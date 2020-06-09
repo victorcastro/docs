@@ -8,7 +8,7 @@ next:
     - voice-ios-cloud-playing-ringtones
 ---
 
-Use the Sinch SDK toghether with Apple _VoIP_ push notifications and [CallKit](https://developer.apple.com/documentation/callkit) to provide the best possible end user experience. _VoIP_ push notifications are a special type of push notifications that Apple support as part of _Apple Push Notification service_ (_APNs_) which enables fast and high-priority notifications. [CallKit]((https://developer.apple.com/documentation/callkit)) is an iOS framework that lets you integrate the Sinch VoIP calling functionality with a iOS native system look and feel.
+Use the Sinch SDK toghether with Apple _VoIP_ push notifications and [CallKit](https://developer.apple.com/documentation/callkit) to provide the best possible end user experience. _VoIP_ push notifications are a special type of push notifications that Apple support as part of _Apple Push Notification service_ (_APNs_) which enables fast and high-priority notifications. [CallKit](https://developer.apple.com/documentation/callkit) is an iOS framework that lets you integrate the Sinch VoIP calling functionality with a iOS native system look and feel.
 
 To fully enable VoIP push notifications in your application, the following steps are required, and this document will guide you through these in more detail:
 
