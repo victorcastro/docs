@@ -145,7 +145,7 @@ JSON body fields:
 |to                                 |List of MSISDNs and group IDs that will receive the batch                                                          |   String array   |N/A                 |                               1 to 1000 elements                               |                     Yes                      |
 |from                               |Sender number                                                                                                      |      String      |N/A                 |               Must be valid MSISDN, short code or alphanumeric.               |If Automatic Default Originator not configured|
 |type                               |Identifies the type of batch message                                                                               |      String      |mt_text             |                     Valid types are mt_text and mt_binary                     |                     Yes                      |
-|body                               |The message content. Normal text string for mt_text and Base64 encoded for mt_binary                               |      String      |N/A                 | Max 1600 chars for mt_text and max 140 bytes together with udh for mt_binary  |                     Yes                      |
+|body                               |The message content. Normal text string for mt_text and Base64 encoded for mt_binary                               |      String      |N/A                 | Max 2000 chars for mt_text and max 140 bytes together with udh for mt_binary  |                     Yes                      |
 |udh                                |The UDH header of a binary message                                                                                 |HEX encoded string|N/A                 |                       Max 140 bytes together with body                        |             If type is mt_binary             |
 |campaign_id                        |The campaign/service ID this message belongs to. US only.                                                          |      String      |N/A                 |                                     None                                      |                      No                      |
 |delivery_report                    |Request delivery report callback. Note that delivery reports can be fetched from the API regardless of this setting|      String      |none                |             Valid types are none, summary, full and per_recipient             |                     Yes                      |
@@ -478,7 +478,7 @@ JSON body fields:
 |toAdd               |List of MSISDNs and group IDs to add to the batch.                                                                          |                             String array                              |                    |1 to 100 elements.                                                             |   No   |
 |toRemove            |List of MSISDNs and group IDs to remove from the batch.                                                                     |                             String array                              |                    |1 to 100 elements.                                                             |   No   |
 |from                |Sender number                                                                                                               |                                String                                 |                    |Must be valid MSISDN, short code or alphanumeric.                              |   No   |
-|body                |The message content. Normal text string for mt_text and Base64 encoded for mt_binary.                                       |                                String                                 |                    |Max 1600 chars for mt_text and max 140 bytes together with udh for mt_binary   |   No   |
+|body                |The message content. Normal text string for mt_text and Base64 encoded for mt_binary.                                       |                                String                                 |                    |Max 2000 chars for mt_text and max 140 bytes together with udh for mt_binary   |   No   |
 |campaign_id         |The campaign/service ID this message belongs to. US only.                                                                   |                                String                                 |                    |                                                                               |   No   |
 |delivery_report     |Request delivery report callback. Note that delivery reports can be fetched from the API regardless of this setting.        |                                String                                 |        none        |Valid types are none, summary, full and per_recipient                          |   No   |
 |send_at             |If set in the future the message will be delayed until send_at occurs.                                                      |                            ISO-8601 string                            |        Now         |Must be before expire_at. If set in the past messages will be sent immediately.|   No   |
@@ -807,7 +807,7 @@ If other characters are required for different languages, 16-bit Unicode (UCS-2)
 
 ### Long Messages
 
-The message body in a request can contain up to 1600 characters. Longer messages will be split and sent as multiple distinct SMS messages. In most cases, those messages will be re-assembled on the handset and displayed to the end-user as a single long message. You can use the tables below to determine the actual number of SMS messages your message will use depending on its length and encoding.
+The message body in a request can contain up to 2000 characters. Longer messages will be split and sent as multiple distinct SMS messages. In most cases, those messages will be re-assembled on the handset and displayed to the end-user as a single long message. You can use the tables below to determine the actual number of SMS messages your message will use depending on its length and encoding.
 
 #### Using only 7-bit Characters
 
@@ -823,7 +823,10 @@ The message body in a request can contain up to 1600 characters. Longer messages
 | 1062 - 1214    | 8                   |
 | 1215 - 1367    | 9                   |
 | 1368 - 1520    | 10                  |
-| 1521 - 1600    | 11                  |
+| 1521 - 1673    | 11                  |
+| 1674 - 1826    | 12                  |
+| 1827 - 1979    | 13                  |
+| 1980 - 2000    | 14                  |
 
 Each SMS in a multi-part 7-bit encoded message, has a maximum length of 153 characters.
 
@@ -855,7 +858,12 @@ Each SMS in a multi-part 7-bit encoded message, has a maximum length of 153 char
 | 1384 - 1450    | 22                  |
 | 1451 - 1517    | 23                  |
 | 1518 - 1584    | 24                  |
-| 1585 - 1600    | 25                  |
+| 1585 - 1651    | 25                  |
+| 1652 - 1781    | 26                  |
+| 1782 - 1848    | 27                  |
+| 1849 - 1915    | 28                  |
+| 1916 - 1982    | 29                  |
+| 1983 - 2000    | 30                  |
 
 Each SMS in a multi-part Unicode encoded message, has a maximum length of 67
 characters.
