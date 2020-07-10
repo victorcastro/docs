@@ -82,16 +82,15 @@ When the _SinchClient_ is started with a given _User ID_ it is required to provi
 class MySinchClientListener implements SinchClientListener {
   @Override
         ...
+        // The following code demonstrates how the JWT that serves as credential should
+        // be created, provided the Application Key (APP_KEY), Application Secret
+        // (APP_SECRET) and User ID.
 
-        // The most secure way is to obtain the credentials is from the backend,
-        // since storing the Application Secret in the client app is not safe.
-        // Following code demonstrates how the JWT that serves as credential should be created,
-        // provided the Application Key (APP_KEY), Application Secret (APP_SECRET) and User ID.
-
-        // NB: JWT.create() should run on your backend, and return either valid JWT or signal that
-        // user can't be registered.
-        // In the first case, register user with Sinch using aquired JWT via clientRegistration.register(...).
-        // In the latter - report failure by calling clientRegistration.registerFailed()
+        // NB: Since storing the Application Secret in the client app is not safe,
+        // JWT.create() should run on your backend, and either return a valid JWT or
+        // signal that the user can't be registered. In the first case, register the
+        // user with Sinch using the aquired JWT via clientRegistration.register(...).
+        // In the latter - report the failure calling clientRegistration.registerFailed()
 
         @Override
         public void onRegistrationCredentialsRequired(SinchClient client,
