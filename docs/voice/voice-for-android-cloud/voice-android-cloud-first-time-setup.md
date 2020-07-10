@@ -71,4 +71,4 @@ A minimum set of permissions are needed for the app to use the Sinch SDK. These 
 
 To verify that the manifest has the necessary permissions the [SinchClient.checkManifest()](reference/com/sinch/android/rtc/SinchClient.html)` can also be used to check whether required permissions are granted by the user in runtime. An example of how to dynamically request missing permissions can be found in the sample applications that comes with the SDK.
 
-_Note:_ This method takes into consideration the capabilities which were enabled for the app (for example, calling, respecting native calls, and so on). Call `SinchClient.checkManifest()` after the setup but before the start of the SinchClient.
+_Note:_ This method takes into consideration the features which were enabled for the app (for example, calling, respecting native calls, and so on). Call `SinchClient.checkManifest()` after the setup but before the start of the SinchClient.
