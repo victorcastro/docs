@@ -1,14 +1,10 @@
 ---
 title: About the SMS APIs
-excerpt: Introduction to the SMS APIs that is offered by Sinch.
+excerpt: The easiest and most feature-rich API we offer. It allows for single messages, scheduled batch sending, message templates and more. You can also use our server-side libraries if you like to work natively in your programming language of choice.
+
 ---
-'
-## The different SMS APIs
 
-### REST
-The easiest and most feature-rich API we offer. It allows for single messages, scheduled batch sending, message templates and more. You can also use our server-side libraries if you like to work natively in your programming language of choice.
-
-### SMPP
+## SMPP
 
 SMPP interfaces for full control and low latency.
 
