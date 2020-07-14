@@ -138,7 +138,7 @@ A call can be disconnected before it has been completely established.
 Hanging up a connecting call:
 
 ```java
-// Starting a call
+// Starts a call asynchronously
 Call call = callClient.callUser("<remote user id>");
 
 // User changed his/her mind, let’s hangup

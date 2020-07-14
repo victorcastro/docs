@@ -13,7 +13,7 @@ The _SinchClient_ is the Sinch SDK entry point. It is used to configure the user
 
 ## Create the _SinchClient_
 
-Set up the client's listener (_SinchClientListener_, see [Reference](reference\com\sinch\android\rtc\SinchClientListener.html) documentation).
+Set up the Sinch client, using _SinchClientBuilder_ (see [Reference](https://sinch.github.io/docs/voice/voice-for-android-cloud/reference/com/sinch/android/rtc/SinchClientBuilder.html) documentation):
 
 ```java
 // Instantiate a SinchClient using the SinchClientBuilder.
@@ -23,13 +23,9 @@ SinchClient sinchClient = Sinch.getSinchClientBuilder().context(context)
                                                   .environmentHost("ocra.api.sinch.com")
                                                   .userId("<user id>")
                                                   .build();
-
-sinchClient.addSinchClientListener(sinchClientListener);
 ```
 
-The _Application Key_ is obtained from the Sinch Developer Dashboard. See [Production Environments](doc:voice-android-cloud-miscellaneous#production-environments) for valid values for _environmentHost_. The User ID should uniquely identify the user on the particular device.
-
-_Note:_ All listener callbacks emitted from the Sinch SDK are invoked on the same thread that the call to `SinchClientBuilder.build` is made on. If the invoking thread is _not_ the main-thread, it needs to have an associated `Looper`.
+The _ApplicationKey_ is obtained from the Sinch Developer Dashboard. See [Production Environments](doc:voice-android-cloud-miscellaneous#production-environments) for valid values for _environmentHost_. The User ID should uniquely identify the user on the particular device.
 
 ## Specify capabilities
 
@@ -74,6 +70,10 @@ sinchClient.addSinchClientListener(new SinchClientListener() {
 sinchClient.start();
 ```
 
+> **Note**:
+>
+> All listener callbacks emitted from the Sinch SDK are invoked on the same thread that the call to `SinchClientBuilder.build` is made on. If the invoking thread is _not_ the main-thread, it needs to have an associated `Looper`.
+
 ### Authorizing the Client / User
 
 When the _SinchClient_ is started with a given _User ID_ it is required to provide an authorization token to register towards the _Sinch backend_. To authorize a client, implement `SinchClientListener.onRegistrationCredentialsRequired()` and provide a token (a [JSON Web Token](https://jwt.io/)) that is cryptographically signed with the _Application Secret_. The sample applications included in the Sinch SDK includes a class `JWT` that describes how to create the _JWT_ and sign it with the _Application Secret_.
@@ -82,16 +82,15 @@ When the _SinchClient_ is started with a given _User ID_ it is required to provi
 class MySinchClientListener implements SinchClientListener {
   @Override
         ...
+        // The following code demonstrates how the JWT that serves as credential should
+        // be created, provided the Application Key (APP_KEY), Application Secret
+        // (APP_SECRET) and User ID.
 
-        // The most secure way is to obtain the credentials is from the backend,
-        // since storing the Application Secret in the client app is not safe.
-        // Following code demonstrates how the JWT that serves as credential should be created,
-        // provided the Application Key (APP_KEY), Application Secret (APP_SECRET) and User ID.
-
-        // NB: JWT.create() should run on your backend, and return either valid JWT or signal that
-        // user can't be registered.
-        // In the first case, register user with Sinch using aquired JWT via clientRegistration.register(...).
-        // In the latter - report failure by calling clientRegistration.registerFailed()
+        // NB: Since storing the Application Secret in the client app is not safe,
+        // JWT.create() should run on your backend, and either return a valid JWT or
+        // signal that the user can't be registered. In the first case, register the
+        // user with Sinch using the aquired JWT via clientRegistration.register(...).
+        // In the latter - report the failure calling clientRegistration.registerFailed()
 
         @Override
         public void onRegistrationCredentialsRequired(SinchClient client,
