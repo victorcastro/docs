@@ -45,7 +45,7 @@ next:
 **Sinch XML MMS API Methods:**
 
 |         Action         |                      Functionality                                                                                                                                                     |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `save_mms`       | This API stores an MMS from XML.                                                                                                                                          |
 | `send_saved_mms` | This API sends stored content from a specified account using an mms-id to a single mobile number.                                                                         |
 | `send_mms`       | Sends an MMS defined in the XML containing slides of embedded with,video, audio, images and/or text to a single or list of mobile numbers,in international number format. |
