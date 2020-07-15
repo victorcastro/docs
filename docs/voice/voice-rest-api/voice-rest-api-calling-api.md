@@ -537,9 +537,9 @@ Requests a call to be initiated from the server
 
 [CalloutRequest]
     string - method
-    TtsCalloutRequest? - ttsCallout
-    ConferenceCalloutRequest? - conferenceCallout
-    CustomCalloutRequest? - customCallout
+    TtsCalloutRequest - ttsCallout
+    ConferenceCalloutRequest - conferenceCallout
+    CustomCalloutRequest - customCallout
 ```
 
 ### Authorization
@@ -548,7 +548,7 @@ This is a protected resource and requires an [application signed request](doc:us
 
 There are currently three types of callouts that are supported: conference callouts, text-to-speech callouts and custom callouts. The custom callout is the most flexible, but text-to-speech and conferece callouts whereas conference and text-to-speech callouts are more convinient.
 
-### Conference callout
+### Conference Callout
 
 With conference callout, the server initiates call to a phone number and when the call is answered, it is connected to a conference room. The same API can be used multiple times to connect multiple phone numbers in the same conference room.
 
@@ -751,7 +751,7 @@ _Example of conference callout_
 }
 ```
 
-### Text-to-speech
+### Text-to-speech Callout
 
 With the text-to-speech callout, the server initiates a call to a phone number and plays a synthesized text messages or pre-recorded sound files.
 
@@ -893,7 +893,7 @@ _Example of text-to-speech callout_
 }
 ```
 
-### Custom
+### Custom Callout
 
 With the custom callout, the server initiates a call from the servers that can be controlled by specifying how the call should progress at each call event.
 
