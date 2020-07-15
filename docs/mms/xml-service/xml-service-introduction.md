@@ -15,10 +15,6 @@ next:
     to be delivered and Sinch with determine the correct network
     operator for this number.
 
-  - **Device Discovery:** Sinch provides Device Discovery feature to our
-    customers through our XML API. Device discovery is achieved either
-    via carrier database query and discovery message where applicable.
-
   - **Device Profile:** The device profile, if available, is also
     included along with the delivery receipt and MO MMS message.
     System-wide database of last know device profile per phone number is
