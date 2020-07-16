@@ -123,7 +123,7 @@ By bundling APIs at volume, Sinch is able to better predict infrastructure, host
 
 ## How does MAU overage work?
 
-If the client's consumption, measured in MAU, exceeds a tier boundary, but it doesn't yet reach the next tier, then each additional MAU beyond the lower tier is counted as overage. E.g., a client consumes 30K MAU. This is between the 25K and 50K tier. They pay `$550` for the 25K Tier and a MAU overage charge of `5000*$0.016 = 80$ => Total cost = $550+$80 = $630`. (Plus Notification charges etc...).
+If the client's consumption, measured in MAU, exceeds a tier boundary, but it doesn't yet reach the next tier, then each additional MAU beyond the lower tier is counted as overage. E.g., a client consumes 30K MAU. This is between the 25K and 50K tier. They pay `$550` for the 25K Tier and a MAU overage charge of `5000*$0.016 = $80`. This means that the total charge would be `$550+$80 = $630`. (Plus Notification charges etc...).
 
 The client will always pay the lower amount of (Next Higher Tier) OR (Lower Tier + Overage).
 
