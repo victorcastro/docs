@@ -55,11 +55,11 @@ Because the first message preceding Opt-in must be a template message, that mess
 
 ## What Media types are supported in the rich content Session Message?
 
-Document: PDF, DOC(X), PPT(X), XLS(X), ODT, ODS, ODP, RTF, or any of the types below
-Image: JPG, JPEG, PNG
-Audio: AAC, M4A, AMR, MP3, OPUS
-Video: MP4
-Sticker: WEBP
+- Document: PDF, DOC(X), PPT(X), XLS(X), ODT, ODS, ODP, RTF, or any of the types below
+- Image: JPG, JPEG, PNG
+- Audio: AAC, M4A, AMR, MP3, OPUS
+- Video: MP4
+- Sticker: WEBP
 
 A message template can include a document, an image, or a video, but not an audio file or a sticker.
 
@@ -123,7 +123,7 @@ By bundling APIs at volume, Sinch is able to better predict infrastructure, host
 
 ## How does MAU overage work?
 
-If the client's consumption, measured in MAU, exceeds a tier boundary, but it doesn't yet reach the next tier, then each additional MAU beyond the lower tier is counted as overage. E.g., a client consumes 30K MAU. This is between the 25K and 50K tier. They pay `$550` for the 25K Tier and a MAU overage charge of `5000*$0.016` = Total : `$550+$80 = $630`. (Plus Notification charges etc...).
+If the client's consumption, measured in MAU, exceeds a tier boundary, but it doesn't yet reach the next tier, then each additional MAU beyond the lower tier is counted as overage. E.g., a client consumes 30K MAU. This is between the 25K and 50K tier. They pay `$550` for the 25K Tier and a MAU overage charge of `5000*$0.016 = 80$ => Total cost = $550+$80 = $630`. (Plus Notification charges etc...).
 
 The client will always pay the lower amount of (Next Higher Tier) OR (Lower Tier + Overage).
 
