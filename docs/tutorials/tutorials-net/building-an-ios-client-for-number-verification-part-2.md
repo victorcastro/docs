@@ -3,9 +3,11 @@ title: Building an iOS Client for Number Verification - Part 2
 excerpt: >-
   We implement the number verification system for a mobile device in this
   tutorial.
+hidden: true
 ---
+
 > **Update**
-> 
+>
 > To verify numbers even easier, check out our [Verification SDK](https://www.sinch.com/products/verification/sms/)
 
 In [Part 1 of this tutorial](doc:building-a-c-authentication-system-with-net-part-1), we created some server-side code to generate codes that are sent by [our SMS API](https://www.sinch.com/products/messaging/sms/) to a phone number. In Part 2, we will implement the number verification system for a mobile device. Then, in [Part 3](doc:number-verification-aspnet-identity-and-two-factor-authentication-part-3), we will add the two-factor authentication system to the iOS client and a website. This tutorial will take about 30 minutes to complete.
@@ -26,10 +28,10 @@ Using this framework, you should be able to drop it in an app, call a method and
 
 > 1.  Create a workspace name it **NumberValidator**
 > 2.  Create a new Cocoa Touch Framework
-![createproject.png](images\5c01fff-createproject.png)
+>     ![createproject.png](images\5c01fff-createproject.png)
 
 > 3. Add it to the workspace
-![addtoworkspace.png](images\5f07073-addtoworkspace.png)
+>    ![addtoworkspace.png](images\5f07073-addtoworkspace.png)
 
 Repeat steps 1 through 3 but add a Single Page application and call it **NumberValidatorSampleApp**.
 
@@ -111,7 +113,7 @@ Before we go to the next scene, we have to pass the phone number to the **ViewCo
 if ([segue.identifier isEqualToString:@"enterCode"])
    {
        EnterCodeViewController* vc = [segue destinationViewController];
-       vc.phoneNumber = self.phoneNumber.text; 
+       vc.phoneNumber = self.phoneNumber.text;
    }
 ```
 
@@ -180,7 +182,7 @@ Now we have a way to access one and only one instance of the validation helper. 
 {
     //Get a reference to the current window
     UIWindow* window  = [[[UIApplication sharedApplication] delegate] window];
-    //You need to fetch the bundle for the framework, if you leave this as null it will load the apps bundle instead. 
+    //You need to fetch the bundle for the framework, if you leave this as null it will load the apps bundle instead.
     NSBundle* bundle = [NSBundle bundleWithIdentifier:@"com.sinch.NumberValidator"];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"ValidationStoryBoard" bundle:bundle];
     UINavigationController *vc = (UINavigationController *)[storyboard instantiateViewControllerWithIdentifier:@"start"];
@@ -222,10 +224,10 @@ Open up **EnterCodeViewController.m** and add an import to **NSNotificationEvent
         [spinner stopAnimating]
         if (!error)
         {
-            [[NSNotificationCenter defaultCenter] 
-                postNotificationName:NumberValidationDidCompleteNotification 
-                object:self 
-                userInfo:@{PhoneNumberKey: self.phoneNumber}]; 
+            [[NSNotificationCenter defaultCenter]
+                postNotificationName:NumberValidationDidCompleteNotification
+                object:self
+                userInfo:@{PhoneNumberKey: self.phoneNumber}];
             [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
@@ -241,10 +243,10 @@ Add the cancel event to the **EnterPhoneNumber.m**. Find the cancel action and c
 
 ```objectivec
 - (IBAction)cancel:(id)sender {
-    [[NSNotificationCenter defaultCenter] 
-        postNotificationName:NumberValidationDidCancelNotification 
+    [[NSNotificationCenter defaultCenter]
+        postNotificationName:NumberValidationDidCancelNotification
         object:nil];
-    [[self parentViewController] 
+    [[self parentViewController]
     dismissViewControllerAnimated:YES completion:^{
     }];
 }
@@ -252,7 +254,7 @@ Add the cancel event to the **EnterPhoneNumber.m**. Find the cancel action and c
 
 ## Finishing up the framework
 
-In a framework app, you need to decide which headers should be visible, so select your **NumberValidator** project and go into *build phases*. Drag the header files so they look like this:
+In a framework app, you need to decide which headers should be visible, so select your **NumberValidator** project and go into _build phases_. Drag the header files so they look like this:
 
 ![publicheaders.png](images\01cef31-publicheaders.png)
 
@@ -263,8 +265,8 @@ You also want to open up the **NumberValidator.h** and add the following imports
 #import "NSNotificationEvents.h"
 ```
 
-##Creating a test client 
-Select the **NumberValidatorSampleApp** and go to *build phases*. Drag the **NumberValidator.framework** to Link Binary With Libraries. Open the story **Main.Storyboard** and add a button. Connect it with an action called validate.
+##Creating a test client
+Select the **NumberValidatorSampleApp** and go to _build phases_. Drag the **NumberValidator.framework** to Link Binary With Libraries. Open the story **Main.Storyboard** and add a button. Connect it with an action called validate.
 ![sampleappview.png](images\fa4c1dc-sampleappview.png)
 
 In **ViewController.m**, add an import to our NumberValidator framework.
@@ -286,10 +288,10 @@ Now we’ve validated the phone, but we also want to listen in on completed and 
 ```objectivec
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [[NSNotificationCenter defaultCenter] 
-        addObserver:self 
+    [[NSNotificationCenter defaultCenter]
+        addObserver:self
         selector:@selector(verificationComplete:)
-        name:NumberValidationDidCompleteNotification 
+        name:NumberValidationDidCompleteNotification
         object:nil];
 }
 ```
@@ -309,9 +311,9 @@ Lastly, in **dealoc**, unregister for the notifications:
 ```objectivec
 -(void)dealloc
 {
-    [[NSNotificationCenter defaultCenter] 
-        removeObserver:self 
-        name:NumberValidationDidCompleteNotification 
+    [[NSNotificationCenter defaultCenter]
+        removeObserver:self
+        name:NumberValidationDidCompleteNotification
         object:nil];
 }
 ```
@@ -319,4 +321,3 @@ Lastly, in **dealoc**, unregister for the notifications:
 ## Conclusion
 
 In this tutorial, we learned how to build a Cocoa frameworks reusable library and how to make your stuff modularized in iOS. We also learned how to consume our service we created in [Part 1 of this series](doc:building-a-c-authentication-system-with-net-part-1). Next up in [Part 3](doc:number-verification-aspnet-identity-and-two-factor-authentication-part-3), we will build a small website and add two-factor authentication.
-
