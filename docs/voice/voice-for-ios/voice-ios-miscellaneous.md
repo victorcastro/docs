@@ -18,13 +18,9 @@ The _Sinch.framework_ file includes a FAT-binary containing the architectures _a
 
 ## Production environments
 
-Sinch provides two environments:
+The environment hostname is passed as the parameter _environmentHost_ when instantiating the Sinch client.
 
-> - Production - Used for applications deployed in production.
-
-The environment is passed as the parameter _environmentHost_ when instantiating the Sinch client.
-
-| Environment | EnvironmentHost parameter |
+| Environment | Environment hostname |
 | ----------- | ------------------------- |
 | Production  | clientapi.sinch.com       |
 
