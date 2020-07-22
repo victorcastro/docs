@@ -21,7 +21,8 @@ id<SINClient> sinchClient = [Sinch clientWithApplicationKey:@"<application key>"
                                                      userId:@"<user id>"];
 ```
 
-The _Application Key_ and _Application Secret_ are obtained from the Sinch Developer Dashboard. See \[Production Environments\]\[\] for valid values for _environmentHost_. The User ID should uniquely identify the user on the particular device.
+* The _Application Key_ is obtained from the [Sinch Developer Dashboard - Apps](https://portal.sinch.com/#/apps). 
+* The _User ID_ should uniquely identify the user on the particular device.
 
 ## Specifying capabilities
 
