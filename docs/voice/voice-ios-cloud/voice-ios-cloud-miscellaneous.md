@@ -24,13 +24,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjiklmnopqrstuvwxyz0123456789-_=
 
 User IDs **must not** be longer than **255** bytes.
 
-If you really need to use _User IDs_ containing characters outside the
-allowed set above, you could consider _base64_-encoding the raw _User
-IDs_ using a URL-safe base64 alphabet as described in
-https://tools.ietf.org/html/rfc4648#section-5). Please note how the
-allowed character set overlaps with the URL-safe base64 alphabet, but
-does __NOT__ allow characters in the __non__-URL-safe alphabet, e.g. `/`
-(forward slash) and `+` (plus sign).
+If you really need to use _User IDs_ containing characters outside the allowed set above, you could consider _base64_-encoding the raw _User IDs_ using a URL-safe base64 alphabet as described in https://tools.ietf.org/html/rfc4648#section-5). Please note how the allowed character set overlaps with the URL-safe base64 alphabet, but does __NOT__ allow characters in the __non__-URL-safe alphabet, e.g. `/` (forward slash) and `+` (plus sign).
 
 ## Statistics
 

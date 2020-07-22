@@ -22,10 +22,7 @@ ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjiklmnopqrstuvwxyz0123456789-_=
 > does __NOT__ allow characters in the __non__-URL-safe alphabet, e.g. `/`
 > (forward slash) and `+` (plus sign).
 
-If you really need to use _User IDs_ containing characters outside the
-allowed set above, you could consider _base64_-encoding the raw _User
-IDs_ using a URL-safe base64 alphabet as described in
-https://tools.ietf.org/html/rfc4648#section-5). 
+If you really need to use _User IDs_ containing characters outside the allowed set above, you could consider _base64_-encoding the raw _User IDs_ using a URL-safe base64 alphabet as described in https://tools.ietf.org/html/rfc4648#section-5).
 
 ## Encryption Export Regulations
 
