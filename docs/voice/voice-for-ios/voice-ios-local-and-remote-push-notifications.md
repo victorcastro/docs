@@ -16,8 +16,7 @@ If the app is allowed to execute while in background then the Sinch SDK will pri
 An application is considered _offline_ in the following scenarios:
 
 > - Application is not running at all
-> - Application is not in the foreground, and the feature \[Active
->   Connection in Background\]\[\] is not enabled
+> - Application is not in the foreground, and the feature _Active Connection in Background_ is not enabled
 
 For these scenarios, push notifications can be used to receive incoming calls. The following sections cover how to enable receiving calls and messages using remote push notifications (both the VoIP type and regular.)
 
