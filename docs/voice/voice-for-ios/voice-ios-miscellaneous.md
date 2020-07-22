@@ -16,13 +16,13 @@ The _Sinch.framework_ file includes a FAT-binary containing the architectures _a
 
 (Even though _armv7s_ is supported and included, we recommend to not build your application for armv7s to reduce the final application binary size)
 
-## Production environments
+## Production environment
 
 The environment hostname is passed as the parameter _environmentHost_ when instantiating the Sinch client.
 
 | Environment | Environment hostname |
-| ----------- | ------------------------- |
-| Production  | clientapi.sinch.com       |
+| ----------- | -------------------- |
+| Production  | clientapi.sinch.com  |
 
 ## Restrictions on User IDs
 

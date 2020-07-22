@@ -6,17 +6,13 @@ excerpt: ''
 
 We officially support the 3 latest major Android versions. You can try older versions but there are no guarantees it will work as expected.
 
-## Production environments
+## Production environment
 
-Sinch provides two environments:
+The environment hostname is passed as the parameter _environmentHost_ when instantiating the Sinch client.
 
-> - Production - Used for applications deployed in production.
-
-The environment is passed as the parameter _environmentHost_ when instantiating the Sinch client.
-
-| Environment | EnvironmentHost parameter |
-| ----------- | ------------------------- |
-| Production  | clientapi.sinch.com       |
+| Environment | Environment hostname |
+| ----------- | -------------------- |
+| Production  | clientapi.sinch.com  |
 
 ## Restrictions on User IDs
 
