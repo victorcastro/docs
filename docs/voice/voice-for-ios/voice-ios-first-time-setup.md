@@ -1,8 +1,8 @@
 ---
-title: First time setup
+title: First Time Setup
 excerpt: >-
-  Follow this step-by-step guide if you want to set up the Sinch Voice w/ Video
-  SDK for the first time.
+  Follow this step-by-step guide to set up the Sinch Voice and Video SDK for the
+  first time.
 next:
   pages:
     - voice-ios-sinch-client
@@ -10,17 +10,15 @@ next:
 ## Register an Application
 
 > 1.  Register a Sinch Developer account [here](https://portal.sinch.com/#/signup).
-> 2.  Setup a new Application using the Dashboard where you can then obtain an _Application Key_ and an _Application Secret_.
+> 2.  Setup a new Application using the [Dashboard](https://portal.sinch.com/#/dashboard) where you can then obtain an _Application Key_ and an _Application Secret_.
 
 ## Download
 
 The Sinch SDK can be downloaded [here](https://sinch.readme.io/page/downloads). It contains: the library binary, this user guide, reference documentation, and sample apps for calling.
 
-### Sinch is available as a CocoaPod
+### Sinch as CocoaPod
 
 If you are using [CocoaPods](http://www.cocoapods.org), add the following to your Podfile:
-
-**Code**
 
 ```ruby
 target '<your xcode project>' do
@@ -28,7 +26,7 @@ target '<your xcode project>' do
 end
 ```
 
-> **Tip**
+> 👍
 >
 > Using the pod allows you to skip the manual steps in the next section.
 
