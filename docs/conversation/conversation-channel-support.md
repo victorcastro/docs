@@ -1197,7 +1197,7 @@ the **recipient** and **app_id** which are both required when sending a message.
 
 ###### Text Messages
 
-Text messages are natively supported by VBM channel.
+Text messages are natively supported by VBM channel. The maximum length of the text is 1000 characters, longer content will be truncated.
 
 ---
 
@@ -1219,7 +1219,7 @@ The rendered message:
 
 ###### Media Messages
 
-VBM support Image messages natively:
+VBM support Image messages natively. Supported image types are JPG, JPEG and PNG. 
 
 ---
 
@@ -1247,7 +1247,8 @@ Video and other types of media messages render as a link:
 
 ###### Choice Messages
 
-VBM channel provides native support for single choice (URL, Call, or Location) **Choice Messages**:
+VBM channel provides native support for single choice (URL, Call, or Location) **Choice Messages**.
+The title of the choice has a maximum length of 30 characters, longer content will be truncated.
 
 ---
 
@@ -1400,6 +1401,7 @@ The rendered message:
 
 VBM supports natively Card messages with one URL, Call, or Location choice.
 The media message in the Card should point to an image.
+The title of the choice in the Card message has a maximum length of 30 characters, longer content will be truncated.
 
 ---
 
