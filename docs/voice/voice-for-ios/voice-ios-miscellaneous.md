@@ -16,27 +16,23 @@ The _Sinch.framework_ file includes a FAT-binary containing the architectures _a
 
 (Even though _armv7s_ is supported and included, we recommend to not build your application for armv7s to reduce the final application binary size)
 
-## Production environments
+## Production environment
 
-Sinch provides two environments:
+The environment hostname is passed as the parameter _environmentHost_ when instantiating the Sinch client.
 
-> - Production - Used for applications deployed in production.
-
-The environment is passed as the parameter _environmentHost_ when instantiating the Sinch client.
-
-| Environment | EnvironmentHost parameter |
-| ----------- | ------------------------- |
-| Production  | clientapi.sinch.com       |
+| Environment | Environment hostname |
+| ----------- | -------------------- |
+| Production  | clientapi.sinch.com  |
 
 ## Restrictions on User IDs
 
-User IDs can only contain characters in the _printable ASCII character set_. That is:
+User IDs **must not** be longer than **255** bytes, **must** only contain URL-safe characters, and restricted to the following character set:
 
 ```text
-!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjiklmnopqrstuvwxyz0123456789-_=
 ```
 
-User IDs **must not** be longer than **40** characters.
+If you need to use _User IDs_ containing characters outside the allowed set above, you could consider _base64_-encoding the raw _User IDs_ using a URL-safe base64 alphabet as described in https://tools.ietf.org/html/rfc4648#section-5). Please note how the allowed character set overlaps with the URL-safe base64 alphabet, but does __NOT__ allow characters in the __non__-URL-safe alphabet, e.g. `/` (forward slash) and `+` (plus sign).
 
 ## Encryption export regulations
 
