@@ -16,8 +16,7 @@ If the app is allowed to execute while in background then the Sinch SDK will pri
 An application is considered _offline_ in the following scenarios:
 
 > - Application is not running at all
-> - Application is not in the foreground, and the feature \[Active
->   Connection in Background\]\[\] is not enabled
+> - Application is not in the foreground, and the feature _Active Connection in Background_ is not enabled
 
 For these scenarios, push notifications can be used to receive incoming calls. The following sections cover how to enable receiving calls and messages using remote push notifications (both the VoIP type and regular.)
 
@@ -168,26 +167,6 @@ In the latter case, the app can determine whether the call originated from backg
         // and the user has opened the application (e.g. via a Local Notification),
         // which we then interpret as that the user want to answer the call.
         [call answer];
-    }
-}
-```
-
-## Presenting local notifications for missed calls
-
-When the push notification is enabled on a Sinch client, besides the incoming call notification, the Sinch SDK will also send a push notification for a canceled call when the caller cancels the call before it is answered. This gives developers a good opportunity to present local notifications for missed calls in their apps.
-
-A `SINNotificationResult` will be returned when an incoming push notification is forwarded to a Sinch client. It could then be inspected to determine if the push notification is a canceled call, it also provides detailed information such as `remoteUserId` to construct a more informative local notification for a missed call.
-
-```objectivec
-// SINManagedPushDelegate
-- (void)managedPush:(id<SINManagedPush>)unused
-    didReceiveIncomingPushWithPayload:(NSDictionary *)payload
-                              forType:(NSString *)pushType {
-    id<SINClient> client; // get previously created client
-
-    id<SINNotificationResult> result = [client relayRemotePushNotification:userInfo];
-    if ([result isCall] && [[result callResult] isCallCanceled]) {
-        // present a local notification for the missed call.
     }
 }
 ```

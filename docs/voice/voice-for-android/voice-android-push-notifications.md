@@ -182,26 +182,6 @@ if (SinchHelpers.isSinchPushPayload(remoteMessage.getData())) {
 }
 ```
 
-### Show local notifications for missed calls
-
-When the push notification is enabled on a Sinch client, besides the incoming call notification, the Sinch SDK will also send a push notification for a canceled call when the caller cancels the call before it is answered. This gives developers a good opportunity to present local notifications for missed calls in their apps:
-
-```java
-NotificationResult result = sinchService.relayRemotePushNotificationPayload(payload);
-// handle result, e.g. show a notification for a missed call:
-if (result.isValid() && result.isCall()) {
-    CallNotificationResult callResult = result.getCallResult();
-    if (callResult.isCallCanceled()) {
-        // user-defined method to show notification
-        createNotification(callResult.getRemoteUserId());
-    }
-}
-```
-
-> **Note**
->
-> If the message forwarded to the Sinch client happened to be _call cancel_ message, the client arranges the termination of the call automatically resulting in `CallListener.onCallEnded()` event being triggered, allowing UI to handle canceling the call.
-
 ## Unregister a device
 
 If the user of the application logs out or performs a similar action, the push notification device token can be unregistered via `SinchClient.unregisterManagedPush()` to prevent further notifications to be sent to the device. Starting a client with `setSupportManagedPush(true)` will register the device again.
