@@ -5,6 +5,11 @@ excerpt: >-
   bug fixes.
 ---
 
+## 2020-07-28
+
+  - Improvement for sending messages during heavy load
+  - Improvement for sending media messages
+
 ## 2020-06-30
 
   - Improvements in phone number validation - less restrictive rules are now used - number does not have to be approved by authoritative evidence e.g. ITU, IR 21…
