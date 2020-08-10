@@ -7,9 +7,9 @@ excerpt: >-
 
 ## 2020-08-11
 
-  - Add support marking inbound messages as read. See [Marking messages as read](doc:whatsapp-callback#mark-inbound-message-as-read)
-  - Add support for forwarded and frequently forwarded inbound message. See [Callback for fowarded message](doc:whatsapp-callback#sample-inbound-forwarded-message)
-  - Reject inbound messages when Sender ID is inactive.
+  - Support marking inbound messages as read. See [Marking messages as read](doc:whatsapp-callback#mark-inbound-message-as-read)
+  - Support forwarded and frequently forwarded inbound message. See [Callback for fowarded message](doc:whatsapp-callback#sample-inbound-forwarded-message)
+  - Reject inbound messages for inactive Sender ID.
 
 ## 2020-07-28
 
