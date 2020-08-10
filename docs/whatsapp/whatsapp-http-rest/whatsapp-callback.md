@@ -88,15 +88,17 @@ The format is as follows:
 
 **Notifications**
 
-|Name        | Description                                                                 | JSON Type |
-|------------|---------------------------------------------------------------------------- |-----------|
-|from        | MSISDN of the user sending the message                                      | String    |
-|in_group    | Identifier of a group if this message is sent to one of your owned groups   | String    |
-|to          | The identifier of the receiving bot                                         | String    |
-|replying_to | A context object, present only if the user is replying to a specific thread | Object    |
-|message_id  | Generated message id for the inbound message                                | String    |
-|message     | Message object describing the inbound message                               | Object    |
-|timestamp   | ISO-8601 datetime of the status update                                      | Object    |
+|Name                   | Description                                                                 | JSON Type |
+|---------------------- |---------------------------------------------------------------------------- |-----------|
+|from                   | MSISDN of the user sending the message                                      | String    |
+|in_group               | Identifier of a group if this message is sent to one of your owned groups   | String    |
+|to                     | The identifier of the receiving bot                                         | String    |
+|replying_to            | A context object, present only if the user is replying to a specific thread | Object    |
+|message_id             | Generated message id for the inbound message                                | String    |
+|message                | Message object describing the inbound message                               | Object    |
+|timestamp              | ISO-8601 datetime of the status update                                      | Object    |
+|forwarded              | Boolean object stating if message was forwarded                             | Boolean   |
+|frequently_forwarded   | Boolean object stating if message was frequently forwarded                  | Boolean   |
 
 **Context**
 
@@ -211,6 +213,62 @@ The format is as follows:
         "from": "447537817391",
         "message_id": "01E7Q9AVTRB5A30JD7D9ZN0HTE"
       }
+    }
+  ]
+}
+```
+
+#### Sample inbound forwarded message
+
+```json
+{
+  "type":"whatsapp",
+  "contacts":[
+    {
+      "profile":{
+        "name":"John Smith"
+      },
+      "wa_id":"0732001122"
+    }
+  ],
+  "notifications":[
+    {
+      "from":"0732001122",
+      "to":"sinchbot",
+      "message_id":"01DPNXZ0WCF9XD19MH84XD0P62",
+      "message":{
+        "type":"text",
+        "body":"Hello bot I want to know something!"
+      },
+      "forwarded": true
+    }
+  ]
+}
+```
+
+#### Sample inbound frequently forwarded message
+
+```json
+{
+  "type":"whatsapp",
+  "contacts":[
+    {
+      "profile":{
+        "name":"John Smith"
+      },
+      "wa_id":"0732001122"
+    }
+  ],
+  "notifications":[
+    {
+      "from":"0732001122",
+      "to":"sinchbot",
+      "message_id":"01DPNXZ0WCF9XD19MH84XD0P62",
+      "message":{
+        "type":"text",
+        "body":"Hello bot I want to know something!"
+      },
+      "frequently_forwarded": true
     }
   ]
 }
