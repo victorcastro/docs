@@ -1,7 +1,10 @@
 ---
-title: Sinch MMS Best Practices
-excerpt: ## Best Practices for Sending Static MMS Images
+title: MMS Best Practices for images and video
+excerpt: Recomendations on sending and transcoding multimedia messages.
+hidden: false
 ---
+
+## Best Practices for Sending Static MMS Images
 
 ### Recommended File Size for Static MMS Images
 
