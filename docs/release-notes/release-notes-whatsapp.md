@@ -8,7 +8,7 @@ excerpt: >-
 ## 2020-08-11
 
   - Support marking inbound messages as read. See [Marking messages as read](doc:whatsapp-callback#mark-inbound-message-as-read)
-  - Support forwarded and frequently forwarded inbound message. See [Callback for forwarded message](doc:whatsapp-callback#sample-inbound-forwarded-message)
+  - Support forwarded and frequently forwarded flag in inbound message. See [Callback for forwarded message](doc:whatsapp-callback#sample-inbound-forwarded-message)
 
 ## 2020-07-28
 
