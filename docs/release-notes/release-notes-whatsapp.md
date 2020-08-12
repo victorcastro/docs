@@ -5,6 +5,10 @@ excerpt: >-
   bug fixes.
 ---
 
+## 2020-08-12
+
+ - upgrade FB API gateways for bots from 2.29.1 to 2.29.3. Details: https://developers.facebook.com/docs/whatsapp/changelog Aug 11, 2020 (v2.29.3)
+
 ## 2020-08-11
 
   - Support marking inbound messages as read. See [Marking messages as read](doc:whatsapp-callback#mark-inbound-message-as-read)
