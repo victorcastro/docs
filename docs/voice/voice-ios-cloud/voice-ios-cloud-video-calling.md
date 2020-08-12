@@ -125,9 +125,9 @@ __Example__
 }
 ```
 
-### Accessing Raw Video Frames from Remote Streams
+### Accessing Raw Video Frames from Remote and Local Streams
 
-The Sinch SDK provides access to the raw video frames of the remote video streams. This allows you to process the video frames with your own implementation to achieve rich functionalities, e.g. applying filters, adding stickers to the video frames, or saving a frame as an image.
+The Sinch SDK provides access to the raw video frames of the remote and local video streams. This allows you to process the video frames with your own implementation to achieve rich functionalities, e.g. applying filters, adding stickers to the video frames, or saving a frame as an image.
 
 Perform custom video frame processing by implementing `SINVideoFrameCallback` and register it using `-[SINVideoController setRemoteVideoFrameCallback:]` and `-[SINVideoController setLocalVideoFrameCallback:]`. The callback handler will provide the frame in the form of a [`CVPixelBufferRef`](https://developer.apple.com/documentation/corevideo/cvpixelbuffer?language=objc), and a completion handler block that you __must__ invoke, passing the processed output frame (also as a `CVPixelBufferRef`) as argument. The implementation of the frame callback hander __must__ retain (and release) the buffer using [CVPixelBufferRetain](https://developer.apple.com/documentation/corevideo/1563590-cvpixelbufferretain?language=objc) and [CVPixelBufferRelease](https://developer.apple.com/documentation/corevideo/1563589-cvpixelbufferrelease?language=objc).
 
