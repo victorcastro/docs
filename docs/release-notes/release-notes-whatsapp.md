@@ -7,7 +7,7 @@ excerpt: >-
 
 ## 2020-08-12
 
- - upgrade FB API gateways for bots from 2.29.1 to 2.29.3. Details: https://developers.facebook.com/docs/whatsapp/changelog Aug 11, 2020 (v2.29.3)
+ - Upgrade FB API gateways for bots from 2.29.1 to 2.29.3. Details can be found in [Facebook changelog (Aug 11, 2020 (v2.29.3))](https://developers.facebook.com/docs/whatsapp/changelog#wa2293)
 
 ## 2020-08-11
 
