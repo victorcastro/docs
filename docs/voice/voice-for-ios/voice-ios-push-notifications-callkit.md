@@ -212,6 +212,13 @@ For example, if your application is signed with a _Development_ provisioning pro
 
 Typically a _Debug_ build will be code signed with a _Development_ provisioning profile and thus `SINAPSEnvironmentDevelopment` should be used. And typically a _Release_ build will be code signed with a _Distribution_ provisioning profile and thus `SINAPSEnvironmentProduction` should be used. Instead of changing this manually for each build, the macro `SINAPSEnvironmentAutomatic` is available which automatically expands to _Development_ for _Debug_ builds and _Production_ for _Release_ builds.
 
+## iOS Throttling Notifications
+
+iOS will under certain circumstances throttle push notifications and not deliver the notification to your application (even if it was receved on the device/OS level). Note that this also applies to VoIP push notifications. Exact throttling behaviour and limits are subject to iOS internal details, but the well known throttling scenarios are:
+
+* The end user has actively terminated the application. iOS will only start delivering notifications to the application again after the user has actively started the application again.
+* Your app has not been reporting VoIP push notifications to _CallKit_. Please see the separate sections above on how to report VoIP push notifications as _CallKit_ calls.
+
 ## Relevant Apple Resources
 
 For more details on Apple _PushKit_ and _CallKit_, see following _Apple Developer Documentation_:
