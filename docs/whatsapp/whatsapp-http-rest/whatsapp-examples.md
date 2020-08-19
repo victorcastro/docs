@@ -2,7 +2,7 @@
 title: Examples
 excerpt: Use cases for the Sinch WhatsApp API
 ---
-**Interactive message templates**
+## Interactive message templates
 
 Interactive message templates have buttons that can be pressed by the recipent of the message, triggering some action. This is what they can look like on the recipient's phone.
 
@@ -10,7 +10,7 @@ Interactive message templates have buttons that can be pressed by the recipent o
 
 ![image](images\interactive-message-template-quick-reply-buttons.png)
 
-**Message template with quick reply button**
+## Message template with quick reply button
 
 Suppose there exists a message template with the following data.
 
