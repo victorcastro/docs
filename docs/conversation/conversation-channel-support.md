@@ -1618,3 +1618,60 @@ Conversation API POST to `UNSUPPORTED` webhook:
   }
 }
 ```
+
+### Sinch SMS
+
+With Sinch SMS channel you get the largest possible coverage in expense of
+limited rich content features.
+
+#### Channel Configuration
+
+Sending and receiving SMS messages through Conversation API requires a Sinch SMS service
+plan. To ensure the best experience for your end user, we recommend that you set default sender IDs
+for your service plan for each country that you have an active user base in.
+By default most telecom operators allow end users to send internationally, but to be able to respond to the end user,
+often a national registered sender ID must be used. For example, an inbound message from US phone number to
+a Swedish long number for the service plan will be passed successfully to the Conversation API **app**
+and further to the registered MESSAGE_INBOUND webhooks. However, any outbound messages (replies) to the same US phone number from the
+same Conversation API **app** will need to be sent over the US long number registered for the service plan
+and not through the Swedish long number. To request domestic long numbers in all relevant countries, please visit Numbers section in [Sinch Portal](https://dashboard.sinch.com/numbers).
+Once numbers have been requested, please open a support ticket to request these numbers to be assigned as default originators in their respective countries.
+
+##### Sending Config
+
+Once you have your service plan ID and associated API token you
+can setup SMS integration for your Conversation API **app** either in the
+portal or thorough API call. The following snippet shows the channel
+credentials configuration for **app** with SMS channel:
+
+```json
+{
+  "channel_credentials": [
+    {
+      "channel": "SMS",
+      "static_bearer": {
+        "claimed_identity": "{{SERVICE_PLAN_ID}}",
+        "token": "{{API_TOKEN}}"
+      }
+    }
+  ]
+}
+```
+
+You need to replace `{{SERVICE_PLAN_ID}}` and `{{API_TOKEN}}` with your
+Sinch SMS service plan ID and API token.
+
+##### Receiving Config
+
+To start receiving contact messages (replies) and delivery receipts for sent
+messages you need to configure the callback URL of your service plan to
+point to your Conversation API **app**. You find the correct URL for your
+**app** under *Inbound messages* section in the app details page in the Sinch
+portal.
+
+You also need to configure at least one Conversation API webhook which
+will trigger POST callbacks to the given URL.
+The triggers which are relevant for SMS channel are:
+
+- MESSAGE_DELIVERY - delivery receipts for SMS messages
+- MESSAGE_INBOUND - inbound messages e.g., contact replies
