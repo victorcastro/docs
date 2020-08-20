@@ -119,7 +119,7 @@ JSON object parameters:
             "param here"
         ],
         "media": {
-                "type": "text"
+            "type": "text"
         }
     }
 }
