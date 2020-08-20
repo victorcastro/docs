@@ -1634,7 +1634,7 @@ often a national registered sender ID must be used. For example, an inbound mess
 a Swedish long number for the service plan will be passed successfully to the Conversation API **app**
 and further to the registered MESSAGE_INBOUND webhooks. However, any outbound messages (replies) to the same US phone number from the
 same Conversation API **app** will need to be sent over the US long number registered for the service plan
-and not through the Swedish long number. To request domestic long numbers in all relevant countries, please visit Numbers section in [Sinch Portal](dashboard.sinch.com/numbers).
+and not through the Swedish long number. To request domestic long numbers in all relevant countries, please visit Numbers section in [Sinch Portal](https://dashboard.sinch.com/numbers).
 Once numbers have been requested, please open a support ticket to request these numbers to be assigned as default originators in their respective countries.
 
 ##### Sending Config
