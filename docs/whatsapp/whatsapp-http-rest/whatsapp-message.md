@@ -85,7 +85,7 @@ The types of messages that can be sent are one of the following:
 
 #### Template message
 
-Accepted language codes can be found in the [introduction](doc:whatsapp-introduction#supported-language-codes).
+Accepted language codes can be found in the [introduction](doc:whatsapp-introduction#supported-language-codes). You can use [media provider](doc:whatsapp-media-provider) feature in template messages.
 
 JSON object parameters:
 
