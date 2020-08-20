@@ -14,4 +14,4 @@ For more details please download: [Sinch Campaign Manager User Guide V4.pdf](dow
 
 [CTIA Messaging Principles and Best Practices.pdf](https://www.sinch.com/wp-content/uploads/2019/10/CTIA-Messaging-Principles-and-Best-Practices.pdf)
 
-[Cita guidelines from github](https://github.com/sinch/docs/blob/master/docs/sms/[]CTIA-Messaging-Principles-and-Best-Practices.pdf)
+[Cita guidelines from github](https://github.com/sinch/docs/blob/master/docs/sms/CTIA-Messaging-Principles-and-Best-Practices.pdf)
