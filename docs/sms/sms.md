@@ -57,7 +57,7 @@ MtBatchTextSmsResult batch =
               SinchSMSApi.batchTextSms()
                   .sender("{your free test number}")
                   .addRecipient(RECIPIENTS)
-                  .body("This is a test message")
+                  .body("This is a test message!")
                   .build()
 
 ```
