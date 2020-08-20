@@ -139,7 +139,10 @@ JSON object parameters:
             ],
         "body_params": [
           "Swan Lake"
-        ]
+        ],
+        "media": {
+            "type": "text"
+        }
     }
 }
 ```
