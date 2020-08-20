@@ -25,7 +25,7 @@ Currently, Sinch Conversation API is in closed beta. If you are interested in th
 
 #### Project
 
-The **project** entity, in the ER-diagram above, is the root entity from the Conversation API's point-of-view. All the Conversation API resources are grouped under a **project**, which acts as a container. Each **project**, under the hood, belongs to a Sinch **account** created when creating an account in the [Sinch Portal](https://dashboard.sinch.com). It is, currently, only possible to have one **project** per **account**.
+The **project** entity, in the ER-diagram above, is the root entity from the Conversation API's point-of-view. All the Conversation API resources are grouped under a **project**, which acts as a container. Each **project**, under the hood, belongs to a Sinch **account** created when creating an account in the [Sinch Portal](https://dashboard.sinch.com).
 
 #### App
 
