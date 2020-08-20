@@ -2,7 +2,7 @@
 title: Introduction
 excerpt: >-
   Get introduced to the features and capabilities that the Sinch MM7 API offers.
-  Send and receive rich multimedia content. Read more.
+  Send and receive rich multimedia content. 
 next:
   pages:
     - mm7-service-mm7_submit
@@ -34,4 +34,4 @@ We authenticate your account with your VASPID and we authenticate your short cod
 *Always Use International Number Format:*
 You must use international format when submitting an MM7 message to Sinch. International format includes both the country code with the phone number. We use the country code to determine routing of the message. There should be no dialing prefixes (eg 00 or 001) or special characters such as the plus symbol when submitting messages. (example: '642111111' not '+642111111'). If you submit a message without a country code the message will likely get routed to the wrong country and you may end up paying for the delivery there.
 
-*For example the US number (774)-319-9144 in international number format would be 17743199144 because the USA country code is 1.*
+*For example the US number (555)-319-9144 in international number format would be 15553199144 because the USA country code is 1.*
