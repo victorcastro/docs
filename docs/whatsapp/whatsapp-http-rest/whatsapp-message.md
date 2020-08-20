@@ -38,7 +38,7 @@ The message endpoint is used as the primary endpoint of the API and this is wher
 
 ## Send a WhatsApp message
 
-#### Request
+### Request
 `POST whatsapp/v1/{bot-id}/messages`
 
 JSON object parameters:
@@ -49,7 +49,7 @@ JSON object parameters:
 | message | Message object                                                       | Object       | N/A        | Valid Message object  | Yes      |
 | callback| Callback URL to overwrite configured callback URL for status updates | String       | N/A        | Valid URL             | No       |
 
-#### Response
+### Response
 
 `201 Created`
 
@@ -78,10 +78,9 @@ There was an error with your request. The body is a JSON object described in the
 There was an authentication error with your request. Either you're using incorrect credentials or you're attempting to authenticate
 in a region where your bot does not reside. The body is a JSON object described in the [introduction](doc:whatsapp-introduction#http-errors).
 
-## Message object types
+### Message object types
 
 The types of messages that can be sent are one of the following:
-
 
 #### Template message
 
@@ -107,7 +106,45 @@ JSON object parameters:
 > 
 > Audio template messages are not supported.
 
-##### Button objects
+```json
+{
+    "to": [
+        "46732001122"
+    ],
+    "message": {
+        "type": "template",
+        "template_name": "test_template",
+        "language": "en",
+        "body_params": [
+            "param here"
+        ],
+        "media": {
+                "type": "text"
+        }
+    }
+}
+```
+
+```json
+{
+    "to": [
+    	"46732001122"
+    ],
+    "message": {
+        "type": "template",
+		"template_name": "demo_rich_text",
+		"language": "en",
+		"header_params": [
+              "Nick"
+            ],
+        "body_params": [
+          "Swan Lake"
+        ]
+    }
+}
+```
+
+#### Templates with buttons
 
 - Call button
 
@@ -130,42 +167,6 @@ JSON object parameters:
 | payload       | A payload to return when the recipient presses the button.           | String       | N/A                   | No       |
 
 [Find more button examples here](doc:whatsapp-examples).
-
-```json
-{
-    "to": [
-        "{{RECIPIENT}}"
-    ],
-    "message": {
-        "type": "template",
-        "template_name": "test_template",
-        "language": "en",
-        "body_params": [
-            "param here"
-        ],
-        "media": {
-                "type": "text"
-        }
-    }
-}
-```
-
-```json
-{
-    "to": [
-    	"{{RECIPIENT}}"
-    ],
-    "message": {
-        "type": "template",
-		"template_name": "demo_rich_text",
-		"language": "en",
-		"params": [
-			"Nick",
-			"Swan Lake"
-		]
-    }
-}
-```
 
 ```json
 {
