@@ -480,7 +480,32 @@ media and location messages.
 
 ##### Sending Messages
 
-This section provides examples of various messaging capabilities of WhatsApp channel,
+All business initiated conversations on the WhatsApp channel must start with an “Opt-In” by the user.
+This can be collected through any third party channel. For example in an SMS message, a web form, email etc.
+You need to register the collected user opt-in by invoking the opt-in service
+provided by Conversation API - `/optins:register`. A successful registration or opt-in errors will be
+announced by a callback to webhooks with trigger `OPT_IN`.
+
+Businesses must also provide a method by which customers may opt-out of receiving future messages from your organization.
+Registering the user opt-out is done through the Conversation API `/optouts:register` endpoint.
+The outcome of the opt-out registration is delivered by a callback to webhooks with trigger `OPT_OUT`.
+
+An example payload for opt-in/out registration (POST to `/optins:register` or `/optouts:register`) is the following snipped:
+
+```json
+{
+    "app_id": "{{APP_ID}}",
+    "recipient": {
+        "contact_id": "{{CONTACT_ID}}"
+    },
+    "channels": ["WHATSAPP"]
+}
+```
+
+where {{APP_ID}} is the ID of your **app** and the {{CONTACT_ID}} is the contact with WhatsApp channel identity
+for which this opt-in/out is preformed.
+
+The rest of this section provides examples of various messaging capabilities of WhatsApp channel,
 and how to utilize them using Conversation API generic message format.
 Please note that for the sake of brevity the JSON snippets do not include
 the **recipient** and **app_id** which are both required when sending a message.
