@@ -10,15 +10,15 @@ hidden: false
 ```shell Curl
 curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/messages:send' \
 -H 'Content-Type: application/json' \
--u '<client_id:client_secret>' \
+-H 'Authorization: Bearer <access token>' \
  -d '{
     "app_id": "{{YOUR_APP_ID}}",
     "recipient": {
         "contact_id": "{{YOUR_CONTACT_ID}}"
     },
     "message": {
-        "text_message": {
-            "text": "Text message from Sinch Conversation API."
+        "media_message": {
+            "url": "https://1vxc0v12qhrm1e72gq1mmxkf-wpengine.netdna-ssl.com/wp-content/uploads/2018/12/favicon.png"
         }
     },
     "channel_priority_order": [
@@ -36,7 +36,7 @@ curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/pro
 curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/messages:send' \
 
 -H 'Content-Type: application/json' \
--u '<client_id:client_secret>' \
+-H 'Authorization: Bearer <access token>' \
 -d '{
     "app_id": "{{YOUR_APP_ID}}",
     "recipient": {
@@ -91,7 +91,7 @@ curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/pro
 ```shell Curl
 curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/messages:send' \
 -H 'Content-Type: application/json' \
--u '<client_id:client_secret>' \
+-H 'Authorization: Bearer <access token>' \
  -d '{
     "app_id": "{{YOUR_APP_ID}}",
     "recipient": {
@@ -149,7 +149,7 @@ curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/pro
 ```shell Curl
 curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/messages:send' \
 -H 'Content-Type: application/json' \
--u '<client_id:client_secret>' \
+-H 'Authorization: Bearer <access token>' \
  -d '{
     "app_id": "{{YOUR_APP_ID}}",
     "recipient": {
@@ -247,7 +247,7 @@ curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/pro
 ```shell Curl
 curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/messages:send' \
 -H 'Content-Type: application/json' \
--u '<client_id:client_secret>' \
+-H 'Authorization: Bearer <access token>' \
  -d '{
     "app_id": "{{YOUR_APP_ID}}",
     "recipient": {
