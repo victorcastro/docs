@@ -135,7 +135,7 @@ The metadata fields are currently restricted to 1024 characters.
 The Conversation API uses OAuth2 **access tokens** to authenticate API calls. The first step to obtaining an **access token** is to create an **Access Key** in the [Sinch portal](https://dashboard.sinch.com/convapi/keys). A **client_id** and **client_secret** will be provided when creating an **Access Key** in the portal. The **project** ID will also be visible on the **Access Key** page in the portal. The credential pair can then be used to obtain an **access token**, given in the response, in the following way:
 
 ```console
-curl https://auth.sinch.com/oauth2/token -d grant_type=client_credentials --user <client_id>:<client_secret>
+curl https://eu.auth.sinch.com/oauth2/token -d grant_type=client_credentials --user <client_id>:<client_secret>
 ```
 
 A call to the Conversation API can then be done by including the obtained **access_token** in the request header. See below for an example:
