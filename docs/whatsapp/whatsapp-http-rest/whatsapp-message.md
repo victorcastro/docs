@@ -78,11 +78,11 @@ There was an error with your request. The body is a JSON object described in the
 There was an authentication error with your request. Either you're using incorrect credentials or you're attempting to authenticate
 in a region where your bot does not reside. The body is a JSON object described in the [introduction](doc:whatsapp-introduction#http-errors).
 
-### Message object types
+## Message object types
 
 The types of messages that can be sent are one of the following:
 
-#### Template message
+### Template message
 
 Accepted language codes can be found in the [introduction](doc:whatsapp-introduction#supported-language-codes). You can use [media provider](doc:whatsapp-media-provider) feature in template messages.
 
@@ -147,7 +147,7 @@ JSON object parameters:
 }
 ```
 
-#### Templates with buttons
+### Templates with buttons
 
 - Call button
 
@@ -240,7 +240,7 @@ JSON object parameters:
 }
 ```
 
-#### Text message
+### Text message
 
 Available formatting and using emojis for the text message content can be found in the [introduction](doc:whatsapp-introduction#formatting-text-messages).
 
@@ -266,7 +266,7 @@ JSON object parameters:
 }
 ```
 
-#### Image message
+### Image message
 
 > 📘 Note
 >
@@ -297,7 +297,7 @@ JSON object parameters:
 }
 ```
 
-#### Video message
+### Video message
 
 > 📘 Note
 >
@@ -329,7 +329,7 @@ JSON object parameters:
 }
 ```
 
-#### Document message
+### Document message
 
 > 📘 Note
 >
@@ -362,7 +362,7 @@ JSON object parameters:
 }
 ```
 
-#### Audio message
+### Audio message
 
 > 📘 Note
 >
@@ -392,7 +392,7 @@ JSON object parameters:
 ```
 
 
-#### Location message
+### Location message
 
 JSON object parameters:
 
@@ -419,7 +419,7 @@ JSON object parameters:
   }
 }
 ```
-#### Contacts message
+### Contacts message
 
 JSON object parameters:
 
@@ -485,7 +485,7 @@ JSON object parameters:
 }
 ```
 
-#### Sticker message
+### Sticker message
 
 Custom sticker must comply with WhatsApp requirements:
 1. Each sticker should have a transparent background.
