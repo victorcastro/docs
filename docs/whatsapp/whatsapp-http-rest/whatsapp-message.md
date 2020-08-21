@@ -23,7 +23,7 @@ next:
 
 The message endpoint is used as the primary endpoint of the API and this is where all the messages are sent through.
 
-**WhatsApp message flow**
+## WhatsApp message flow
 
 ![image](images\whatsapp-msg-flow.png)
 
@@ -38,7 +38,7 @@ The message endpoint is used as the primary endpoint of the API and this is wher
 
 ## Send a WhatsApp message
 
-#### Request
+### Request
 `POST whatsapp/v1/{bot-id}/messages`
 
 JSON object parameters:
@@ -49,7 +49,7 @@ JSON object parameters:
 | message | Message object                                                       | Object       | N/A        | Valid Message object  | Yes      |
 | callback| Callback URL to overwrite configured callback URL for status updates | String       | N/A        | Valid URL             | No       |
 
-#### Response
+### Response
 
 `201 Created`
 
@@ -64,7 +64,7 @@ The response body is a JSON object with the same format as a [delivery report ca
       "recipient":"+46732001122",
       "status":"success",
       "state":"queued"
-    },
+    }
   ]
 }
 ```
@@ -82,23 +82,22 @@ in a region where your bot does not reside. The body is a JSON object described 
 
 The types of messages that can be sent are one of the following:
 
-
 #### Template message
 
-Accepted language codes can be found in the [introduction](doc:whatsapp-introduction#supported-language-codes).
+Accepted language codes can be found in the [introduction](doc:whatsapp-introduction#supported-language-codes). You can use [media provider](doc:whatsapp-media-provider) feature in template messages.
 
 JSON object parameters:
 
-| Name          | Description                                                          | JSON Type    | Default    | Constraints           | Required |
-| ------------- | -------------------------------------------------------------------- | ------------ | ---------- | --------------------- | :------: |
+| Name          | Description                                                           | JSON Type    | Default    | Constraints           | Required |
+| ------------- | --------------------------------------------------------------------- | ------------ | ---------- | --------------------- | :------: |
 | type          | Constant value `template`.                                            | String       | N/A        | N/A                   | Yes      |
 | template_name | Name of the template.                                                 | String       | N/A        | N/A                   | Yes      |
 | language      | Language to send the template in.                                     | String       | `en`       | Language codes and locales (e.g `en`, `en_us`) | No       |
-| params        | Parameters to inject into the template.                               | String array | N/A        | This parameter can only be used for template messages with only a body of text. | No      |
-| header_params | Parameter to inject into the header of the template.                   | String array | N/A        | Can only used when there is a header of type text in the template. | No      |
-| body_params   | Parameters to inject into the body of the template.                    | String array | N/A        | N/A                   | No      |
-| media | An object describing the document, image or video to include in the header of the template. The objects are the same as described under Document message, Image message and Video message below, except that the `caption` parameter is not allowed. Also see the note below. For a message without media, set the media type to `text`.       | String array | N/A        | N/A                   | No      |
-| buttons | A list of buttons to include in the template message. | List of button objects | N/A        | N/A                   | Yes, if the template definition includes either at least one quick reply button or a dynamic URL button. |
+| params        | Parameters to inject into the template. DEPRECATED, please use `body_params` and `header_params` instead. | String array | N/A        | This parameter can only be used for template messages with only a body of text. | No      |
+| header_params | Parameter to inject into the header of the template.                  | String array | N/A        | Can only used when there is a header of type text in the template. | No      |
+| body_params   | Parameters to inject into the body of the template.                   | String array | N/A        | N/A                   | No      |
+| media         | An object describing the document, image or video to include in the header of the template. The objects are the same as described under Document message, Image message and Video message below, except that the `caption` parameter is not allowed. Also see the note below. For a message without media, set the media type to `text`.       | String array | N/A        | N/A                   | No      |
+| buttons       | A list of buttons to include in the template message.                 | List of button objects | N/A        | N/A                   | Yes, if the template definition includes either at least one quick reply button or a dynamic URL button. |
 | ttl           | Time to live of the template message. If the receiver has not opened the template message before the time to live expires, the message will be deleted and a failed callback will be sent. The time to live can be specified in ISO-8601 Duration format or in seconds as a string. | String       | 30 Days    | See description | No      |
 
 > 📘 Note
@@ -107,7 +106,48 @@ JSON object parameters:
 > 
 > Audio template messages are not supported.
 
-Button objects:
+```json
+{
+    "to": [
+        "46732001122"
+    ],
+    "message": {
+        "type": "template",
+        "template_name": "test_template",
+        "language": "en",
+        "body_params": [
+            "param here"
+        ],
+        "media": {
+            "type": "text"
+        }
+    }
+}
+```
+
+```json
+{
+    "to": [
+    	"46732001122"
+    ],
+    "message": {
+        "type": "template",
+		"template_name": "demo_rich_text",
+		"language": "en",
+		"header_params": [
+              "Nick"
+            ],
+        "body_params": [
+          "Swan Lake"
+        ],
+        "media": {
+            "type": "text"
+        }
+    }
+}
+```
+
+##### Templates with buttons
 
 - Call button
 
@@ -139,29 +179,10 @@ Button objects:
   ],
   "message": {
     "type": "template",
-    "template_name": "sinch_test_greeting",
-    "language": "en",
-    "params": [
-      "Nick"
-    ],
-    "ttl": "P1D"
-  }
-}
-
-```
-
-```json
-{
-  "to": [
-    "46732001122",
-    "group:447506616260-1565342732"
-  ],
-  "message": {
-    "type": "template",
     "template_name": "some_template_name",
     "language": "en",
     "header_params": [
-      "a_parameter",
+      "a_parameter"
     ],
     "body_params": [
       "some_first_parameter",
@@ -214,7 +235,7 @@ Button objects:
       {
         "type": "quick_reply"
       }
-    ],
+    ]
   }
 }
 ```
