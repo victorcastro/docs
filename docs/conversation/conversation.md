@@ -164,7 +164,7 @@ Currently Sinch Conversation API is available in:
 ### Postman collection
 
 Sinch offers a Postman collection for easy setup and testing during development.
-https://www.getpostman.com/collections/608a4d8cda9fe8d2b462
+https://www.getpostman.com/collections/79a07a7d299afe46658b
 After importing the collection, fill in the following variables: PROJECT with your PROJECT ID, APP with app id, CLIENT_ID with your CLIENT_ID, and CLIENT_SECRET with your client secret.  
 To fill WEBHOOK_URL, simply visit  
 https://webhook.site/  
