@@ -777,7 +777,7 @@ You can find more information on callback request signing [here](doc:using-rest#
 > - “pstn”: If the incoming call comes from the PSTN network (a local phone number mapped to your application)
 > - “mxp”: If the incoming call comes from one of the Sinch SDKs (iOS, Android, Javascript) through data connection.
 
-**duration** shows the duration of the current call.
+**duration** is the duration of the current call (in seconds).
 
 > **Note**
 >
