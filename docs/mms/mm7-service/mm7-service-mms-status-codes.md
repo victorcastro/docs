@@ -21,14 +21,16 @@ excerpt: ""
 | 2566           | Invalid carrier                                               | Invalid carrier ID.                                                                                                          |
 | 2567           | Missing carrier ID                                            | Carrier ID is required to be passed                                                                                          |
 | 2568           | Unable to authenticate                                        | Ensure the HTTP username and password you have specified are correct and formatted properly within the Authorization header. |
+| 2569           | Carrier Lookup Service is down. Please retry.                                        |  |
 | 2500           | Missing or Invalid HTTP header Content-Length or Content-Type | Ensure the HTTP Content-Length and Content Type header are included and valid.                                               |
 | 2502           | Missing destination address                                   | Ensure the recipient is specified correctly for the MM7 version that is used.                                                |
 | 2503           | Multiple destination addresses not supported                  | Multiple recipients not supported. Instead, create multiple messages                                                         |
 | 2504           | Missing source address                                        | Ensure source address is specified correctly for the MM7 version that is used                                                |
-| 2505           | Missing or unsupported MM7 Version                            | Ensure specified MM7 version is on the list of supported versions, and is in the format x.y.z                                |
+
 
 | StatusCode | StatusText                                  | Details                                                                                                 |
 | ---------- | ------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| 2505       | Missing or unsupported MM7 Version          | Ensure specified MM7 version is on the list of supported versions, and is in the format x.y.z           |
 | 2506       | Missing XML element - Content               | Ensure the Content element is included in the SubmitRequest.                                            |
 | 2507       | Unsupported namespace                       | Ensure that all the namespaces specified are on the list of supported namespaces.                       |
 | 2510       | Missing or Invalid SOAP header              | Ensure the SOAP envelope contains a SOAP header with only the TransactionID element                     |
