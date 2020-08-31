@@ -28,11 +28,11 @@ A callback from the Sinch WhatsApp API will always have the following structure:
 
 If you wish to have your callbacks signed and have made the proper configuration for this, the callbacks will have the following signature-related headers.
 
-|Header                                     | Description                                                                        | JSON Type |
-|-------------------------------------------|------------------------------------------------------------------------------------|-----------|
-|sinch-whatsapp-callback-signature          | The signature                                                                      | String    |
-|sinch-whatsapp-callback-signature-algoritm | The algorithm that was used to compute the signature: `HMAC_SHA_256`               | String    |
-|sinch-whatsapp-callback-signature-nonce    | The nonce that was used together with the callback payload to create the signature | String    |
+|Header                                      | Description                                                                        | JSON Type |
+|--------------------------------------------|------------------------------------------------------------------------------------|-----------|
+|sinch-whatsapp-callback-signature           | The signature                                                                      | String    |
+|sinch-whatsapp-callback-signature-algorithm | The algorithm that was used to compute the signature: `HMAC_SHA_256`               | String    |
+|sinch-whatsapp-callback-signature-nonce     | The nonce that was used together with the callback payload to create the signature | String    |
 
 The signature is computed by using the signature algorithm with the following string as input: the callback payload joined to the nonce with a dot, i.e. `payload.nonce`.
 
