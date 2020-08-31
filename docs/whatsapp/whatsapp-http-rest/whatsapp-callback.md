@@ -34,7 +34,7 @@ If you wish to have your callbacks signed and have made the proper configuration
 |sinch-whatsapp-callback-signature-algorithm | The algorithm that was used to compute the signature: `HMAC_SHA_256`               | String    |
 |sinch-whatsapp-callback-signature-nonce     | The nonce that was used together with the callback payload to create the signature | String    |
 
-The signature is computed by using the signature algorithm with the following string as input: the callback payload joined to the nonce with a dot, i.e. `payload.nonce`.
+The signature is computed by using the signature algorithm with the following string as input (as well as the HMAC key that you supplied during configuration): the callback payload joined to the nonce with a dot, i.e. `payload.nonce`.
 
 ### Delivery report callback
 
