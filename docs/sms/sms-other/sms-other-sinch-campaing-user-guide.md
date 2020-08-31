@@ -7,7 +7,9 @@ excerpt: >-
 
 The purpose of this Guide is to briefly describe usage of the Campaign Manager Portal.
 
-For more details please download: [Sinch Campaign Manager User Guide V4.pdf](downloads\Sinch Campaign Manager User Guide V4.pdf)
+For more details please download: 
+
+[Sinch Campaign Manager User Guide V4.pdf](downloads\Sinch Campaign Manager User Guide V4.pdf)
 
 [CTIA Short Code Monitoring Handbook v1.7.pdf](https://www.sinch.com/wp-content/uploads/2019/10/CTIA-Short-Code-Monitoring-Handbook-v1.7.pdf)
 
