@@ -1,7 +1,7 @@
 ---
-title: Sinch Campaign Manager User Guide
+title: US Campaign Compliance
 excerpt: >-
-  The Sinch Manager User Guides can be found here. Get to know the Campaing
+  The Sinch Manager User Guides can be found here. Get to know the Campaign
   Manager Portal. Read more.
 ---
 
