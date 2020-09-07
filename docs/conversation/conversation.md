@@ -1,5 +1,5 @@
 ---
-title: Introduction 
+title: Introduction
 excerpt: >-
   High level presentation of Sinch Conversation API and overview of its key concepts.
 hidden: false
@@ -142,6 +142,13 @@ A call to the Conversation API can then be done by including the obtained **acce
 
 ```console
 curl -H "Authorization: Bearer <access token>" https://eu.conversation.api.sinch.com/v1beta/projects/<Project ID>/apps
+```
+
+#### Support for Basic Authentication
+The Conversation API also supports Basic Authentication for testing purposes. The recommendation is to use the OAuth2 authentication flow, as described above. Also note that that calls, authenticated via Basic Authentication, are heavily rate-limited. The **username** and **password** correspond to the **client_id** and **client_secret** obtained when creating an **Access Key**. See below for an example of how to authenticate towards the Conversation API using Basic Authentication.
+
+```console
+curl https://eu.conversation.api.sinch.com/v1beta/projects/<Project ID>/apps --user <client_id>:<client_secret>
 ```
 
 ### Supported channels
