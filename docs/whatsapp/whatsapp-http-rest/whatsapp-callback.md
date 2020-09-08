@@ -24,6 +24,18 @@ A callback from the Sinch WhatsApp API will always have the following structure:
 >
 > Contacts might be placed only for text, contact and location inbound messages.
 
+### Signature
+
+If you wish to have your callbacks signed and have made the proper configuration for this, the callbacks will have the following signature-related headers.
+
+|Header                                      | Description                                                                        | JSON Type |
+|--------------------------------------------|------------------------------------------------------------------------------------|-----------|
+|sinch-whatsapp-callback-signature           | The signature                                                                      | String    |
+|sinch-whatsapp-callback-signature-algorithm | The algorithm that was used to compute the signature: `HMAC_SHA_256`               | String    |
+|sinch-whatsapp-callback-signature-nonce     | The nonce that was used together with the callback payload to create the signature | String    |
+
+The signature is computed by using the signature algorithm with the following string as input (as well as the HMAC key that you supplied during configuration): the callback payload joined to the nonce with a dot, i.e. `payload.nonce`.
+
 ### Delivery report callback
 
 A delivery report contains the status and state of each message sent through the Sinch WhatsApp API.
