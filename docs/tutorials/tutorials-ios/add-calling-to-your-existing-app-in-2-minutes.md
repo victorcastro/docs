@@ -5,10 +5,12 @@ excerpt: >-
   to start building and prototyping straight away. While our SDK is simple to
   use, you still have to add your own UI to make a calling app that users will
   understand.
+hidden: true
 ---
+
 If you’re like me, when you start testing a new SDK or service, you just want to start building and prototyping straight away. While our SDK is simple to use, you still have to add your own UI to make a calling app that users will understand.
 
-Full disclosure: I have a minor investment in a company called [iRezQ](http://irezq.com), an app that warns you about nearby traffic accidents, which it detects using your device’s accelerometer and an algorithm developed in collaboration with some insurance companies.
+Full disclosure: I have a minor investment in a company called iRezQ (its now dead), an app that warns you about nearby traffic accidents, which it detects using your device’s accelerometer and an algorithm developed in collaboration with some insurance companies.
 
 I wanted to test if VoIP calling could help iRezQ save some money and add an extra feature on top of the existing functionality using our [Voice API](doc:voice-introduction).
 
@@ -59,19 +61,14 @@ I removed that code and added the import to my controller and the following line
 Now I’m ready to show this to the product owner. And it’s good to submit to the App Store. We probably won’t do that because we want to have VoIP calling so we can send some extra headers with more meta information about the call. But in just a few minutes, we can try out the user flow and potential UI without having to plan a whole sprint.
 ![irezqstart.PNG](images\6745318-irezqstart.PNG)
 
-
 ![manual.PNG](images\d0e3137-manual.PNG)
-
 
 ![calling.png](images\9d1506c-calling.png)
 
-
 ![incomming.png](images\7788079-incomming.png)
-
 
 ![incall.png](images\0cb5f36-incall.png)
 
 We’re really interested to know how you feel about these kinds of libraries. Tweet me at [@cjsinch](https://twitter.com/cjsinch) or email me at `christian@sinch.com` to let me know.
 
 If there is interest, we could make this a supported product feature. For now, enjoy the open-source framework that lets you add calling in two minutes.
-
