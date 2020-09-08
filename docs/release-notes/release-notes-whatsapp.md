@@ -8,7 +8,7 @@ excerpt: >-
 ## 2020-09-08
 
  - Performance and security improvements.
- - Option to have the callbacks sent from the Sinch WhatsApp API to the customer's endpoint signed using the [HMAC algorithm](https://en.wikipedia.org/wiki/HMAC). To be able to use this feature a HMAC key needs to be used, which should be delivered in the provisioning Excel form. For more information see the [Callback signature](doc:whatsapp-callback#signature) documentation.
+ - Option to have the callbacks sent from the Sinch WhatsApp API to the customer's endpoint signed using the [HMAC algorithm](https://en.wikipedia.org/wiki/HMAC). To be able to use this feature a HMAC key needs to be delivered in the provisioning Excel form. For more information see the [Callback signature](doc:whatsapp-callback#signature) documentation.
 
 ## 2020-08-12
 
