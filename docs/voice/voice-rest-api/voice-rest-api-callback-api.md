@@ -5,7 +5,7 @@ excerpt: >-
   Sinch platform... Read more.
 next:
   pages:
-    - voice-rest-api-reporting-api
+    - voice-rest-api-recording
 ---
 
 ## Overview
@@ -752,7 +752,7 @@ You can find more information on callback request signing [here](doc:using-rest#
         string - originationType
         CallHeader[] - callHeaders
     }
-    
+
     [CallHeader]
     {
       string - key
@@ -930,7 +930,7 @@ You can find more information on callback request signing [here](doc:using-rest#
         string - from
         CallHeader[] - callHeaders
     }
-    
+
     [CallHeader]
     {
       string - key
@@ -1142,16 +1142,16 @@ Example of ICE response:
 The maximum size for the value of call headers is 1024 bytes (counted as the UTF-8 encoded size of each header key/value pair).
 
 > **Important**
-> 
+>
 > When call headers are specified in ICE response, they will be made available to callee, but not to caller. I.e. if call headers was specified first by caller client, but then overriden via ICE response, the caller will not be updated of the changed call headers.
 
 ### Call Headers and the `custom` Field
 
-__WARNING__: This is a deprecated feature.
+**WARNING**: This is a deprecated feature.
 
 The _ICE_ and _DICE_ events have a field named `custom`. If call headers are specified at call initation on SDK client or via ICE response, the call headers will be available in `custom` in a JSON encoded format. E.g. if a call is initiated with headers `{"foo": "x"}` then the value of `custom` will be `"{\"foo\":\"x\"}"`.
 
-Note that call headers are only mapped to `custom` for Sinch SDK client calls and it is considered a legacy feature. It is *strongly recommended* to use `callHeaders` as specify/override call headers in _ICE_ and _DICE_.
+Note that call headers are only mapped to `custom` for Sinch SDK client calls and it is considered a legacy feature. It is _strongly recommended_ to use `callHeaders` as specify/override call headers in _ICE_ and _DICE_.
 
 > **Important**
 >
