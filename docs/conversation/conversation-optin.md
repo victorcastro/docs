@@ -71,18 +71,18 @@ Below is an example for Opt-In Notification.
 
 The Opt-In Notification can have the following fields:
 
-| Field           | Description                                                                                          |
-| --------------- | ---------------------------------------------------------------------------------------------------- |
-| contact_id      | The id of the contact that the Opt-In was executed for.                                              |
-| identity        | The channel recipient identity of the contact.                                                       |
-| channel         | The channel that the Opt-In was registered with.                                                     |
-| status          | The status response for the Opt-In request. See possible values below the table.                     |
-| error_details   | If the Opt-In failed the reason is present in this field.                                            |
+| Field             | Description                                                                                          |
+| ----------------- | ---------------------------------------------------------------------------------------------------- |
+| `contact_id`      | The id of the contact that the Opt-In was executed for.                                              |
+| `identity`        | The channel recipient identity of the contact.                                                       |
+| `channel`         | The channel that the Opt-In was registered with.                                                     |
+| `status`          | The status response for the Opt-In request. See possible values below the table.                     |
+| `error_details`   | If the Opt-In failed the reason is present in this field.                                            |
 
 Possible values for ``status`` are:
-* ``OPT_IN_STATUS_UNSPECIFIED``: the underlying channel doesn't support Opt-In.
-* ``OPT_IN_SUCCEEDED``: the Opt-In registration succeeded.
-* ``OPT_IN_FAILED``: the Opt-In registration failed, see reason in `error_details` field.
+* ``OPT_IN_STATUS_UNSPECIFIED`` : the underlying channel doesn't support Opt-In.
+* ``OPT_IN_SUCCEEDED`` : the Opt-In registration succeeded.
+* ``OPT_IN_FAILED`` : the Opt-In registration failed, see reason in `error_details` field.
 
 ### Opt-Out
 
@@ -142,15 +142,15 @@ Below is an example for Opt-Out Notification.
 
 The Opt-Out Notification can have the following fields:
 
-| Field           | Description                                                                                          |
-| --------------- | ---------------------------------------------------------------------------------------------------- |
-| contact_id      | The id of the contact that the Opt-Out was executed for.                                             |
-| identity        | The channel recipient identity of the contact.                                                       |
-| channel         | The channel that the Opt-Out was registered with.                                                    |
-| status          | The status response for the Opt-Out request. See possible values below the table.                    |
-| error_details   | If the Opt-Out failed the reason is present in this field.                                           |
+| Field             | Description                                                                                          |
+| ----------------- | ---------------------------------------------------------------------------------------------------- |
+| `contact_id`      | The id of the contact that the Opt-Out was executed for.                                             |
+| `identity`        | The channel recipient identity of the contact.                                                       |
+| `channel`         | The channel that the Opt-Out was registered with.                                                    |
+| `status`          | The status response for the Opt-Out request. See possible values below the table.                    |
+| `error_details`   | If the Opt-Out failed the reason is present in this field.                                           |
 
 Possible values for ``status`` are:
-* ``OPT_OUT_STATUS_UNSPECIFIED``: the underlying channel doesn't support Opt-Out.
-* ``OPT_OUT_SUCCEEDED``: the Opt-Out registration succeeded.
-* ``OPT_OUT_FAILED``: the Opt-Out registration failed, see reason in `error_details` field.
+* ``OPT_OUT_STATUS_UNSPECIFIED`` : the underlying channel doesn't support Opt-Out.
+* ``OPT_OUT_SUCCEEDED`` : the Opt-Out registration succeeded.
+* ``OPT_OUT_FAILED`` : the Opt-Out registration failed, see reason in `error_details` field.
