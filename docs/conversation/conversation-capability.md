@@ -11,7 +11,7 @@ A Capability Query means checking available options to reach the [**contact**](d
 
 Capability Queries can only be executed for contacts that already exist in a project/app. For executing the request it is required to provide either the contactId or the channel recipient identities of the contact.
 
-The request is executed asynchronously, therefore it immediately responds we the registered query request. The result of the Capability Query is sent to the registered webhook for the CAPABILITY trigger. To set up webhooks with the proper trigger read about [**webhooks**](doc:conversation#webhook).
+The request is executed asynchronously, therefore the service responds immediately. The result of the Capability Query is sent to the registered webhook for the CAPABILITY trigger. To set up webhooks with the proper trigger read about [**webhooks**](doc:conversation#webhook).
 
 ### Capability Request
 
