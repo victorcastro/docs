@@ -9,7 +9,7 @@ hidden: false
 
 By using the Opt-In & Opt-Out service it is possible to register an Opt-In or an Opt-Out event for a [**contact**](doc:conversation#contact) with the underlying channel. In order to execute the request either the contactId of the contact or its channel recipient identities are required.
 
-In Beta Opt-In & Opt-Out in Conversation API is only supported for WhatsApp channel. To read more about relevant policies go to [**WhatsApp Opt-In Policies**](doc:whatsapp-opt-in-and-outs#opt-in-policy-change-9th-July-2020).
+In Beta Opt-In & Opt-Out in Conversation API is only supported for WhatsApp channel. To read more about relevant policies go to [**WhatsApp Opt-In and Opt-Out**](doc:whatsapp-opt-in-and-outs).
 
 Requests are executed asynchronously, therefore the endpoint immediately returns the registered request. The result of the Opt-In or Opt-Out request is posted to the webhook having OPT_IN or OPT_OUT trigger respectively. To read more about setting up webhooks go to [**Webhooks**](doc:conversation#webhook).
  
