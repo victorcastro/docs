@@ -1,21 +1,21 @@
 ---
 title: Capability
 excerpt: >-
-  Requesting a Capability Lookup for a contact
+  Requesting a Capability Query for a contact
 hidden: false
 ---
 
 ## Introduction to Capability <span class="betabadge">Beta</span>
 
-A Capability Lookup means checking available options to reach the [**contact**](doc:conversation#contact) on the channels where it has a channel identity. 
+A Capability Query means checking available options to reach the [**contact**](doc:conversation#contact) on the channels where it has a channel identity. 
 
-Capability Lookups can only be executed for contacts that already exist in a project/app. For executing the request it is required to provide either the contactId or the channel recipient identities of the contact.
+Capability Queries can only be executed for contacts that already exist in a project/app. For executing the request it is required to provide either the contactId or the channel recipient identities of the contact.
 
-The request is executed asynchronously, therefore it immediately responds we the registered lookup request. The result of the Capability Lookup is sent to the registered webhook for the CAPABILITY trigger. To set up webhooks with the proper trigger read about [**webhooks**](doc:conversation#webhook).
+The request is executed asynchronously, therefore it immediately responds we the registered query request. The result of the Capability Query is sent to the registered webhook for the CAPABILITY trigger. To set up webhooks with the proper trigger read about [**webhooks**](doc:conversation#webhook).
 
 ### Capability Request
 
-Below is an example for executing a Capability Lookup request using the contactId.
+Below is an example for executing a Capability Query request using the contactId.
 
 Conversation API POST `capability:query`
 
@@ -50,11 +50,11 @@ Another alternative is using a list fo channel recipient identities instead of c
 
 ### Capability Response
 
-The response for the Capability Lookup is the registered request. The result of the lookup is returned on the webhook with CAPABILITY trigger, see [**Capability Notification**](doc:conversation-capability#capability-notification).
+The response for the Capability Query is the registered request. The result of the query is returned on the webhook with CAPABILITY trigger, see [**Capability Notification**](doc:conversation-capability#capability-notification).
 
 ### Capability Notification
 
-The result of a Capability Lookup is posted to the webhook having CAPABILITY trigger set.
+The result of a Capability Query is posted to the webhook having CAPABILITY trigger set.
 
 Below is an example Capability Notification.
 
@@ -63,23 +63,23 @@ Below is an example Capability Notification.
   "contact_id": "{{CONTACT_ID}}",
   "identity": "46712312312",
   "channel": "WHATSAPP",
-  "capability_status" : "CAPABILITY_FULL"
+  "capability_status": "CAPABILITY_FULL"
 }
 ```
 
-The Capability Notification can have the following fields.
+The Capability Notification can have the following fields:
 
-| Field                      | Description                                                                                  |
-| -------------------------- | -------------------------------------------------------------------------------------------- |
-| contact_id                 | The id of the contact that the lookup was executed for.                                      |
-| identity                   | The channel recipient identity of the contact.                                               |
-| channel                    | The channel that the capability information was retrieved from.                              |
-| capability_status          | The capability of the contact reported by the channel. See possible values below the table.  |
-| reason                     | If the capability lookup failed the reason is present in this field.                         |
-| channel_capabilities       | If the underlying channel has a list of specific capabilities then it is listed here.        |
+| Field                        | Description                                                                                  |
+| ---------------------------- | -------------------------------------------------------------------------------------------- |
+| `contact_id`                 | The id of the contact that the query was executed for.                                       |
+| `identity`                   | The channel recipient identity of the contact.                                               |
+| `channel`                    | The channel that the capability information was retrieved from.                              |
+| `capability_status`          | The capability of the contact reported by the channel. See possible values below the table.  |
+| `reason`                     | If the capability query failed the reason is present in this field.                          |
+| `channel_capabilities`       | If the underlying channel has a list of specific capabilities then it is listed here.        |
 
 Possible values for ``capability_status`` are:
-* ``CAPABILITY_UNKNOWN`` : the channel capability for the identity is unknown, due to the underlying channel not making this information available.
-* ``CAPABILITY_FULL`` : the specified identity supports all the features of the channel.
-* ``CAPABILITY_PARTIAL`` : the specified identity supports a subset of the channel features.
-* ``NO_CAPABILITY`` : the specified identity has no capability on the channel.
+* ``CAPABILITY_UNKNOWN`` : the channel capability for the contact is unknown, due to the underlying channel not making this information available.
+* ``CAPABILITY_FULL`` : the specified contact supports all the features of the channel.
+* ``CAPABILITY_PARTIAL`` : the specified contact supports a subset of the channel features.
+* ``NO_CAPABILITY`` : the specified contact has no capability on the channel.
