@@ -15,7 +15,7 @@ The request is executed asynchronously, therefore the service responds immediate
 
 ### Capability Request
 
-Below is an example for executing a Capability Query request using the contactId.
+Below you can find an example for executing a Capability Query request using the contactId.
 
 Conversation API POST `capability:query`
 
@@ -29,7 +29,7 @@ Conversation API POST `capability:query`
 }
 ```
 
-Another alternative is using a list fo channel recipient identities instead of contactId.
+Another alternative is using a list of channel recipient identities instead of contactId.
 
 ```json
 {
@@ -50,13 +50,13 @@ Another alternative is using a list fo channel recipient identities instead of c
 
 ### Capability Response
 
-The response for the Capability Query is the registered request. The result of the query is returned on the webhook with CAPABILITY trigger, see [**Capability Notification**](doc:conversation-capability#capability-notification).
+The response for the Capability Query is the registered request. The result of the query is returned through the webhook with CAPABILITY trigger, see [**Capability Notification**](doc:conversation-capability#capability-notification).
 
 ### Capability Notification
 
-The result of a Capability Query is posted to the webhook having CAPABILITY trigger set.
+The result of a Capability Query is posted to the webhook which has CAPABILITY trigger set.
 
-Below is an example Capability Notification.
+Below you can find an example for Capability Notification.
 
 ```json
 {
