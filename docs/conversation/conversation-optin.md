@@ -9,15 +9,15 @@ hidden: false
 
 By using the Opt-In & Opt-Out service it is possible to register an Opt-In or an Opt-Out event for a [**contact**](doc:conversation#contact) with the underlying channel. In order to execute the request either the contactId of the contact or its channel recipient identities are required.
 
-In Beta Opt-In & Opt-Out in Conversation API is only supported for WhatsApp channel. To read more about relevant policies go to [**WhatsApp Opt-In and Opt-Out**](doc:whatsapp-opt-in-and-outs).
+In Beta version of Conversation API the Opt-In & Opt-Out registration is only supported for WhatsApp channel. To read more about relevant policies go to [**WhatsApp Opt-In and Opt-Out**](doc:whatsapp-opt-in-and-outs).
 
-Requests are executed asynchronously, therefore the endpoint immediately returns the registered request. The result of the Opt-In or Opt-Out request is posted to the webhook having OPT_IN or OPT_OUT trigger respectively. To read more about setting up webhooks go to [**Webhooks**](doc:conversation#webhook).
+Requests are executed asynchronously, therefore the endpoint immediately returns the registered request. The result of the Opt-In or Opt-Out request is posted to the webhook which has OPT_IN or OPT_OUT trigger respectively. To read more about setting up webhooks go to [**Webhooks**](doc:conversation#webhook).
  
 ### Opt-In
 
 #### Opt-In Request
 
-Below is an example to register an Opt-In event.
+Below you can find an example to register an Opt-In event.
 
 Conversation API POST ``optins:register``
 
@@ -52,13 +52,13 @@ Alternatively the contact's channel recipient identities can be used:
 
 #### Opt-In Response
 
-The response for Opt-In is the registered request. The result is returned on the webhook with OPT_IN trigger, see [**Opt-In Notification**](doc:conversation-optin#opt-in-notification).
+The response for Opt-In is the registered request. The result is returned through the webhook with OPT_IN trigger, see [**Opt-In Notification**](doc:conversation-optin#opt-in-notification).
 
 #### Opt-In Notification 
 
-The result of registering an Opt-In is posted to the webhook having OPT_IN trigger set.
+The result of registering an Opt-In is posted to the webhook which has OPT_IN trigger set.
 
-Below is an example for Opt-In Notification.
+Below you can find an example for Opt-In Notification.
 
 ```json
 {
@@ -88,7 +88,7 @@ Possible values for ``status`` are:
 
 #### Opt-Out Request
 
-Below is an example to register an Opt-Out event.
+Below you can find an example to register an Opt-Out event.
 
 Conversation API POST ``optouts:register``
 
@@ -123,13 +123,13 @@ Alternatively the contact's channel recipient identities can be used:
 
 #### Opt-Out Response
 
-The response for Opt-Out is the registered request. The result is returned on the webhook with OPT_OUT trigger, see [**Opt-Out Notification**](doc:conversation-optin#opt-out-notification).
+The response for Opt-Out is the registered request. The result is returned through the webhook which has OPT_OUT trigger, see [**Opt-Out Notification**](doc:conversation-optin#opt-out-notification).
 
 #### Opt-Out Notification 
 
-The result of registering an Opt-Out is posted to the webhook having OPT_OUT trigger set.
+The result of registering an Opt-Out is posted to the webhook which has OPT_OUT trigger set.
 
-Below is an example for Opt-Out Notification.
+Below you can find an example for Opt-Out Notification.
 
 ```json
 {
