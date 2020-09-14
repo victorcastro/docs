@@ -1,6 +1,7 @@
 ---
 title: SMS Node Module
 excerpt: This is an open source Node module to send SMS with the Sinch SMS API.
+hidden: truehide 
 ---
 One of the teams at TheNextWeb hackathon this past weekend was kind enough to open source a node module to send SMS with the [Sinch SMS API](https://www.sinch.com/sms-api/). (Shoutout to Mihir and Mikhail\!) Here’s an example of how to use it:
 
