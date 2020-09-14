@@ -21,6 +21,8 @@ excerpt: >-
 
 [U.S. Cellular Campaign Playbook](downloads\US Cellular Campaign Playbook August 2013.pdf) - U.S. Cellular Campaign Playbook August 2013 Edition.
 
+[Sinch Disallowed Content Policy](downloads\Disallowed Content Policy.pdf) - This document quickly covers disallowed content on A2P messaging in the United States.
+
 [WMC Improved Vetting Form for US Short Code](downloads\WMC Improved Vetting Form for US SC.pdf) - This is used for vetting content providers and is required only for new CPs.
 
-[Sample Migration Letter Template](downloads\Migration Letter Template.pdf) - Use as a guide for creating a migration letter (only required for MIGRATING codes)
+[Sample Migration Letter Template](downloads\Migration Letter Template.pdf) - Use as a guide for creating a migration letter (only required for MIGRATING codes).
