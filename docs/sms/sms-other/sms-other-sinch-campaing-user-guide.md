@@ -7,7 +7,7 @@ excerpt: >-
 
 [Sinch Campaign Manager User Guide V4](downloads\Sinch Campaign Manager User Guide V4.pdf) - The purpose of this Guide is to briefly describe usage of the Campaign Manager Portal.
 
-[US Short Code Onboarding Overview](downloads\US Short Code Onboarding.pptx) - This document covers the US short code process.
+[Sinch US Short Code Onboarding Overview](downloads\US Short Code Onboarding.pptx) - This document covers the US short code process.
 
 [CTIA Short Code Monitoring Handbook v1.7](https://www.sinch.com/wp-content/uploads/2019/10/CTIA-Short-Code-Monitoring-Handbook-v1.7.pdf) - This is the CTIA handbook which covers the guidelines/requirements for US Short Code campaigns.
 
