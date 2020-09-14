@@ -122,7 +122,7 @@ When linking against the iOS 13 SDK or later, your implementation **must** repor
 When you relay the push notification to a `SINClient`. If you for some reason do not relay the push payload to a Sinch client instance using `-[SINClient relayRemotePushNotification:]`, you __must__ instead invoke `-[SINManagedPush didCompleteProcessingPushPayload:]` so that the Sinch SDK can invoke the _PKPushKit_ completion handler (which is managed by `SINManagedPush`).
 
 > ❗️Report Push Notifications to CallKit
-> If a VoIP push notification is not reported to CallKit then iOS will __terminate__ the application. Repeatedly failing to report calls to CallKit may cause the system to stop delivering any more VoIP push notifications to your app. The exact limit before this throttling behaviour kicks in is subject to Apple iOS implementation details and outside the control of the Sinch SDK.
+> If a VoIP push notification is not reported to CallKit then iOS will __terminate__ the application. Repeatedly failing to report calls to CallKit may cause the system to stop delivering any more VoIP push notifications to your app. The exact limit before this behaviour kicks in is subject to Apple iOS implementation details and outside the control of the Sinch SDK.
 >
 > Please also see [Apples Developer documentation on this topic](https://developer.apple.com/documentation/pushkit/pkpushregistrydelegate/2875784-pushregistry).
 
@@ -195,9 +195,9 @@ For example, if your application is signed with a _Development_ provisioning pro
 
 Typically a _Debug_ build will be code signed with a _Development_ provisioning profile and thus `SINAPSEnvironmentDevelopment` should be used. And typically a _Release_ build will be code signed with a _Distribution_ provisioning profile and thus `SINAPSEnvironmentProduction` should be used. Instead of changing this manually for each build, the macro `SINAPSEnvironmentAutomatic` is available which automatically expands to _Development_ for _Debug_ builds and _Production_ for _Release_ builds.
 
-## iOS Throttling Notifications
+## iOS not Delivering Notifications
 
-iOS will under certain circumstances throttle push notifications and not deliver the notification to your application (even if it was received on the device/OS level). Note that this also applies to VoIP push notifications. Exact throttling behaviour and limits are subject to iOS internal details, but the well known throttling scenarios are:
+Under certain circumstances, iOS will not deliver a notification to your application even if it was received at device/OS level. Note that this also applies to VoIP push notifications. Exact behaviour and limits are subject to iOS internal details, but well known scenarios where notifications will not be delivered are:
 
 * The end user has actively terminated the application. iOS will only start delivering notifications to the application again after the user has actively started the application again.
 * Your app has not been reporting VoIP push notifications to _CallKit_. Please see the separate sections above on how to report VoIP push notifications as _CallKit_ calls.
