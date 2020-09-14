@@ -7,6 +7,8 @@ excerpt: >-
 
 [Sinch Campaign Manager User Guide V4](downloads\Sinch Campaign Manager User Guide V4.pdf) - The purpose of this Guide is to briefly describe usage of the Campaign Manager Portal.
 
+[US Short Code Onboarding Overview](downloads\US Short Code Onboarding.pptx) - This document covers the US short code process.
+
 [CTIA Short Code Monitoring Handbook v1.7](https://www.sinch.com/wp-content/uploads/2019/10/CTIA-Short-Code-Monitoring-Handbook-v1.7.pdf) - This is the CTIA handbook which covers the guidelines/requirements for US Short Code campaigns.
 
 [CTIA Short Code Monitoring Handbook Addendum v1.7](https://www.sinch.com/wp-content/uploads/2019/10/CTIA-Short-Code-Monitoring-Handbook-v1.7-Addendum.pdf) - This is the CTIA handbook addendum which covers the guidelines/requirements for US Short Code campaigns.
@@ -18,3 +20,7 @@ excerpt: >-
 [T-Mobile Code of Conduct](downloads\T_Mobile_Code_of_Conduct_V2__9.1.2020.pdf) - T-Mobile Code of Conduct Version 2.0 September 2020.
 
 [U.S. Cellular Campaign Playbook](downloads\US Cellular Campaign Playbook August 2013.pdf) - U.S. Cellular Campaign Playbook August 2013 Edition.
+
+[WMC Improved Vetting Form for US Short Code](downloads\WMC Improved Vetting Form for US SC.pdf) - This is used for vetting content providers and is required only for new CPs.
+
+[Sample Migration Letter Template](downloads\Migration Letter Template.pdf) - Use as a guide for creating a migration letter (only required for MIGRATING codes)
