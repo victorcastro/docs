@@ -13,4 +13,8 @@ excerpt: >-
 
 [CTIA Messaging Principles and Best Practices](https://www.sinch.com/wp-content/uploads/2019/10/CTIA-Messaging-Principles-and-Best-Practices.pdf) - This is the CTIA handbook which covers best practices guidelines for US Short Code campaigns.
 
-[AT&T Code of Conduct](downloads\ATT_Code_of_Conduct_062020.pdf) - Code of Conduct for the AT&T Short Code and 10-Digit A2P SMS Messages 06/01/2020
+[AT&T Code of Conduct](downloads\ATT_Code_of_Conduct_062020.pdf) - Code of Conduct for the AT&T Short Code and 10-Digit A2P SMS Messages 06/01/2020.
+
+[T-Mobile Code of Conduct](downloads\T_Mobile_Code_of_Conduct_V2__9.1.2020.pdf) - T-Mobile Code of Conduct Version 2.0 September 2020.
+
+[U.S. Cellular Campaign Playbook](downloads\US Cellular Campaign Playbook August 2013.pdf) - U.S. Cellular Campaign Playbook August 2013 Edition.
