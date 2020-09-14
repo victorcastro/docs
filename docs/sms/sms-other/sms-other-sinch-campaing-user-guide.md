@@ -26,3 +26,5 @@ excerpt: >-
 [WMC Improved Vetting Form for US Short Code](downloads\WMC Improved Vetting Form for US SC.pdf) - This is used for vetting content providers and is required only for new CPs.
 
 [Sample Migration Letter Template](downloads\Migration Letter Template.pdf) - Use as a guide for creating a migration letter (only required for MIGRATING codes).
+
+[Sinch US Short Code Carrier Reach List](downloads\Sinch US Short Code Carrier Reach List 20200913.xlsx) - Sinch US Short Code Carrier Reach List.
