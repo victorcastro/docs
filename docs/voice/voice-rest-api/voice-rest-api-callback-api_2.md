@@ -693,12 +693,40 @@ _Example of runMenu action_
 
 **barge** "Barging" means that the user can press DTMF while hearing the prompt asking for DTMF input. The DTMF will stop the message playing and accept the input. With barging disabled, the user will have to listen to the full message before being able to reply with DTMF. This behaviour is controlled by setting "barge" parameter to true or false. By default, barging is enabled.
 
-**enableVoice** [Voice IVR] indicates that voice DTMF is active, and IVR numerical imputs will be accepted via voice commands
+### Voice IVR
+
+**enableVoice** indicates that voice DTMF is active, and IVR numerical inputs will be accepted via voice commands
 ie. IVR Prompt:
 "Please type or say your passcode:"
-User can either type [55] or say his passcode "Fifty-five".
+User can either type [55] or say his passcode "Five, Five" or "Fifty-five".
 
-Voice IVR is a new service and it is in Closed-Beta phase. Different from basic IVR functionality, Voice IVR is charged, customers will pay per interaction, incase the value is set to true AND the end user opt for say his instructions instead of type via keyboard.
+Voice IVR is a new service and it is in Closed-Beta phase. Different from basic IVR functionality, Voice IVR is charged, customers will pay per iteration, if the value is set to TRUE and the end user choose to say his instructions instead of type via keyboard.
+
+To select the input voice language, customers must use the Locale field.
+
+locale is specified with a language code according to ISO 639, a dash and a country code according to ISO 3166-1 alpha-2.
+
+Supported Languages:
+https://cloud.google.com/speech-to-text/docs/languages
+
+_Example of runmenu action with enableVoice_
+
+    {
+      "name": "runmenu",
+      "barge": false,
+      "locale": "en-US",
+      "mainMenu": "main",
+      "enableVoice": true,
+      "menus": [
+        {
+          "id": "main",
+          "mainPrompt":
+            '#href[https://mydomain.com/file.mp3]',
+          "maxDigits": 4,
+          "timeoutMills": 1000,
+        },
+      ],
+    }
 
 ### Park
 
