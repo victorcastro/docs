@@ -17,7 +17,7 @@ excerpt: >-
 
 [AT&T Code of Conduct](downloads\ATT_Code_of_Conduct_062020.pdf) - Code of Conduct for the AT&T Short Code and 10-Digit A2P SMS Messages 06/01/2020.
 
-[T-Mobile Code of Conduct](downloads\T_Mobile_Code_of_Conduct_V2__9.1.2020.pdf) - T-Mobile Code of Conduct Version 2.0 September 2020.
+[T-Mobile Code of Conduct](downloads\T-Mobile Code of Conduct_V2.1 2020.pdf) - T-Mobile Code of Conduct Version 2.1 September 2020.
 
 [U.S. Cellular Campaign Playbook](downloads\US Cellular Campaign Playbook August 2013.pdf) - U.S. Cellular Campaign Playbook August 2013 Edition.
 
