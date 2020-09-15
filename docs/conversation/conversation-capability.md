@@ -78,8 +78,9 @@ The Capability Notification can have the following fields:
 | `reason`                     | If the capability query failed the reason is present in this field.                          |
 | `channel_capabilities`       | If the underlying channel has a list of specific capabilities then it is listed here.        |
 
-Possible values for ``capability_status`` are:
-* ``CAPABILITY_UNKNOWN`` : the channel capability for the contact is unknown, due to the underlying channel not making this information available.
-* ``CAPABILITY_FULL`` : the specified contact supports all the features of the channel.
-* ``CAPABILITY_PARTIAL`` : the specified contact supports a subset of the channel features.
-* ``NO_CAPABILITY`` : the specified contact has no capability on the channel.
+Possible values for `capability_status` are:
+
+* `CAPABILITY_UNKNOWN` : the channel capability for the contact is unknown, due to the underlying channel not making this information available.
+* `CAPABILITY_FULL` : the specified contact supports all the features of the channel.
+* `CAPABILITY_PARTIAL` : the specified contact supports a subset of the channel features.
+* `NO_CAPABILITY` : the specified contact has no capability on the channel.
