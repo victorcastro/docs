@@ -130,7 +130,7 @@ When you relay the push notification to a `SINClient`. If you for some reason do
 
 While reporting incoming calls to CallKit is mandatory in order to process incoming VoIP push notifications, the same limitation does not apply to outgoing calls. Nevertheless, reporting outgoing calls to CallKit is still required in scenarios when an outgoing call is established (i.e., callee answers the call) while the caller app is in background, or the caller device is in locked state.
 
-In such scenarios, as a privacy measure the OS will prevent the audio unit to be initialized for recording while the app is not in foreground, unless the outgoing call is reported to CallKit. For this reason the recommendation is that outgoing calls should be reported to CallKit as well.
+In such scenarios, as a privacy measure the OS will prevent the audio unit to be initialized for recording because the app is not in foreground, unless the outgoing call is reported to CallKit. For this reason the recommendation is that outgoing calls should be reported to CallKit as well.
 
 
 ```objectivec
