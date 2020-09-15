@@ -84,3 +84,6 @@ Possible values for `capability_status` are:
 * `CAPABILITY_FULL` : the specified contact supports all the features of the channel.
 * `CAPABILITY_PARTIAL` : the specified contact supports a subset of the channel features.
 * `NO_CAPABILITY` : the specified contact has no capability on the channel.
+
+
+
