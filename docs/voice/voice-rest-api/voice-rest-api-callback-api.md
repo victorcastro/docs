@@ -974,7 +974,7 @@ You can find more information on callback request signing [here](doc:using-rest#
 
 **to** is an object containing information on the recipient of the call.
 
-**duration** shows the duration of the call.
+**duration** shows the duration of the call. `duration` is an optional field, i.e. it may not be populated depending on whether it is applicable. E.g. if the call `result` is not `ANSWERED`, duration is not applicable and may not be present in the DICE.
 
 **from** shows information of the initiator of the call.
 
