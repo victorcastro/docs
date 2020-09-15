@@ -151,8 +151,9 @@ The Opt-Out Notification can have the following fields:
 | `error_details`   | If the Opt-Out failed the reason is present in this field.                                           |
 
  Possible values for ``status`` are:
+
 | Value | Description |
-|---| ---| 
+|--- | --- | 
 |`OPT_OUT_STATUS_UNSPECIFIED` | the underlying channel doesn't support Opt-Out. |
 | `OPT_OUT_SUCCEEDED` | the Opt-Out registration succeeded. |
 | `OPT_OUT_FAILED` | the Opt-Out registration failed, see reason in `error_details`|
