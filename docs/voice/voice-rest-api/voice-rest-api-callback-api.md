@@ -771,7 +771,7 @@ You can find more information on callback request signing [here](doc:using-rest#
 
 **user** shows the user Id that initiated the call
 
-**userRate** contains the rate that will be charged for the call established to the original destination. If the SVAML response specifies another destination, the same rate may not apply.
+**userRate** contains the rate that will be charged for the call established to the original destination. If the SVAML response specifies another destination, the same rate may not apply. Also see [Money](doc:using-rest#money-money) type.
 
 **cli** shows the number that will be displayed to the recipient of the call. By default it is set to “private”. If you want to be able to set your own CLI when making PSTN calls, please contact Sinch support.
 
@@ -968,9 +968,9 @@ You can find more information on callback request signing [here](doc:using-rest#
 
 **user** shows the user Id that initiated the call.
 
-**debit** contains the amount that was charged for the call.
+**debit** contains the amount that was charged for the call. Also see [Money](doc:using-rest#money-money) type.
 
-**userRate** contains the rate per minute that applied for the call.
+**userRate** contains the rate per minute that applied for the call. Also see [Money](doc:using-rest#money-money) type.
 
 **to** is an object containing information on the recipient of the call.
 
