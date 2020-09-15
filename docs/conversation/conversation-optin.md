@@ -19,7 +19,7 @@ Requests are executed asynchronously, therefore the endpoint immediately returns
 
 Below you can find an example to register an Opt-In event.
 
-Conversation API POST ``optins:register``
+Conversation API POST `optins:register`
 
 ```json
 {
@@ -79,8 +79,8 @@ The Opt-In Notification can have the following fields:
 | `status`          | The status response for the Opt-In request. See possible values below the table.                     |
 | `error_details`   | If the Opt-In failed the reason is present in this field.                                            |
 
-Possible values for ``status`` are:
-* ``OPT_IN_STATUS_UNSPECIFIED`` : the underlying channel doesn't support Opt-In.
+Possible values for `status` are:
+* `OPT_IN_STATUS_UNSPECIFIED` : the underlying channel doesn't support Opt-In.
 * ``OPT_IN_SUCCEEDED`` : the Opt-In registration succeeded.
 * ``OPT_IN_FAILED`` : the Opt-In registration failed, see reason in `error_details` field.
 
@@ -90,7 +90,7 @@ Possible values for ``status`` are:
 
 Below you can find an example to register an Opt-Out event.
 
-Conversation API POST ``optouts:register``
+Conversation API POST `optouts:register`
 
 ```json
 {
