@@ -75,7 +75,7 @@ Where the states means:
       "state":"delivered",
       "message_id":"01DPNXZ0WCF9XD19MH84XD0P62",
       "recipient": "+46732001122",
-      "timestamp": "2019-10-02T18:40:42Z"
+      "timestamp": "2020-05-02T18:40:42Z"
     }
   ]
 }
@@ -149,7 +149,7 @@ The format is as follows:
         "type":"text",
         "body":"Hello bot I want to know something!"
       },
-      "timestamp": "2019-10-02T18:40:42Z"
+      "timestamp": "2020-05-02T19:48:42Z"
     }
   ]
 }
@@ -191,7 +191,7 @@ The format is as follows:
         "name":"Sinch Ideon Lund",
         "address":"Scheelevägen 17"
       },
-      "timestamp": "2019-10-02T18:40:42Z"
+      "timestamp": "2020-05-02T19:40:52Z"
     }
   ]
 }
@@ -254,7 +254,7 @@ The format is as follows:
         "type":"text",
         "body":"Hello bot I want to know something!"
       },
-      "timestamp": "2020-07-30T17:43:32Z",
+      "timestamp": "2020-05-02T17:43:32Z",
       "forwarded": true
     }
   ]
@@ -283,7 +283,7 @@ The format is as follows:
         "type":"text",
         "body":"Hello bot I want to know something!"
       },
-      "timestamp": "2020-07-31T07:28:54Z",
+      "timestamp": "2020-05-03T07:28:54Z",
       "frequently_forwarded": true
     }
   ]
@@ -436,7 +436,7 @@ The format is as follows:
           }
         ]
       },
-      "timestamp": "2020-08-30T17:23:55Z"
+      "timestamp": "2020-05-02T17:23:55Z"
     }
   ]
 }
@@ -482,7 +482,7 @@ The sticker metadata object has the following parameters:
         "mime_type":"image/jpeg",
         "caption":"Fantastic headphones"
       },
-      "timestamp": "2020-09-02T15:43:52Z"
+      "timestamp": "2020-05-02T15:43:52Z"
     }
   ]
 }
