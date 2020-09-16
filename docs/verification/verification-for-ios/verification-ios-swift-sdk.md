@@ -91,7 +91,7 @@ bash ${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/SinchVerification.framework
 
 ![swift-run-script-contents.png](images\0f8e419-swift-run-script-contents.png)
 
-(This step is required to work around an [App Store / iTunes Connect bug](http://www.openradar.me/radar?id=6409498411401216))
+(This step is required to work around an App Store / iTunes Connect bug http://www.openradar.me/radar?id=6409498411401216)
 
 5.  Make sure that _libc++_, _libz_ and _libicucore_ are linked (See [here](doc:verification-ios-first-time-setup))
 
@@ -120,7 +120,7 @@ import SinchVerification
 ]
 }
 
-(This step is required to work around an [App Store / iTunes Connect bug](http://www.openradar.me/radar?id=6409498411401216))
+(This step is required to work around an App Store / iTunes Connect bug http://www.openradar.me/radar?id=6409498411401216)
 
 5.  Make sure that _libc++_, _libz_ and _libicucore_ are linked (See [here](doc:verification-ios-first-time-setup))
 
