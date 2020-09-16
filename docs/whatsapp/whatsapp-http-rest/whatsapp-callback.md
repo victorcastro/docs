@@ -48,7 +48,7 @@ The format of a delivery report is as follows:
 |message_id | The message id of the message to which this delivery report belong to | String    |
 |details    | Detailed message containing information.                              | String    |
 |recipient  | The recipient of the message that this delivery report belong to      | String    |
-|timestamp  | ISO-8601 datetime of the status update                                | Object    |
+|timestamp  | ISO-8601 datetime of the status update                                | String    |
 
 Where the states means:
 
@@ -75,6 +75,7 @@ Where the states means:
       "state":"delivered",
       "message_id":"01DPNXZ0WCF9XD19MH84XD0P62",
       "recipient": "+46732001122",
+      "timestamp": "2019-10-02T18:40:42Z"
     }
   ]
 }
@@ -108,7 +109,7 @@ The format is as follows:
 |replying_to            | A context object, present only if the user is replying to a specific thread | Object    |
 |message_id             | Generated message id for the inbound message                                | String    |
 |message                | Message object describing the inbound message                               | Object    |
-|timestamp              | ISO-8601 datetime of the status update                                      | Object    |
+|timestamp              | ISO-8601 datetime of the status update                                      | String    |
 |forwarded              | Boolean object stating if message was forwarded                             | Boolean   |
 |frequently_forwarded   | Boolean object stating if message was frequently forwarded                  | Boolean   |
 
@@ -147,7 +148,8 @@ The format is as follows:
       "message":{
         "type":"text",
         "body":"Hello bot I want to know something!"
-      }
+      },
+      "timestamp": "2019-10-02T18:40:42Z"
     }
   ]
 }
@@ -188,7 +190,8 @@ The format is as follows:
         "lng":13.191,
         "name":"Sinch Ideon Lund",
         "address":"Scheelevägen 17"
-      }
+      },
+      "timestamp": "2019-10-02T18:40:42Z"
     }
   ]
 }
@@ -211,7 +214,6 @@ The format is as follows:
   "notifications":[
     {
       "from": "0732001122",
-      "to": "sinchbot",
       "message_id": "01DPNXZ0WCF9XD19MH84XD0P62",
       "message": {
         "type": "button",
@@ -220,7 +222,7 @@ The format is as follows:
         "payload": "some_payload"
       },
       "timestamp": "2020-05-07T10:02:10Z",
-      "to": "a_bot_id",
+      "to": "sinchbot",
       "replying_to": {
         "from": "447537817391",
         "message_id": "01E7Q9AVTRB5A30JD7D9ZN0HTE"
@@ -252,6 +254,7 @@ The format is as follows:
         "type":"text",
         "body":"Hello bot I want to know something!"
       },
+      "timestamp": "2020-07-30T17:43:32Z",
       "forwarded": true
     }
   ]
@@ -280,6 +283,7 @@ The format is as follows:
         "type":"text",
         "body":"Hello bot I want to know something!"
       },
+      "timestamp": "2020-07-31T07:28:54Z",
       "frequently_forwarded": true
     }
   ]
@@ -431,7 +435,8 @@ The format is as follows:
             ]
           }
         ]
-      }
+      },
+      "timestamp": "2020-08-30T17:23:55Z"
     }
   ]
 }
@@ -476,7 +481,8 @@ The sticker metadata object has the following parameters:
         "url":"http://www.example.com/img.jpg",
         "mime_type":"image/jpeg",
         "caption":"Fantastic headphones"
-      }
+      },
+      "timestamp": "2020-09-02T15:43:52Z"
     }
   ]
 }
