@@ -126,9 +126,43 @@ When you relay the push notification to a `SINClient`. If you for some reason do
 >
 > Please also see [Apples Developer documentation on this topic](https://developer.apple.com/documentation/pushkit/pkpushregistrydelegate/2875784-pushregistry).
 
+### Reporting outgoing calls to CallKit
+
+While reporting incoming calls to CallKit is mandatory in order to process incoming VoIP push notifications, the same limitation does not apply to outgoing calls. Nevertheless, reporting outgoing calls to CallKit is still required in scenarios when an outgoing call is established (i.e., callee answers the call) while the caller app is in background, or the caller device is in locked state.
+
+In such scenarios, as a privacy measure the OS will prevent the audio unit to be initialized for recording because the app is not in foreground, unless the outgoing call is reported to CallKit. For this reason the recommendation is that outgoing calls should be reported to CallKit as well.
+
+
+```objectivec
+
+// (Assuming CallKit CXCallController accessible as self.callController)
+- (void)startOutgoingCall:(NSString *)destination {
+  NSUUID *callId = [[NSUUID alloc] init];
+
+  CXHandle *handle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:destination];
+  CXStartCallAction *initiateCallAction =
+      [[CXStartCallAction alloc] initWithCallUUID:callId handle:handle];
+  CXTransaction *initOutgoingCall = [[CXTransaction alloc] initWithAction:initiateCallAction];
+
+  [self.callController requestTransaction:initOutgoingCall
+                           completion:^void(NSError *error) {
+                               if (error) {
+                                 NSLog(@"%@", error);
+                               }
+                             }];
+}
+
+- (void)provider:(CXProvider *)provider performStartCallAction:(CXStartCallAction *)action {
+  id<SINCall> call = [_client.callClient callUserWithId: action.handle.value];
+  [action fulfill];
+}
+
+// (For a more complete example, see the Sinch sample app SinchCallKit.xcodeproj)
+```
+
 ### Extracting Call Information From a Push Payload
 
-At the time when your application receives a push notification you will need to extract some key information about the call based on only the push notification payload. You will need to do this to conform with with Apple requirements on reporting a VoIP push notification as an incoming call to _CallKit_, but you may also want to extract application-specific headers for the call. Use the method `+[SINManagedPush queryPushNotificationPayload:]` to extract call details from the raw push payload. Note that you can do this immediately and before you have created and started a `SINClient` instance.
+At the time when your application receives a push notification you will need to extract some key information about the call based on only the push notification payload. You will need to do this to conform with Apple requirements on reporting a VoIP push notification as an incoming call to _CallKit_, but you may also want to extract application-specific headers for the call. Use the method `+[SINManagedPush queryPushNotificationPayload:]` to extract call details from the raw push payload. Note that you can do this immediately and before you have created and started a `SINClient` instance.
 
 __Example__
 
