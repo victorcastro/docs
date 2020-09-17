@@ -39,7 +39,7 @@ iOS apps must have the proper entitlements to use push notifications. To add the
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)options {
 
-    self.push = [Sinch managedPushWithAPSEnvironment:SINAPSEnvironmentAutomatic];
+    self.push = [Sinch managedPushWithAPSEnvironment:SINAPSEnvironmentDevelopment];
     self.push.delegate = self;
 
     [self.push setDesiredPushType:SINPushTypeVoIP];
@@ -227,7 +227,7 @@ This means how the the app is code signed and what _Provisioning Profile_ is use
 
 For example, if your application is signed with a _Development_ provisioning profile it will be bound to the APS _Development_ environment. If it’s code signed with a _Distribution_ provisioning profile it will be bound to the APS _Production_ environment.
 
-Typically a _Debug_ build will be code signed with a _Development_ provisioning profile and thus `SINAPSEnvironmentDevelopment` should be used. And typically a _Release_ build will be code signed with a _Distribution_ provisioning profile and thus `SINAPSEnvironmentProduction` should be used. Instead of changing this manually for each build, the macro `SINAPSEnvironmentAutomatic` is available which automatically expands to _Development_ for _Debug_ builds and _Production_ for _Release_ builds.
+Typically a _Debug_ build will be code signed with a _Development_ provisioning profile and thus `SINAPSEnvironmentDevelopment` should be used. And typically a _Release_ build will be code signed with a _Distribution_ provisioning profile and thus `SINAPSEnvironmentProduction` should be used. **You are responsible for selecting proper entitlements depending on your build type and signing profile.**
 
 ## iOS not Delivering Notifications
 
