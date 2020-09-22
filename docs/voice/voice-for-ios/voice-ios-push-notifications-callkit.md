@@ -107,19 +107,20 @@ Depending on your use case it is possible to configure calling functionality dif
 
 #### Single Sinch Application, multiple iOS apps (i.e. multiple different Bundle IDs)
 
-Suppose you have a patient app and a doctor app with `PatBundleID` and `DocBundleID` respectively.
-You want a doctor to be able to call a patient. You need to generate *VoIP certificate* for the app with `PatBundleID` and upload it to *Sinch Developer Portal* for the *Sinch Application* which key and secret you are going to use in both iOS apps.
+Suppose you have App-A and App-B with `A-BundleID` and `B-BundleID` iOS bundles respectively.
+You want App-B to be able to call App-A. You need to generate *VoIP certificate* for the app with `A-BundleID` and upload it to *Sinch Developer Portal* for the *Sinch Application* which application key you are going to use in both iOS apps.
 
 > ⚠️ Note that both iOS apps should be signed using either *Apple Development Certificate* or *iOS Distribution Certificate*. Chosen certificate must match ANPS environment setting provided to Sinch SDK when `SINManagedPush` is created: if you sign using *Apple Development Certificate* please provide `SINAPSEnvironmentDevelopment`, if you sign using *iOS Distribution Certificate* please provide `SINAPSEnvironmentProduction`.
 
-Miss match in APNS environment settings and signing identity in one or both iOS apps will result in ability to make a call from the doctor app to the patient app.
+Mismatch in APNS environment settings and signing identity in one or both iOS apps will result in inability to make a call from App-B to App-A.
 
 #### Multiple Sinch Applications, one iOS app (one Bundle ID)
 
-Suppose that we have two Sinch Apps, SApp1 and SApp2 respectively and only one iOS app. If you want to make a call from iOS app with SApp1 to iOS app with SApp2 you need to generate VoIP certificate for iOS app bundle ID and upload it to the caller app in *Sinch Developer Portal*. In our example you will upload VoIP certificate to SApp1 in the portal.
+Suppose that we have two Sinch Apps (in Sinch Portal), App-A and App-B and only one iOS app.
+iOS app could be build with App-A application key or App-B application key.
+If you want to make a call from iOS app with App-A application key to iOS app with App-B application key you need to generate VoIP certificate for iOS app bundle ID and upload it to the caller app in *Sinch Developer Portal*. In our example you will upload VoIP certificate to App-A in the portal.
 
-> ⚠️ Considerations regarding signing certificates and ANPS environments remains the same as in previous example.
-
+> ⚠️ Note that both iOS apps should be signed using either *Apple Development Certificate* or *iOS Distribution Certificate*. Chosen certificate must match ANPS environment setting provided to Sinch SDK when `SINManagedPush` is created: if you sign using *Apple Development Certificate* please provide `SINAPSEnvironmentDevelopment`, if you sign using *iOS Distribution Certificate* please provide `SINAPSEnvironmentProduction`.
 
 ## CallKit
 
