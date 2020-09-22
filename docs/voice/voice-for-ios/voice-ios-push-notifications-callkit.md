@@ -110,7 +110,7 @@ Depending on your use case it is possible to configure calling functionality dif
 Suppose you have a patient app and a doctor app with `PatBundleID` and `DocBundleID` respectively.
 You want a doctor to be able to call a patient. You need to generate *VoIP certificate* for the app with `PatBundleID` and upload it to *Sinch Developer Portal* for the *Sinch Application* which key and secret you are going to use in both iOS apps.
 
-> ⚠️ Note that both iOS apps should be signed using either *Apple Development Certificate* or *iOS Distribution Certificate*. Chosen certificate must match ANPS environment setting provided to Sinch SDK. If you sign using *Apple Development Certificate* please provide `SINAPSEnvironmentDevelopment` to Sinch SDK when SINManagedPush is created. If you sign using *iOS Distribution Certificate* please provide `SINAPSEnvironmentProduction` when SINManagedPush is created.
+> ⚠️ Note that both iOS apps should be signed using either *Apple Development Certificate* or *iOS Distribution Certificate*. Chosen certificate must match ANPS environment setting provided to Sinch SDK when `SINManagedPush` is created: if you sign using *Apple Development Certificate* please provide `SINAPSEnvironmentDevelopment`, if you sign using *iOS Distribution Certificate* please provide `SINAPSEnvironmentProduction`.
 
 Miss match in APNS environment settings and signing identity in one or both iOS apps will result in ability to make a call from the doctor app to the patient app.
 
