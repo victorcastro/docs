@@ -53,7 +53,7 @@ The `JWT` will be making use of the standard JWT header parameters `alg` and `ki
   "iss": "//rtc.sinch.com/applications/a32e5a8d-f7d8-411c-9645-9038e8dd051d",
   "sub": "a32e5a8d-f7d8-411c-9645-9038e8dd051d",
   "aud": "https://as.your-domain.com/sinch/rtc/push/oauth2/v1/huawei-hms/token",
-  "scope": ["https://push-api.cloud.huawei.com"],
+  "scope": "https://push-api.cloud.huawei.com",
   "iat": 1600780504,
   "exp": 1600784104,
   "nonce": "6b438bda-2d5c-4e8c-92b0-39f20a94b34e"
@@ -63,7 +63,7 @@ The `JWT` will be making use of the standard JWT header parameters `alg` and `ki
 * Claim `iss` is on the form `//rtc.sinch.com/applications/<your Sinch Application Key>`
 * Claim `sub` is your _Sinch Application Key_.
 * Claim `aud` will be set to the _Authorization Server_ token endpoint you have configured with Sinch. E.g. `https://as.your-domain.com/sinch/rtc/push/oauth2/v1/huawei-hms/token`
-* The JWT claim `scope` will be an array containing the single requested scope `https://push-api.cloud.huawei.com` (representing the Huawei _Push Kit_ server domain)
+* The JWT claim `scope` will be `https://push-api.cloud.huawei.com` (representing the Huawei _Push Kit_ server domain)
 * Claims `iat`, `exp`, `nonce` are standard JWT claims (see [JWT RFC 7519](https://tools.ietf.org/html/rfc7519))
 
 
