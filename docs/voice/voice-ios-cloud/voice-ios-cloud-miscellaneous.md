@@ -10,19 +10,19 @@ We officially support iOS _10.0_ as iOS _Deployment Target_. You can try older v
 
 ## Note on Sinch.framework File Size vs. Linked Size
 
-The _Sinch.framework_ file includes a FAT-binary containing the architectures _armv7_, _arm64_, _x86_64_. When linking an application target against the _Sinch.framework_ targeting an iOS device, it will add a approximately 6Mb per _arm_ slice.
+The _Sinch.framework_ file includes a FAT-binary containing the architectures _armv7_, _arm64_, _x86_64_. When linking an application target against the _Sinch.framework_ targeting an iOS device, it will add a approximately 9.5MB for _arm64_ and approximately 8MB for _armv7_.
 
-**Example**: Assuming linking _armv7_ and _arm64_ into the final application, it would add approximately 12Mb to the application.
+**Example**: Assuming linking _armv7_ and _arm64_ into the final application, it would add approximately 17.5MB to the application.
 
 ## Restrictions on User IDs
 
-User IDs can only contain characters in the _printable ASCII character set_. That is:
+User IDs **must not** be longer than **255** bytes, **must** only contain URL-safe characters, and restricted to the following character set:
 
 ```text
-!"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\]^_`abcdefghijklmnopqrstuvwxyz{|}~
+ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjiklmnopqrstuvwxyz0123456789-_=
 ```
 
-User IDs **must not** be longer than **40** characters.
+If you need to use _User IDs_ containing characters outside the allowed set above, you could consider _base64_-encoding the raw _User IDs_ using a URL-safe base64 alphabet as described in https://tools.ietf.org/html/rfc4648#section-5). Please note how the allowed character set overlaps with the URL-safe base64 alphabet, but does __NOT__ allow characters in the __non__-URL-safe alphabet, e.g. `/` (forward slash) and `+` (plus sign).
 
 ## Statistics
 
@@ -55,3 +55,12 @@ Please see [Encryption and Export Administration Regulations (EAR)](https://www.
 ### Active Connection in Background
 
 Apple has since iOS 10 discontinued support for maintaining a _VoIP_ control connection alive via `-[UIApplication setKeepAliveTimeout:handler:]`. Attempting to use this method on an iOS device running iOS 10 results in the following warning log: `Legacy VoIP background mode is deprecated and no longer supported`. The Sinch feature _Active connection in background_ was using the keep alive handler API and is as a consequence no longer supported on iOS. It is recommended to use [VoIP Push Notifications and CallKit](doc:voice-ios-cloud-push-notifications-callkit) to achieve the equivalent functionality.
+
+### Missed Call Push Notifications
+
+Sinch SDK primarily use VoIP push notifications. Since iOS 13, Apple and iOS imposed stricter limitations and requirements on how each VoIP push notification that an application receive must be reported to _CallKit_ as an incoming call. This has the implication that Sinch SDK no longer supports separate "Missed Call" push notifications.
+
+We recommend using your own non-VoIP push notification mechanism to deliver "Missed Call" push notifications.
+
+Please also see [Apple Developer documentation on this topic](https://developer.apple.com/documentation/pushkit/pkpushregistrydelegate/2875784-pushregistry).
+

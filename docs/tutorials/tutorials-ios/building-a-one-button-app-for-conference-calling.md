@@ -4,7 +4,8 @@ excerpt: >-
   In this tutorial you will learn how to make a one-button application for
   conference calling.
 ---
-Remember telephone [hotlines back in the 80s](http://guff.com/15-bizarre-1-900-numbers-from-the-80s-and-90s) ? I’ve been thinking about building a one-button app that does something stupid just like [Yo](https://www.justyo.co/). When we released [Conference Calling](https://www.sinch.com/products/voice/) ), I thought of the awesome video conferencing sites that are nothing more than a URL, and I wanted to make that kind of app, but for Conference Calling on mobile.
+
+Remember telephone [hotlines back in the 80s](http://guff.com/15-bizarre-1-900-numbers-from-the-80s-and-90s) ? I’ve been thinking about building a one-button app that does something stupid just like Yo. When we released [Conference Calling](https://www.sinch.com/products/voice/) ), I thought of the awesome video conferencing sites that are nothing more than a URL, and I wanted to make that kind of app, but for Conference Calling on mobile.
 
 Here comes **So**. An app like Yo, but for hanging out in voice-only group chat rooms. After you download the app, you create a “room” and invite your friends to hangout in it. Whenever you feel like it, open So, click on the button and see who’s active at the time.
 ![Product.png](images\43bab80-Product.png)
@@ -189,5 +190,3 @@ Now that we have a URL type defined, we can react to a clicked link instead of j
 Take a look at what the host passed to the app, and connect to the conference immediately.
 
 That’s it. Hanging out with friends and family is now literally one button press away!
-
-

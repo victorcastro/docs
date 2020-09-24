@@ -5,6 +5,25 @@ excerpt: >-
   bug fixes.
 ---
 
+## 2020-09-08
+
+ - Performance and security improvements.
+ - Option to have the callbacks sent from the Sinch WhatsApp API to the customer's endpoint signed using the [HMAC algorithm](https://en.wikipedia.org/wiki/HMAC). To be able to use this feature a HMAC key needs to be delivered in the provisioning Excel form. For more information see the [Callback signature](doc:whatsapp-callback#signature) documentation.
+
+## 2020-08-12
+
+ - Upgrade FB API gateways for bots from 2.29.1 to 2.29.3. Details can be found in [Facebook changelog (Aug 11, 2020 (v2.29.3))](https://developers.facebook.com/docs/whatsapp/changelog#wa2293)
+
+## 2020-08-11
+
+  - Support marking inbound messages as read. See [Marking messages as read](doc:whatsapp-callback#mark-inbound-message-as-read)
+  - Support forwarded and frequently forwarded flag in inbound message. See [Callback for forwarded message](doc:whatsapp-callback#sample-inbound-forwarded-message)
+
+## 2020-07-28
+
+  - Improvement for sending messages during heavy load
+  - Improvement for sending media messages
+
 ## 2020-06-30
 
   - Improvements in phone number validation - less restrictive rules are now used - number does not have to be approved by authoritative evidence e.g. ITU, IR 21…

@@ -5,7 +5,9 @@ excerpt: >-
   iOS application. This will let users connect with other users nearby using
   Apple’s multi-peer connectivity framework; once a connection has been made,
   either user will be able to call the other.
+hidden: true
 ---
+
 Thanks to [Zac Brown](https://twitter.com/brownzac1) for writing this tutorial.
 
 Sinch is the easiest way to integrate real-time instant messaging and voice communication into your iOS, Android, and Web applications. Not only does it allow app-to-app communications, but it gives the option to send text messages and make voice calls from within an application to cellular networks. Sinch can easily be added to your project using the SDK for your platform (iOS, Android, and Web) or the Sinch API. Sinch is also now fully compatible with 64-bit architecture on iOS.
@@ -45,17 +47,17 @@ If you do go down the road of adding the files by importing the frameworks, you 
 
 You will now need to add some local frameworks in Xcode to ensure the Parse framework has the resources to work properly. In the left-hand column of Xcode, navigate to the project settings and at the bottom of the page, you will find a section labeled “Linked Frameworks and Libraries.” Click the “+” symbol and add these frameworks:
 
->   - AudioToolbox.framework
->   - CFNetwork.framework
->   - CoreGraphics.framework
->   - CoreLocation.framework
->   - MobileCoreServices.framework
->   - QuartzCore.framework
->   - Security.framework
->   - StoreKit.framework
->   - SystemConfiguration.framework
->   - libz.dylib
->   - libsqlite3.dylib
+> - AudioToolbox.framework
+> - CFNetwork.framework
+> - CoreGraphics.framework
+> - CoreLocation.framework
+> - MobileCoreServices.framework
+> - QuartzCore.framework
+> - Security.framework
+> - StoreKit.framework
+> - SystemConfiguration.framework
+> - libz.dylib
+> - libsqlite3.dylib
 
 Your Xcode window should look something like this:
 ![frameworks.png](images\21f4bb4-frameworks.png)
@@ -63,7 +65,7 @@ Your Xcode window should look something like this:
 Now you’re ready to start coding. Navigate over to the AppDelegate.m file. Below ‘\#import “AppDelegate.h”, import the Parse framework so that you can start using it. Add this code:
 
 ```objectivec
-#import <Parse.Parse.h>         
+#import <Parse.Parse.h>
 ```
 
 That will import the framework and now you will be able to use it in the Appdelegate.h & .m files. Next, navigate to the method didFinishLaunchingWithOptions and add this code, which I’ll explain below:
@@ -257,7 +259,7 @@ If you’re struggling with the delegate concept, here’s a quick example. Imag
 Here are all the delegate methods we need to implement with a brief description of each below:
 
 ```objectivec
-- (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state{  
+- (void)session:(MCSession *)session peer:(MCPeerID *)peerID didChangeState:(MCSessionState)state{
 
 }
 ```
@@ -373,14 +375,13 @@ self.advertiserAssistant = [[MCAdvertiserAssistant alloc]                       
 }
 ```
 
-
 This code is looking pretty good; there’s only one small problem. Can you see it? If you said this code isn’t being executed because nowhere in the code has it been called, you’re correct\! It’s best to call this method from viewDidLoad, as I mentioned earlier, it’s a given that this method is going to be called.
 
 ```objectivec
 - (void)viewDidLoad {
         [self setUpConnection];
 
-}   
+}
 ```
 
 As you can probably see, there’s an error relating to the username property not being declared. Go ahead and declare it in the @interface of newFriends.m, and make it of type NSString and weak/nonatomic. This property will be used throughout the software so it’s best to have it globally accessible.
@@ -588,9 +589,9 @@ We also set the client userId equal to the username property. This property is s
 
 Now that we’ve moved on to the implementation of Sinch. Let’s figure the easiest way to work through the problems in front of us. Here’s the functionality we need to add:
 
-  - Making calls to selected user
-  - Answering calls from other users
-  - Declining calls from other users
+- Making calls to selected user
+- Answering calls from other users
+- Declining calls from other users
 
 Let’s focus on making calls. To do this, we’re going to allow users to select a user from the friends table view. From there, a segue will occur and the user will be presented with the callScreen view controller. Then, we will need to set some properties before the view controller is presented and set some delegates so that our users are able to hang up.
 
@@ -838,17 +839,16 @@ That’s all for now folks\!
 
 As a rough guide, here’s some functionality you could add to this app:
 
->   - Add an instant messaging option using Sinch
->   - Make modifications to the user interface
->   - Add some profile pictures to the user objects on Parse
->   - Have messages automatically save themselves to Parse
->   - Persist data on the iOS device
->   - Add Facebook login using Parse
->   - Configure push notifications so calls can be received at any time
+> - Add an instant messaging option using Sinch
+> - Make modifications to the user interface
+> - Add some profile pictures to the user objects on Parse
+> - Have messages automatically save themselves to Parse
+> - Persist data on the iOS device
+> - Add Facebook login using Parse
+> - Configure push notifications so calls can be received at any time
 
 There’s an endless list of things that you can add to this project and I encourage you to experiment with the project.
 
 Sinch is an excellent framework and with its wide range of excellent SDKs and APIs, you can do anything. If you have any questions or would like to get in contact, reach out on Twitter to [me](https://www.twitter.com/brownzac1) or [Christian Jensen](https://www.twitter.com/cjsinch), Sinch’s Developer Evangelist. We look forward to hearing from you\!
 
 And as always, if you have any ideas for upcoming tutorials, give us a shout.
-

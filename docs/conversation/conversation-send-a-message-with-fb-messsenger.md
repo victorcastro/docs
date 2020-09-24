@@ -72,18 +72,21 @@ Copy and store your Messenger Token somewhere safe, we will need it to add the M
 
 #### Configure your FaceBook Messenger Channel on Sinch Conversation API
 
-Create and send a POST to **Patch** your Sinch Conversations App with the newly created **Messenger Token**, this will allow the Sinch Conversations App to respond to inbound messages posted by visitors of your FaceBook Page.
+The easiest way to configure your channel is through the App Details page in the [Sinch Portal](https://dashboard.sinch.com/convapi/apps):
+
+![Generate Messenger Token](images/channel-support/messenger/fb_channel_config.png)
+
+Another way is to use the **app** management API  to **Patch** your Sinch Conversations App with the newly created **Messenger Token**, this will allow the Sinch Conversations App to send messages to visitors of your FaceBook Page.
 
 ```shell Curl
-curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/apps' \
+curl --location --request PATCH 'https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/apps' \
 --header 'Content-Type: application/json' \
--u '<client_id:client_secret>'
+--header 'Authorization: Bearer <access token>' \
 --data-raw '{
     "channel_credentials": [
         {
             "channel": "MESSENGER",
             "static_token": {
-                "claimed_identity": "{{YOUR_FB_APP_NAME}}",
                 "token": "{{YOUR_FB_PAGE_MESSENGER_TOKEN}}"
             }
         }
@@ -101,7 +104,7 @@ The Messenger Webhook Settings configuration forwards message events posted on y
 Then add the following **Callback URL** and **Verify Token**:
 
 ```Curl  Callback URL:
-https://messenger-adapter.conversation-api.staging.sinch.com/adapter/v1/{{YOUR_SINCH_CONVERSATION_APP_ID}}/callback
+https://messenger-adapter.conversation-api.prod.sinch.com/adapter/v1/{{YOUR_SINCH_CONVERSATION_APP_ID}}/callback
 
 Verify Token: 5651d9fd-5c33-4d7a-aa37-5e3e151c2a92
 ```
@@ -155,8 +158,8 @@ Use your newly created Sinch **Contact** to send a **Text Message** response usi
 
 ```shell Curl
 curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/messages:send' \
--u '<client_id:client_secret>' \
 --header 'Content-Type: application/json' \
+--header 'Authorization: Bearer <access token>' \
 --data-raw '{
     "app_id": "{{YOUR_SINCH_APP_ID}}",
     "recipient": {
@@ -171,37 +174,6 @@ curl --location --request POST 'https://eu.conversation.api.sinch.com/v1beta/pro
         "MESSENGER"
     ]
 }'
-```
-```java Raw Java
-RequestBody body =
-    RequestBody.create(
-        mediaType,
-        "{\n"
-            + "\t\n"
-            + "\t\"app_id\": \"your_app_id\",\n"
-            + "    \"recipient\": {\n"
-            + "    \t\"contact_id\": \"your_contact_id\"\n"
-            + "    },\n"
-            + "    \"message\": {\n"
-            + "        \"text_message\": {\n"
-            + "            \"text\": \"Text message from Sinch Conversation API.\"\n"
-            + "        }\n"
-            + "    },\n"
-            + "    \"channel_priority_order\": [\n"
-            + "        \"SMS\"\n"
-            + "    ]\n"
-            + "}");
-Request request =
-    new Request.Builder()
-        .url(
-            "https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/messages:send")
-        .method("POST", body)
-        .addHeader("Content-Type", "application/json")
-        .addHeader(
-            "Authorization",
-            "Basic " + Base64.getEncoder().encodeToString("{client_id}:{client_secret}".getBytes()))
-        .build();
-Response response = client.newCall(request).execute();
 ```
 
 ![Facebook Message Text](images/channel-support/messenger/fb_message_text.jpg)

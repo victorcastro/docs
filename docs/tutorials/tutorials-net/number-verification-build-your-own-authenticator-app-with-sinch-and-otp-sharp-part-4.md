@@ -6,7 +6,9 @@ excerpt: >-
   In this tutorial, we are going to build a 2FA system that only sends one SMS
   per app install to enable 2FA for web. Continue reading this step-by-step
   guide.
+hidden: true
 ---
+
 > **Update**
 >
 > To verify numbers even easier, check out our [Verification SDK](https://www.sinch.com/products/verification/sms/)
@@ -21,6 +23,7 @@ Building such a system helps you:
 See the flow below. This tutorial is implementing the RFC 6238 that Google Authenticator uses.
 
 ## Appflow
+
 ![render.png](images\1652434-render.png)
 
 The goal is to have a template project using Sinch for SMS and SMS free 2FA that you can use in production for you website.
@@ -29,13 +32,13 @@ This tutorial will take 60 to 120 minutes to finish; the finished sample can be 
 
 ## Prerequisites
 
->   - A solid understanding of .NET, MVC and WebAPI
+> - A solid understanding of .NET, MVC and WebAPI
 
 ### Setup
 
 > 1.  Create a new a project
 > 2.  Select MVC project with basic authentication and WebAPI  
-![createprojectwithapi.png](images\95a84ba-createprojectwithapi.png)
+>     ![createprojectwithapi.png](images\95a84ba-createprojectwithapi.png)
 
 > 3.  In PM console, update your packages `pm>update-package`
 > 4.  In PM console, install Sinch.SMS `pm>Install-Package Sinch.SMS`
@@ -91,7 +94,7 @@ In the code above, we don’t need to implement the GenerateAsync because that w
 
 ### Register a new 2FA provider
 
-Open **App\_Start:raw-latex:\`IdentityConfig\`.cs** comment out SMS and email token providers. Add SinchAuth:
+Open **App_Start:raw-latex:\`IdentityConfig\`.cs** comment out SMS and email token providers. Add SinchAuth:
 
 ```csharp
 // Register two-factor authentication providers. This application uses phone and emails as a step of receiving a code for verifying the user
@@ -130,26 +133,21 @@ Open the user management index view (**Views:raw-latex:\`Manage\`:raw-latex:\`In
 ```html
 <dt>Two-Factor Authentication:</dt>
 <dd>
-    @if (Model.TwoFactor)
-        {
-            using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <text>Enabled
-                <input type="submit" value="Disable" class="btn btn-link" />
-                </text>
-            }
-        }
-        else
-        {
-            using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <text>Disabled
-                <input type="submit" value="Enable" class="btn btn-link" />
-                </text>
-            }
-        }
+  @if (Model.TwoFactor) { using
+  (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post,
+  new { @class = "form-horizontal", role = "form" })) { @Html.AntiForgeryToken()
+  <text
+    >Enabled
+    <input type="submit" value="Disable" class="btn btn-link" />
+  </text>
+  } } else { using (Html.BeginForm("EnableTwoFactorAuthentication", "Manage",
+  FormMethod.Post, new { @class = "form-horizontal", role = "form" })) {
+  @Html.AntiForgeryToken()
+  <text
+    >Disabled
+    <input type="submit" value="Enable" class="btn btn-link" />
+  </text>
+  } }
 </dd>
 ```
 
@@ -199,7 +197,7 @@ public async Task<ActionResult> DisableTwoFactorAuthentication()
 Run the application by pressing **F5**, and log in again. You should now be presented with this:
 ![loginscreen1.png](images\8257732-loginscreen1.png)
 
-Press *Next* and get this:
+Press _Next_ and get this:
 ![loginscreen2.png](images\3c7e5fd-loginscreen2.png)
 
 That’s not ideal, and in this sample, we are only going to support one, so as soon as someone tries to log in, we will skip directly to verify code. But first, let’s prepare an API to handle the mobile client.
@@ -244,7 +242,7 @@ public class VerifyController : ApiController {
     /// <returns>200 ok and delivers an sms to the handset</returns>
     [HttpGet]
     [Route("/api/requestcode/{phonenumber}")]
-    public async Task<HttpResponseMessage> RequestCode(string phoneNumber){    
+    public async Task<HttpResponseMessage> RequestCode(string phoneNumber){
     }
 
     /// <summary>
@@ -374,7 +372,7 @@ public async Task<HttpResponseMessage> VerifyToken(string token, string phoneNum
     bool valid = otp.VerifyTotp(token, out timeStepMatched, new VerificationWindow(2, 2));
     if (!valid) // return error if token is invalid
         return new HttpResponseMessage(HttpStatusCode.Forbidden);
-    //Add link and return ok to the client    
+    //Add link and return ok to the client
     OneTimeLinks.AddLink(user.Id);
     return new HttpResponseMessage(HttpStatusCode.OK);
 }
@@ -398,7 +396,7 @@ public async Task<object> StatusCheck()
         }
     else
     {
-    return Json(new {status="Ok", guid=link.Guid});    
+    return Json(new {status="Ok", guid=link.Guid});
     }
 }
 ```
@@ -427,27 +425,26 @@ public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
 To check status of the OTP in the view, open SendCode.cshtml and change it to the below. Prompt the user to launch the mobile app and enter code:
 
 ```html
-@model Part4.Models.SendCodeViewModel
-@{
-    ViewBag.Title = "Send";
-}
+@model Part4.Models.SendCodeViewModel @{ ViewBag.Title = "Send"; }
 <h2>@ViewBag.Title.</h2>
-Open you app and generate a verify your identity
-@section Scripts {
-    <script>
-        function checkStatus() {
-            $.getJSON('@Url.Action("StatusCheck", "Verify")', function(data) {
-                if (data['status'] == 'Ok') {
-                    document.location = '@Url.Action("VerifyTOTP")?guid=' + data["guid"] + '&returnUrl=@Model.ReturnUrl';
-                } else {
-                    setTimeout(checkStatus, 1000);
-                }
-            });
-        }
-        $().ready(function() {
-            checkStatus();
-        });
-    </script>
+Open you app and generate a verify your identity @section Scripts {
+<script>
+  function checkStatus() {
+    $.getJSON('@Url.Action("StatusCheck", "Verify")', function (data) {
+      if (data["status"] == "Ok") {
+        document.location =
+          '@Url.Action("VerifyTOTP")?guid=' +
+          data["guid"] +
+          "&returnUrl=@Model.ReturnUrl";
+      } else {
+        setTimeout(checkStatus, 1000);
+      }
+    });
+  }
+  $().ready(function () {
+    checkStatus();
+  });
+</script>
 }
 ```
 
@@ -468,7 +465,7 @@ public async Task<ActionResult> VerifyTOTP(string guid, string returnUrl)
    if (OneTimeLinks.VerifyLink(userId, Guid.Parse(guid)))
    {
        await SignInManager.SignInAsync(UserManager.FindById(userId), false, false);
-       return RedirectToLocal(returnUrl);    
+       return RedirectToLocal(returnUrl);
    }
    else
    {
@@ -506,7 +503,7 @@ to:
 NSBundle* bundle = [NSBundle  bundleWithIdentifier:@"com.sinch.NumberValidatorWithOTP"];
 ```
 
-Next, you need to change the methods in httpClient to reflect your requestCode *("/api/requestcode/{phone number})* and verifyCode *(/api/verifycode/{phoneNumber}/{code})* endpoints from above.
+Next, you need to change the methods in httpClient to reflect your requestCode _("/api/requestcode/{phone number})_ and verifyCode _(/api/verifycode/{phoneNumber}/{code})_ endpoints from above.
 
 ```objectivec
 -(void)requestCode:(NSString *)phoneNumber completion:(void (^)(NSError *))completion
@@ -773,7 +770,7 @@ Now the phone is verified. We have stored a user-generated PIN code and shared s
 
 > 1.  Add a new storyboard and call it **TOTP.storyboard**
 > 2.  Add text field and Next buttons like in the screenshot  
-![totpview.png](images\586ef06-totpview.png)
+>     ![totpview.png](images\586ef06-totpview.png)
 
 > 3.  Create a UIVIewController and call it **TOTPController**
 > 4.  Set the file owner of the new created view to TOTPController and add outlets and actions to the buttons and text field.
@@ -832,13 +829,13 @@ Yazid has cleaned up Google’s [sample implementation of TOTP generation](https
 ```objectivec
 MF_Base32Additions.h
 MF_Base32Additions.m
-OTPGenerator.h  
-OTPGenerator.m  
+OTPGenerator.h
+OTPGenerator.m
 TOTPGenerator.h
 TOTPGenerator.m
 ```
 
-Add an import to **TOTPGEnerator.h** and **MF\_Base32Additions.h** to your **TOPTViewController**.
+Add an import to **TOTPGEnerator.h** and **MF_Base32Additions.h** to your **TOPTViewController**.
 
 Create an action called generatePin:
 
@@ -883,7 +880,7 @@ In the next action, generate the token and send it to the server for verificatio
             message:@"Wrong pincode"
             delegate:nil
             cancelButtonTitle:@"Ok"
-            otherButtonTitles:nil] show];        
+            otherButtonTitles:nil] show];
     }
 }
 ```
@@ -947,6 +944,6 @@ Hang in there; we’re almost done\! The last thing we need is a method in our V
 
 ### More ideas to improve the experience
 
->   - Send an push to the phone when there is an authentication request from the website
->   - Implement functionality to prompt both website and mobile that a wrong token was generated
->   - Add Bluetooth low energy (BLE) support so it will log in automatically when the phone is close to the computer
+> - Send an push to the phone when there is an authentication request from the website
+> - Implement functionality to prompt both website and mobile that a wrong token was generated
+> - Add Bluetooth low energy (BLE) support so it will log in automatically when the phone is close to the computer

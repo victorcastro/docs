@@ -4,6 +4,7 @@ excerpt: >-
   Number Verification, ASP.NET Identity and Two-Factor Authentication - Part 3
   In this tutorial you learn how to create an SMS provider for Microsoft
   Identity that comes shipped with in the .NET framework.
+hidden: true
 ---
 In Part 3 of this tutorial series, we will create an SMS provider for Microsoft Identity that comes shipped with in the .NET framework. It will take about 15 minutes.
 

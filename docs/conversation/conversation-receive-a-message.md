@@ -96,57 +96,77 @@ if you did everything correctly, you will receive a `status 200 OK` on ngrok and
 Copy the following code on top of your current webhook and then re-run your node application.
 
 ```javascript 
-const fetch = require('node-fetch');
 const express = require('express');
-      bodyParser = require('body-parser');
-      app = express().use(bodyParser.json());
-      port = 3000;
-  Sending a text message body
-  sendMessage = (contact_id, text) => {
-    const URL = `https://eu.conversation.api.sinch.com/v1beta/projects/{project_id}/messages:send`;
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${btoa(`${client_id}:${client_secret}`)}`,
+const request = require('request-promise');
+const bodyParser = require('body-parser');
+app = express().use(bodyParser.json());
+port = 3000;
+
+const APP_ID = 'APP_ID_HERE',
+      PROJECT_ID = 'PROJECT_ID_HERE',
+      client_id = 'CLIENT_ID_HERE',
+      client_secret = 'CLIENT_SECRET_HERE';
+
+  /* Please note that client id and secret are essentially equivalent to a username and password. This code is for example purposes and is not meant for production.*/
+
+
+const getAuthToken = () => {
+  return request({
+    url: 'https://auth.sinch.com/oauth2/token',
+    method: 'POST',
+    auth: { user: client_id, pass: client_secret },
+    form: { grant_type: 'client_credentials' },
+    json: true,
+  });
+};
+
+const sendMessage = async (contact_id, text) => {
+  const res = await getAuthToken();
+  const token_type = res.token_type;
+  const token = res.access_token;
+  return request({
+    url: `https://eu.conversation.api.sinch.com/v1beta/projects/${PROJECT_ID}/messages:send`,
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json text/plain',
+      Authorization: `${token_type} ${token}`,
+    },
+    body: {
+      app_id: APP_ID,
+      recipient: {
+        contact_id,
       },
-      body: JSON.stringify({
-        app_id: {SINCH_APP_ID},
-        recipient: {
-          contact_id,
+      message: {
+        text_message: {
+          text,
         },
-        message: {
-          text_message: {
-            text,
-          },
-        },
-        channel_priority_order: ['MESSENGER'],
-      }),
-    };
-     return fetch(URL, options);
-  };
+      },
+      channel_priority_order: ['MESSENGER'],
+    },
+    json: true,
+  });
+};
 
 app.post('/webhook', (req, res) => {
-    let body = req.body;
-    let {
-        message: {
-            contact_message: {
-                text_message: { text },
-            },
-        },
-    } = body;
-
-// Adding a simple if statement when you receive a text message
+  let body = req.body;
+  let {
+    message: {
+      contact_message: {
+        text_message: { text },
+      },
+    },
+  } = body;
   if (text) {
-        sendMessage('Contact_ID', 'Replying to that first message!').then(r => r.json()).then(res => console.log(res));
-    }
-    console.log(`MESSAGE RECEIVED:  ${text}`);
-    res.sendStatus(200);
+    sendMessage('Contact_ID', 'Hello World').then((res) => console.log(res));
+  }
+  console.log(`MESSAGE RECEIVED: ${text}`);
+  res.sendStatus(200);
 });
 
 app.listen(port, () => console.log(`Listening to ${port}..`));
+
 ```
-if everything is done correctly, you will receive a message back from your webhook on Messenger
+if everything is done correctly, you will receive a message back from your webhook on Messenger. On your terminal, you will receive data regarding the `message id` and  `accepted time`
 
 ![Received](images/channel-support/messenger/fb_message_replied.png)
 

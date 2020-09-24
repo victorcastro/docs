@@ -3,26 +3,28 @@
 
 name: Validate
 
-on: 
+on:
   push:
-    branches-ignore: 
-    - "master"
+    branches-ignore:
+      - "master"
     paths:
-    - "docs/**"
+      - "docs/**"
   pull_request:
-    paths: 
-    - "docs/**"
+    paths:
+      - "docs/**"
 
 jobs:
-
   check:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - uses: actions/setup-node@v1
-      with:
-        node-version: '10.x'
-    - name: Install dependencies
-      run: npm install
-    - name: Validate documentation contents
-      run: npx readme-sync validate
+      - uses: actions/checkout@v1
+      - uses: actions/setup-node@v1
+        with:
+          node-version: "10.x"
+      - name: Install dependencies
+        run: npm install
+      - name: Validate documentation contents
+        run: npx readme-sync validate
+        env:
+          DOCSVERSION: "1.0"
+          APIKEY: ${{ secrets.README_API_KEY }}

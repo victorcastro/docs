@@ -5,6 +5,7 @@ excerpt: >-
   where you can call in to a number and be connected to anyone. A little bit
   like the carrier hotlines back in the day.
 ---
+
 In this tutorial we are going to create a very simple conference calling app where you can call in to a number and be connected to anyone. A little bit like the carrier hotlines back in the day (maybe they still exist, any one know?).
 
 This tutorial will take approx. 15 min to finish.
@@ -13,9 +14,9 @@ This tutorial will take approx. 15 min to finish.
 
 To get started, you will need:
 
- 1.  A [Sinch account](https://portal.sinch.com/#/signup) and an app with keys
- 1.  A phone number [rented from Sinch](https://portal.sinch.com/dashboard/#/numbers); make sure it’s a voice number
- 1.  A place to host your backend, I am hosting my app on Azure for free
+1.  A [Sinch account](https://portal.sinch.com/#/signup) and an app with keys
+1.  A phone number [rented from Sinch](https://portal.sinch.com/); make sure it’s a voice number
+1.  A place to host your backend, I am hosting my app on Azure for free
 
 ## Rent a number
 
@@ -71,9 +72,9 @@ Next create a file called **app.js** in the root folder, and start coding:
 
 ```javascript
 // add requires
-var express = require('express');
-var bodyParser = require('body-parser');
-var router = require('./routes/sinch');
+var express = require("express");
+var bodyParser = require("body-parser");
+var router = require("./routes/sinch");
 
 //set up an app
 var app = express();
@@ -85,11 +86,11 @@ var port = process.env.PORT || 5000;
 app.use(bodyParser.json());
 
 //add the sinch route
-app.use('/sinch', router);
+app.use("/sinch", router);
 
 //add default content type for all requests
 app.use(function (req, res, next) {
-  res.setHeader("Content-Type","application/json");
+  res.setHeader("Content-Type", "application/json");
   next();
 });
 //export and start listening
@@ -103,13 +104,12 @@ Nothing strange here, just some basic express setup of an app. Note that now we 
 
 ```javascript
 // add requires
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-router.post('/', function (req, res, next) {
-    //echo the post
-    res.json(req.body);
-}
-);
+router.post("/", function (req, res, next) {
+  //echo the post
+  res.json(req.body);
+});
 module.exports = router;
 ```
 
@@ -126,11 +126,10 @@ Whenever someone calls in, I want to connect them to my conference with their ca
 
 ```json
 {
-    "Action":
-    {
-        "name" : "ConnectConf",
-        "conferenceId" : "myConference123"
-    }
+  "Action": {
+    "name": "ConnectConf",
+    "conferenceId": "myConference123"
+  }
 }
 ```
 
@@ -140,9 +139,9 @@ But I also wanted to spice it up and welcome the caller with a text to speech co
 
 ```json
 {
-    "name" : "Say",
-    "text" : "Hello, this is a text to speech message",
-    "locale" : "en-US"
+  "name": "Say",
+  "text": "Hello, this is a text to speech message",
+  "locale": "en-US"
 }
 ```
 
@@ -151,22 +150,21 @@ In **sinch.js** just below `var router` add the SVAML code.
 **SVAML Response**
 
 ```javascript
-var svamlResponse =
+var svamlResponse = {
+  instructions: [
     {
-        instructions: [
-            {
-                "name": "Say",
-                "text": "Welcome to the hotline",
-                "locale": "en-US"
-            }
-        ],
-        action: {
-            "name": "ConnectConf",
-            "conferenceId": "myconference1",
-            "cli": "",
-            "suppressCallbacks": true
-        }
-    }
+      name: "Say",
+      text: "Welcome to the hotline",
+      locale: "en-US",
+    },
+  ],
+  action: {
+    name: "ConnectConf",
+    conferenceId: "myconference1",
+    cli: "",
+    suppressCallbacks: true,
+  },
+};
 ```
 
 You might notice that I added **supressCallbacks**, and this is because in this case I don’t want any more callbacks after the ICE event. So to connect to the conference, we need to change the the **router.post** to this
@@ -174,12 +172,12 @@ You might notice that I added **supressCallbacks**, and this is because in this 
 **router.post**
 
 ```javascript
-router.post('/', function (req, res, next) {
-    //we know its a ICE event since we supress callbacks for other events
-    // set the callerid to the calling number
-    svamlResponse.action.cli = req.body.cli;
-    //send back the response.
-    res.json(svamlResponse);
+router.post("/", function (req, res, next) {
+  //we know its a ICE event since we supress callbacks for other events
+  // set the callerid to the calling number
+  svamlResponse.action.cli = req.body.cli;
+  //send back the response.
+  res.json(svamlResponse);
 });
 ```
 
@@ -189,23 +187,23 @@ Fire it up localy and try and send this fake incoming body to your controller in
 
 ```json
 {
-   "event":"ice",
-   "callid":"2DOQGZ3D2JA5JB54BI4OTPFT3I@81.201.84.195",
-   "timestamp":"2015-11-11T03:28:25Z",
-   "version":1,
-   "userRate":{
-      "currencyId":"USD",
-      "amount":0.0
-   },
-   "cli":"15612600684",
-   "to":{
-      "type":"did",
-      "endpoint":"+17864088196",
-      "verified":null
-   },
-   "domain":"pstn",
-   "applicationKey":"1680b6f8-aa0e-422f-bf25-932adb3a48af",
-   "originationType":"PSTN"
+  "event": "ice",
+  "callid": "2DOQGZ3D2JA5JB54BI4OTPFT3I@81.201.84.195",
+  "timestamp": "2015-11-11T03:28:25Z",
+  "version": 1,
+  "userRate": {
+    "currencyId": "USD",
+    "amount": 0.0
+  },
+  "cli": "15612600684",
+  "to": {
+    "type": "did",
+    "endpoint": "+17864088196",
+    "verified": null
+  },
+  "domain": "pstn",
+  "applicationKey": "1680b6f8-aa0e-422f-bf25-932adb3a48af",
+  "originationType": "PSTN"
 }
 ```
 
@@ -239,8 +237,6 @@ I hope you enjoyed this tutorial and if you have any questions, please add a com
 
 If you want to continue building a conference calling app, take a look at the other resources we have:
 
- - [Sinch REST Documentation](doc:voice-rest-api)
- - [Building a Conference Calling System in .NET](doc:build-a-conference-calling-app-in-nodejs-express)
- - [Hosting node on Azure](https://azure.microsoft.com/en-us/documentation/articles/web-sites-nodejs-develop-deploy-mac/)
-
-
+- [Sinch REST Documentation](doc:voice-rest-api)
+- [Building a Conference Calling System in .NET](doc:build-a-conference-calling-app-in-nodejs-express)
+- [Hosting node on Azure](https://azure.microsoft.com/en-us/documentation/articles/web-sites-nodejs-develop-deploy-mac/)

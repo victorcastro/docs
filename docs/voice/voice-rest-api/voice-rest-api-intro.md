@@ -86,16 +86,6 @@ ICE callbacks will also provide region-specific URLs in the `callResourceUrl` pr
 | TM   | /conferences/id/{conferenceId}                         | DELETE    | [Kick all conference participants](doc:voice-rest-api-calling-api#kick-all-conference-participants)              |
 | TM   | /callouts                                              | POST      | [Place text-to-speech or conference call](doc:voice-rest-api-calling-api#conference-and-text-to-speech-callouts) |
 
-### Reporting API
-
-    https://reportingapi.sinch.com/v1
-
-| URL                                     | HTTP Verb | Functionality          |
-| --------------------------------------- | --------- | ---------------------- |
-| /users/{type}/{endpoint}/calls/{domain} | GET       | [User call report]()   |
-| /counters/{id}                          | GET       | [Get counter]()        |
-| /services/{id}                          | GET       | [Get service status]() |
-
 ## App to phone calls
 
 In this scenario, calls are originated from an app using the iOS, Android or Javascript SDK and are terminated to the fixed or mobile phone network\*. For additional call control, you can configure a callback URL under your app’s voice settings in the Sinch dashboard, where Sinch will send call-related events. By capturing and responding to these events from your backend, you can allow or deny calls to go through. Events will also be triggered when the calls will be answered or disconnected.

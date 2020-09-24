@@ -480,7 +480,32 @@ media and location messages.
 
 ##### Sending Messages
 
-This section provides examples of various messaging capabilities of WhatsApp channel,
+All business initiated conversations on the WhatsApp channel must start with an “Opt-In” by the user.
+This can be collected through any third party channel. For example in an SMS message, a web form, email etc.
+You need to register the collected user opt-in by invoking the opt-in service
+provided by Conversation API - `/optins:register`. A successful registration or opt-in errors will be
+announced by a callback to webhooks with trigger `OPT_IN`.
+
+Businesses must also provide a method by which customers may opt-out of receiving future messages from your organization.
+Registering the user opt-out is done through the Conversation API `/optouts:register` endpoint.
+The outcome of the opt-out registration is delivered by a callback to webhooks with trigger `OPT_OUT`.
+
+An example payload for opt-in/out registration (POST to `/optins:register` or `/optouts:register`) is the following snipped:
+
+```json
+{
+    "app_id": "{{APP_ID}}",
+    "recipient": {
+        "contact_id": "{{CONTACT_ID}}"
+    },
+    "channels": ["WHATSAPP"]
+}
+```
+
+where {{APP_ID}} is the ID of your **app** and the {{CONTACT_ID}} is the contact with WhatsApp channel identity
+for which this opt-in/out is preformed.
+
+The rest of this section provides examples of various messaging capabilities of WhatsApp channel,
 and how to utilize them using Conversation API generic message format.
 Please note that for the sake of brevity the JSON snippets do not include
 the **recipient** and **app_id** which are both required when sending a message.
@@ -1197,7 +1222,7 @@ the **recipient** and **app_id** which are both required when sending a message.
 
 ###### Text Messages
 
-Text messages are natively supported by VBM channel.
+Text messages are natively supported by VBM channel. The maximum length of the text is 1000 characters, longer content will be truncated.
 
 ---
 
@@ -1219,7 +1244,7 @@ The rendered message:
 
 ###### Media Messages
 
-VBM support Image messages natively:
+VBM support Image messages natively. Supported image types are JPG, JPEG and PNG. 
 
 ---
 
@@ -1247,7 +1272,8 @@ Video and other types of media messages render as a link:
 
 ###### Choice Messages
 
-VBM channel provides native support for single choice (URL, Call, or Location) **Choice Messages**:
+VBM channel provides native support for single choice (URL, Call, or Location) **Choice Messages**.
+The title of the choice has a maximum length of 30 characters, longer content will be truncated.
 
 ---
 
@@ -1400,6 +1426,7 @@ The rendered message:
 
 VBM supports natively Card messages with one URL, Call, or Location choice.
 The media message in the Card should point to an image.
+The title of the choice in the Card message has a maximum length of 30 characters, longer content will be truncated.
 
 ---
 
@@ -1616,3 +1643,60 @@ Conversation API POST to `UNSUPPORTED` webhook:
   }
 }
 ```
+
+### Sinch SMS
+
+With Sinch SMS channel you get the largest possible coverage in expense of
+limited rich content features.
+
+#### Channel Configuration
+
+Sending and receiving SMS messages through Conversation API requires a Sinch SMS service
+plan. To ensure the best experience for your end user, we recommend that you set default sender IDs
+for your service plan for each country that you have an active user base in.
+By default most telecom operators allow end users to send internationally, but to be able to respond to the end user,
+often a national registered sender ID must be used. For example, an inbound message from US phone number to
+a Swedish long number for the service plan will be passed successfully to the Conversation API **app**
+and further to the registered MESSAGE_INBOUND webhooks. However, any outbound messages (replies) to the same US phone number from the
+same Conversation API **app** will need to be sent over the US long number registered for the service plan
+and not through the Swedish long number. To request domestic long numbers in all relevant countries, please visit Numbers section in [Sinch Portal](https://dashboard.sinch.com/numbers).
+Once numbers have been requested, please open a support ticket to request these numbers to be assigned as default originators in their respective countries.
+
+##### Sending Config
+
+Once you have your service plan ID and associated API token you
+can setup SMS integration for your Conversation API **app** either in the
+portal or thorough API call. The following snippet shows the channel
+credentials configuration for **app** with SMS channel:
+
+```json
+{
+  "channel_credentials": [
+    {
+      "channel": "SMS",
+      "static_bearer": {
+        "claimed_identity": "{{SERVICE_PLAN_ID}}",
+        "token": "{{API_TOKEN}}"
+      }
+    }
+  ]
+}
+```
+
+You need to replace `{{SERVICE_PLAN_ID}}` and `{{API_TOKEN}}` with your
+Sinch SMS service plan ID and API token.
+
+##### Receiving Config
+
+To start receiving contact messages (replies) and delivery receipts for sent
+messages you need to configure the callback URL of your service plan to
+point to your Conversation API **app**. You find the correct URL for your
+**app** under *Inbound messages* section in the app details page in the Sinch
+portal.
+
+You also need to configure at least one Conversation API webhook which
+will trigger POST callbacks to the given URL.
+The triggers which are relevant for SMS channel are:
+
+- MESSAGE_DELIVERY - delivery receipts for SMS messages
+- MESSAGE_INBOUND - inbound messages e.g., contact replies

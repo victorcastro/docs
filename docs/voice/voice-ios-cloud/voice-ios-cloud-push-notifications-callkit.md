@@ -8,7 +8,7 @@ next:
     - voice-ios-cloud-playing-ringtones
 ---
 
-Use the Sinch SDK toghether with Apple _VoIP_ push notifications and [CallKit](https://developer.apple.com/documentation/callkit) to provide the best possible end user experience. _VoIP_ push notifications are a special type of push notifications that Apple support as part of _Apple Push Notification service_ (_APNs_) which enables fast and high-priority notifications. [CallKit]((https://developer.apple.com/documentation/callkit)) is an iOS framework that lets you integrate the Sinch VoIP calling functionality with a iOS native system look and feel.
+Use the Sinch SDK toghether with Apple _VoIP_ push notifications and [CallKit](https://developer.apple.com/documentation/callkit) to provide the best possible end user experience. _VoIP_ push notifications are a special type of push notifications that Apple support as part of _Apple Push Notification service_ (_APNs_) which enables fast and high-priority notifications. [CallKit](https://developer.apple.com/documentation/callkit) is an iOS framework that lets you integrate the Sinch VoIP calling functionality with a iOS native system look and feel.
 
 To fully enable VoIP push notifications in your application, the following steps are required, and this document will guide you through these in more detail:
 
@@ -122,13 +122,47 @@ When linking against the iOS 13 SDK or later, your implementation **must** repor
 When you relay the push notification to a `SINClient`. If you for some reason do not relay the push payload to a Sinch client instance using `-[SINClient relayRemotePushNotification:]`, you __must__ instead invoke `-[SINManagedPush didCompleteProcessingPushPayload:]` so that the Sinch SDK can invoke the _PKPushKit_ completion handler (which is managed by `SINManagedPush`).
 
 > ❗️Report Push Notifications to CallKit
-> If a VoIP push notification is not reported to CallKit then iOS will __terminate__ the application. Repeatedly failing to report calls to CallKit may cause the system to stop delivering any more VoIP push notifications to your app. The exact limit before this throttling behaviour kicks in is subject to Apple iOS implementation details and outside the control of the Sinch SDK.
+> If a VoIP push notification is not reported to CallKit then iOS will __terminate__ the application. Repeatedly failing to report calls to CallKit may cause the system to stop delivering any more VoIP push notifications to your app. The exact limit before this behaviour kicks in is subject to Apple iOS implementation details and outside the control of the Sinch SDK.
 >
 > Please also see [Apples Developer documentation on this topic](https://developer.apple.com/documentation/pushkit/pkpushregistrydelegate/2875784-pushregistry).
 
+### Reporting outgoing calls to CallKit
+
+While reporting incoming calls to CallKit is mandatory in order to process incoming VoIP push notifications, the same limitation does not apply to outgoing calls. Nevertheless, reporting outgoing calls to CallKit is still required in scenarios when an outgoing call is established (i.e., callee answers the call) while the caller app is in background, or the caller device is in locked state.
+
+In such scenarios, as a privacy measure the OS will prevent the audio unit to be initialized for recording because the app is not in foreground, unless the outgoing call is reported to CallKit. For this reason the recommendation is that outgoing calls should be reported to CallKit as well.
+
+
+```objectivec
+
+// (Assuming CallKit CXCallController accessible as self.callController)
+- (void)startOutgoingCall:(NSString *)destination {
+  NSUUID *callId = [[NSUUID alloc] init];
+
+  CXHandle *handle = [[CXHandle alloc] initWithType:CXHandleTypeGeneric value:destination];
+  CXStartCallAction *initiateCallAction =
+      [[CXStartCallAction alloc] initWithCallUUID:callId handle:handle];
+  CXTransaction *initOutgoingCall = [[CXTransaction alloc] initWithAction:initiateCallAction];
+
+  [self.callController requestTransaction:initOutgoingCall
+                           completion:^void(NSError *error) {
+                               if (error) {
+                                 NSLog(@"%@", error);
+                               }
+                             }];
+}
+
+- (void)provider:(CXProvider *)provider performStartCallAction:(CXStartCallAction *)action {
+  id<SINCall> call = [_client.callClient callUserWithId: action.handle.value];
+  [action fulfill];
+}
+
+// (For a more complete example, see the Sinch sample app SinchCallKit.xcodeproj)
+```
+
 ### Extracting Call Information From a Push Payload
 
-At the time when your application receives a push notification you will need to extract some key information about the call based on only the push notification payload. You will need to do this to conform with with Apple requirements on reporting a VoIP push notification as an incoming call to _CallKit_, but you may also want to extract application-specific headers for the call. Use the method `+[SINManagedPush queryPushNotificationPayload:]` to extract call details from the raw push payload. Note that you can do this immediately and before you have created and started a `SINClient` instance.
+At the time when your application receives a push notification you will need to extract some key information about the call based on only the push notification payload. You will need to do this to conform with Apple requirements on reporting a VoIP push notification as an incoming call to _CallKit_, but you may also want to extract application-specific headers for the call. Use the method `+[SINManagedPush queryPushNotificationPayload:]` to extract call details from the raw push payload. Note that you can do this immediately and before you have created and started a `SINClient` instance.
 
 __Example__
 
@@ -194,6 +228,13 @@ This means how the the app is code signed and what _Provisioning Profile_ is use
 For example, if your application is signed with a _Development_ provisioning profile it will be bound to the APS _Development_ environment. If it’s code signed with a _Distribution_ provisioning profile it will be bound to the APS _Production_ environment.
 
 Typically a _Debug_ build will be code signed with a _Development_ provisioning profile and thus `SINAPSEnvironmentDevelopment` should be used. And typically a _Release_ build will be code signed with a _Distribution_ provisioning profile and thus `SINAPSEnvironmentProduction` should be used. Instead of changing this manually for each build, the macro `SINAPSEnvironmentAutomatic` is available which automatically expands to _Development_ for _Debug_ builds and _Production_ for _Release_ builds.
+
+## iOS not Delivering Notifications
+
+Under certain circumstances, iOS will not deliver a notification to your application even if it was received at device/OS level. Note that this also applies to VoIP push notifications. Exact behaviour and limits are subject to iOS internal details, but well known scenarios where notifications will not be delivered are:
+
+* The end user has actively terminated the application. iOS will only start delivering notifications to the application again after the user has actively started the application again.
+* Your app has not been reporting VoIP push notifications to _CallKit_. Please see the separate sections above on how to report VoIP push notifications as _CallKit_ calls.
 
 ## Relevant Apple Resources
 

@@ -15,10 +15,6 @@ next:
     to be delivered and Sinch with determine the correct network
     operator for this number.
 
-  - **Device Discovery:** Sinch provides Device Discovery feature to our
-    customers through our XML API. Device discovery is achieved either
-    via carrier database query and discovery message where applicable.
-
   - **Device Profile:** The device profile, if available, is also
     included along with the delivery receipt and MO MMS message.
     System-wide database of last know device profile per phone number is
@@ -49,7 +45,15 @@ next:
 **Sinch XML MMS API Methods:**
 
 |         Action         |                      Functionality                                                                                                                                                     |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `save_mms`       | This API stores an MMS from XML.                                                                                                                                          |
 | `send_saved_mms` | This API sends stored content from a specified account using an mms-id to a single mobile number.                                                                         |
 | `send_mms`       | Sends an MMS defined in the XML containing slides of embedded with,video, audio, images and/or text to a single or list of mobile numbers,in international number format. |
+
+**Base URL:**
+
+The following URL can be used by the XML API. 
+
+| Server        |  URL                                   |
+|---------------|----------------------------------------|
+| General API | https://api.ci.mblox.com/ep/v1/     |

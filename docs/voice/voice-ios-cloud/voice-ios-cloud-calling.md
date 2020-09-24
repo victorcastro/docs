@@ -36,9 +36,9 @@ Also see [Handling Incoming Calls](doc:voice-ios-cloud-calling#handling-incoming
 
 An _App-to-Phone_ call is a call that is made to a phone on the regular telephone network. Setting up an _App-to-Phone_ call is not much different from setting up an _App-to-App_ call.
 
-Initiate a call to a phone number by calling the method `-[SINCallClient callPhoneNumber:]`. The phone number should be specified according to the [E.164_ number formatting standard](https://en.wikipedia.org/wiki/E.164) and should be prefixed with a ‘+’.
+Initiate a call to a phone number by calling the method `-[SINCallClient callPhoneNumber:]`. The phone number should be specified according to the [E.164\_ number formatting standard](https://en.wikipedia.org/wiki/E.164) and should be prefixed with a ‘+’.
 
-__Example__: To call the US phone number _415 555 0101_, the phone number should be specified as `+14155550101`. The `‘+’` is the required prefix and the US country code `‘1’` prepended to the local subscriber number.
+**Example**: To call the US phone number _415 555 0101_, the phone number should be specified as `+14155550101`. The `‘+’` is the required prefix and the US country code `‘1’` prepended to the local subscriber number.
 
 _App-to-Phone_ calls can be tested by calling the following test number: _+46000000000_. When placing a call to this number, you will hear a voice prompt stating that the call has been connected, and shortly after that the call will automatically be ended.
 
@@ -67,7 +67,7 @@ id<SINCallClient> callClient = [sinchClient callClient];
 id<SINCall> call = [callClient callConferenceWithId:@"<conference id>"];
 ```
 
-It is also possible to connect users to a conference call via the [Sinch REST API](doc:voice-rest-api-calling-api#text-to-speech).
+It is also possible to connect users to a conference call via the [Sinch REST API](doc:voice-rest-api-calling-api#text-to-speech-callout).
 
 > ❗️Note
 > The identifier for a conference room may not be longer than 64 characters.
@@ -80,7 +80,6 @@ To get events related to the call, assign a call delegate. The call object conta
 
 If you using _VoIP Push Notifications_ and [CallKit](https://developer.apple.com/documentation/callkit), use `didReceiveIncomingCall:` primarily to associate the `SINCall` with the _CallKit_-call. E.g. this may be implemented by keeping a mapping between _CallKit_ calls and `SINCall`. Example:
 
-
 ```objectivec
 - (void)client:(id<SINCallClient>)client didReceiveIncomingCall:(id<SINCall>)call {
     // Assign delegate
@@ -92,10 +91,10 @@ If you using _VoIP Push Notifications_ and [CallKit](https://developer.apple.com
 ```
 
 > 👍 See our _CallKit_ sample apps
-> 
+>
 > In the _Sinch SDK_ download, there is a sample app `SinchCallKit.xcodeproj` with a detailed example on how to associate `SINCall` with _CallKit_ calls.
 
-If you are __not__ using _VoIP Push Notifications_ and [CallKit](https://developer.apple.com/documentation/callkit), then use `didReceiveIncomingCall:` to assign a delegate, and present a call UI. If the application is in foreground, you may also want to [play a ringtone](doc:voice-ios-cloud-playing-ringtones).
+If you are **not** using _VoIP Push Notifications_ and [CallKit](https://developer.apple.com/documentation/callkit), then use `didReceiveIncomingCall:` to assign a delegate, and present a call UI. If the application is in foreground, you may also want to [play a ringtone](doc:voice-ios-cloud-playing-ringtones).
 
 ```objectivec
 - (void)client:(id<SINCallClient>)client didReceiveIncomingCall:(id<SINCall>)call {
@@ -129,7 +128,7 @@ Now, the clients on both ends will establish the connection. When the call is es
 
 ### Declining an Incoming Call
 
-If the call should not be answered, use the method `-[SINCall hangup]`  to decline the call. The caller will be notified that the incoming call was denied (via `-[SINCallDelegate callDidEnd:]`). If a ringtone was previously played, it should be stopped now.
+If the call should not be answered, use the method `-[SINCall hangup]` to decline the call. The caller will be notified that the incoming call was denied (via `-[SINCallDelegate callDidEnd:]`). If a ringtone was previously played, it should be stopped now.
 
 User presses the hangup button:
 

@@ -24,6 +24,18 @@ A callback from the Sinch WhatsApp API will always have the following structure:
 >
 > Contacts might be placed only for text, contact and location inbound messages.
 
+### Signature
+
+If you wish to have your callbacks signed and have made the proper configuration for this, the callbacks will have the following signature-related headers.
+
+|Header                                      | Description                                                                        | JSON Type |
+|--------------------------------------------|------------------------------------------------------------------------------------|-----------|
+|sinch-whatsapp-callback-signature           | The signature                                                                      | String    |
+|sinch-whatsapp-callback-signature-algorithm | The algorithm that was used to compute the signature: `HMAC_SHA_256`               | String    |
+|sinch-whatsapp-callback-signature-nonce     | The nonce that was used together with the callback payload to create the signature | String    |
+
+The signature is computed by using the signature algorithm with the following string as input (as well as the HMAC key that you supplied during configuration): the callback payload joined to the nonce with a dot, i.e. `payload.nonce`.
+
 ### Delivery report callback
 
 A delivery report contains the status and state of each message sent through the Sinch WhatsApp API.
@@ -36,7 +48,7 @@ The format of a delivery report is as follows:
 |message_id | The message id of the message to which this delivery report belong to | String    |
 |details    | Detailed message containing information.                              | String    |
 |recipient  | The recipient of the message that this delivery report belong to      | String    |
-|timestamp  | ISO-8601 datetime of the status update                                | Object    |
+|timestamp  | ISO-8601 datetime of the status update                                | String    |
 
 Where the states means:
 
@@ -63,6 +75,7 @@ Where the states means:
       "state":"delivered",
       "message_id":"01DPNXZ0WCF9XD19MH84XD0P62",
       "recipient": "+46732001122",
+      "timestamp": "2020-05-02T18:40:42Z"
     }
   ]
 }
@@ -88,15 +101,17 @@ The format is as follows:
 
 **Notifications**
 
-|Name        | Description                                                                 | JSON Type |
-|------------|---------------------------------------------------------------------------- |-----------|
-|from        | MSISDN of the user sending the message                                      | String    |
-|in_group    | Identifier of a group if this message is sent to one of your owned groups   | String    |
-|to          | The identifier of the receiving bot                                         | String    |
-|replying_to | A context object, present only if the user is replying to a specific thread | Object    |
-|message_id  | Generated message id for the inbound message                                | String    |
-|message     | Message object describing the inbound message                               | Object    |
-|timestamp   | ISO-8601 datetime of the status update                                      | Object    |
+|Name                   | Description                                                                 | JSON Type |
+|---------------------- |---------------------------------------------------------------------------- |-----------|
+|from                   | MSISDN of the user sending the message                                      | String    |
+|in_group               | Identifier of a group if this message is sent to one of your owned groups   | String    |
+|to                     | The identifier of the receiving bot                                         | String    |
+|replying_to            | A context object, present only if the user is replying to a specific thread | Object    |
+|message_id             | Generated message id for the inbound message                                | String    |
+|message                | Message object describing the inbound message                               | Object    |
+|timestamp              | ISO-8601 datetime of the status update                                      | String    |
+|forwarded              | Boolean object stating if message was forwarded                             | Boolean   |
+|frequently_forwarded   | Boolean object stating if message was frequently forwarded                  | Boolean   |
 
 **Context**
 
@@ -112,7 +127,7 @@ The format is as follows:
 |type       | Fixed value `text`                                                    | String    |
 |body       | The text of the text message                                          | String    |
 
-##### Sample inbound text message
+#### Sample inbound text message
 
 ```json
 {
@@ -133,7 +148,8 @@ The format is as follows:
       "message":{
         "type":"text",
         "body":"Hello bot I want to know something!"
-      }
+      },
+      "timestamp": "2020-05-02T19:48:42Z"
     }
   ]
 }
@@ -150,7 +166,7 @@ The format is as follows:
 |name       | Name of the location                                                   | String    |
 |url        | URL for the website where the user downloaded the location information | String    |
 
-##### Sample inbound location message
+#### Sample inbound location message
 
 ```json
 {
@@ -174,7 +190,8 @@ The format is as follows:
         "lng":13.191,
         "name":"Sinch Ideon Lund",
         "address":"Scheelevägen 17"
-      }
+      },
+      "timestamp": "2020-05-02T19:40:52Z"
     }
   ]
 }
@@ -189,7 +206,7 @@ The format is as follows:
 |text       | The button text.                                                       | String    |
 |payload    | The payload that was sent with the button.                             | String    |
 
-##### Sample inbound quick reply button reply message
+#### Sample inbound quick reply button reply message
 
 ```json
 {
@@ -197,7 +214,6 @@ The format is as follows:
   "notifications":[
     {
       "from": "0732001122",
-      "to": "sinchbot",
       "message_id": "01DPNXZ0WCF9XD19MH84XD0P62",
       "message": {
         "type": "button",
@@ -206,11 +222,69 @@ The format is as follows:
         "payload": "some_payload"
       },
       "timestamp": "2020-05-07T10:02:10Z",
-      "to": "a_bot_id",
+      "to": "sinchbot",
       "replying_to": {
         "from": "447537817391",
         "message_id": "01E7Q9AVTRB5A30JD7D9ZN0HTE"
       }
+    }
+  ]
+}
+```
+
+#### Sample inbound forwarded message
+
+```json
+{
+  "type":"whatsapp",
+  "contacts":[
+    {
+      "profile":{
+        "name":"John Smith"
+      },
+      "wa_id":"0732001122"
+    }
+  ],
+  "notifications":[
+    {
+      "from":"0732001122",
+      "to":"sinchbot",
+      "message_id":"01DPNXZ0WCF9XD19MH84XD0P62",
+      "message":{
+        "type":"text",
+        "body":"Hello bot I want to know something!"
+      },
+      "timestamp": "2020-05-02T17:43:32Z",
+      "forwarded": true
+    }
+  ]
+}
+```
+
+#### Sample inbound frequently forwarded message
+
+```json
+{
+  "type":"whatsapp",
+  "contacts":[
+    {
+      "profile":{
+        "name":"John Smith"
+      },
+      "wa_id":"0732001122"
+    }
+  ],
+  "notifications":[
+    {
+      "from":"0732001122",
+      "to":"sinchbot",
+      "message_id":"01DPNXZ0WCF9XD19MH84XD0P62",
+      "message":{
+        "type":"text",
+        "body":"Hello bot I want to know something!"
+      },
+      "timestamp": "2020-05-03T07:28:54Z",
+      "frequently_forwarded": true
     }
   ]
 }
@@ -296,7 +370,7 @@ The format is as follows:
 |type         | Type of URL `HOME`,  `WORK`                                           | String        |
 |url          | URL                                                                   | String        |
 
-##### Sample inbound contact message
+#### Sample inbound contact message
 
 ```json
 {
@@ -361,7 +435,8 @@ The format is as follows:
             ]
           }
         ]
-      }
+      },
+      "timestamp": "2020-05-02T17:23:55Z"
     }
   ]
 }
@@ -391,7 +466,7 @@ The sticker metadata object has the following parameters:
 |android-app-store-link | A link to the stickerpack the sticker belongs to in the Google Play store   | String        |
 |is-first-party-sticker | 1 if the sticker is part of a first-party stickerpack, 0 otherwise          | Integer       |
 
-##### Sample inbound image message
+#### Sample inbound image message
 
 ```json
 {
@@ -406,7 +481,8 @@ The sticker metadata object has the following parameters:
         "url":"http://www.example.com/img.jpg",
         "mime_type":"image/jpeg",
         "caption":"Fantastic headphones"
-      }
+      },
+      "timestamp": "2020-05-02T15:43:52Z"
     }
   ]
 }
@@ -445,7 +521,7 @@ The event types can be one of the following:
 | `group_ended`                       |
 | `group_error_blocked_adding_user`   |
 
-##### Sample user joined a group
+#### Sample user joined a group
 
 ```json
 {
@@ -480,7 +556,7 @@ In case an error happens, an error notification can be sent.
 |type       | Fixed value `error`.                                                   | String    |
 |details    | A description of the error.                                            | String    |
 
-##### Error notification
+#### Error notification
 
 ```json
 {
@@ -502,3 +578,44 @@ In case an error happens, an error notification can be sent.
     ]
 }
 ```
+
+### Mark inbound message as read
+
+For each incoming message you can inform a WhatsApp User that his message has been read.
+
+#### Request
+
+`POST /whatsapp/v1/{bot-id}/events`
+
+JSON object parameters:
+
+| Name    | Description                      | JSON Type    | Default    | Constraints           | Required |
+| ------------- | -------------------------- | ------------ | ---------- | --------------------- | :------: |
+| type          | Fixed value `read`         | String       | N/A        | `read`                | Yes      |
+| message_id    | ID of incoming message     | String       | N/A        | Valid message ID      | Yes      |
+
+```json
+{
+  "type": "read",
+  "message_id": "01E7SP2FX8E16R0X3GE8Z41VSQABGGSFATkBVvAgo61AND5uEmlo54"
+}
+```
+
+#### Response
+
+`201 CREATED`
+
+Message has been marked as read and WhatsApp user will now see two blue ticks under this message.
+
+`400 Bad Request`
+
+There was an error with your request. The body is a JSON object described in the [introduction](doc:whatsapp-introduction#http-errors)
+
+`401 Unauthorized`
+
+There was an authentication error with your request. Either you're using incorrect credentials or you're attempting to authenticate
+in a region where your bot does not reside. The body is a JSON object described in the [introduction](doc:whatsapp-introduction#http-errors)
+
+`500 Internal Server Error`
+
+There was an error with your request. The body is a JSON object described in the [introduction](doc:whatsapp-introduction#http-errors)

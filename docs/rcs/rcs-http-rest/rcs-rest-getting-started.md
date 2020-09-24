@@ -7,32 +7,33 @@ next:
   pages:
     - rcs-rest-formats
 ---
+
 RCS is the logical evolution of SMS enabling enterprises and individuals to exchange rich media, deep linking features and interactive content with the same ease as SMS.
 
 The RCS REST API requires the message originator to be an A2P Sender ID (also known as chatbot). The Sender ID specifies the "appearance" of the conversation on the handset, with brand logo, color, and contact information. Please contact Sinch to get your Sender ID provisioned with your branding.
 
-The RCS REST API exposes a large portion of the chatbot enabled messaging formats described in the [GSMA Universal Profile 2.0 specification](https://www.gsma.com/futurenetworks/rcs/resources-rcs-events/universal-profile/).
+The RCS REST API exposes a large portion of the chatbot enabled messaging formats described in the [GSMA Universal Profile 2.0 specification](https://www.gsma.com/futurenetworks/rcs/universal-profile/).
 
 The following types and concept are available:
 
-* Two-way text messaging
-* Two-way file transfer (including rich media messages such as videos and GIFs)
-* Rich cards (with suggestion chips)
-* Rich card carousels
-* Suggestion chips (actions and replies)
-* Delivery, display and composing indications
-* Message revocation
+- Two-way text messaging
+- Two-way file transfer (including rich media messages such as videos and GIFs)
+- Rich cards (with suggestion chips)
+- Rich card carousels
+- Suggestion chips (actions and replies)
+- Delivery, display and composing indications
+- Message revocation
 
 ### Authentication
 
 Request with token
 
 **Request with token**
+
 ```shell
 $ curl -H "Authorization: Bearer {token}" \
 "https://api.clxcommunications.com/rcs/v1/{endpoint}"
 ```
-
 
 The token is required for all requests made to the REST API.
 
@@ -45,6 +46,7 @@ Please contact your Technical Account Manager to obtain your API token.
 Example of sending a simple text message.
 
 **Sending a simple text message**
+
 ```shell
 curl https://api.clxcommunications.com/rcs/v1/my-agent-id/messages \
   -H "Content-Type: application/json" \
@@ -58,6 +60,5 @@ curl https://api.clxcommunications.com/rcs/v1/my-agent-id/messages \
     }
   }'
 ```
-
 
 Sending messages is described in detail in [Messages Endpoint](doc:rcs-rest-messages-endpoint#send-a-message).

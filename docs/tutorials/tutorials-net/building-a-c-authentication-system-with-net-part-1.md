@@ -1,10 +1,12 @@
 ---
-title: 'Building a C# Authentication System with .NET - Part 1'
+title: "Building a C# Authentication System with .NET - Part 1"
 excerpt: >-
   More and more websites and apps ask for your phone number and, in many cases,
   are using it for two-factor authentication. In this tutorial, you will learn
   how to build your own C# two factor authentication system
+hidden: true
 ---
+
 > **Update**
 >
 > To verify numbers even easier, check out our [Verification SDK](https://www.sinch.com/products/verification/sms/)

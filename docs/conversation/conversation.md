@@ -25,7 +25,7 @@ Currently, Sinch Conversation API is in closed beta. If you are interested in th
 
 #### Project
 
-The **project** entity, in the ER-diagram above, is the root entity from the Conversation API's point-of-view. All the Conversation API resources are grouped under a **project**, which acts as a container. Each **project**, under the hood, belongs to a Sinch **account** created when creating an account in the [Sinch Portal](https://dashboard.sinch.com). It is, currently, only possible to have one **project** per **account**.
+The **project** entity, in the ER-diagram above, is the root entity from the Conversation API's point-of-view. All the Conversation API resources are grouped under a **project**, which acts as a container. Each **project**, under the hood, belongs to a Sinch **account** created when creating an account in the [Sinch Portal](https://dashboard.sinch.com).
 
 #### App
 
@@ -172,7 +172,7 @@ curl https://us.conversation.api.sinch.com/v1beta/projects/<Project ID>/apps --u
 ### Postman collection
 
 Sinch offers a Postman collection for easy setup and testing during development.
-https://www.getpostman.com/collections/ec98cd8a811476359d2b
+https://www.getpostman.com/collections/79a07a7d299afe46658b
 After importing the collection, fill in the following variables: PROJECT with your PROJECT ID, APP with app id, CLIENT_ID with your CLIENT_ID, and CLIENT_SECRET with your client secret.  
 To fill WEBHOOK_URL, simply visit  
 https://webhook.site/  

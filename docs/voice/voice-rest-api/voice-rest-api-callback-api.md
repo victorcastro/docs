@@ -5,7 +5,7 @@ excerpt: >-
   Sinch platform... Read more.
 next:
   pages:
-    - voice-rest-api-reporting-api
+    - voice-rest-api-recording
 ---
 
 ## Overview
@@ -574,14 +574,20 @@ Actions allow your Sinch application to control individual calls. The following 
     {
         "name": "connectMXP",
         "destination": {
-        "type": "username",
-        "endpoint": "hello"
-        }
+          "type": "username",
+          "endpoint": "johndoe"
+        },
+        "callHeaders": [
+          {"key": "foo", "value": "bar" },
+          {"key": "baz", "value": "qux" }
+        ]
     }
 
 **connectMXP** is the action of an incoming call event. It allows an app-to-app call to connect.
 
 **destination** is an optional parameter that allows you to specify or override the final call destination.
+
+**callHeaders** is an optional parameter that allows you to specify or override call headers that will be provided to the receiving Sinch SDK client (_callee_). See details [here](doc:voice-rest-api-callback-api#call-headers)
 
 > **Note**
 >
@@ -744,6 +750,13 @@ You can find more information on callback request signing [here](doc:using-rest#
         string - domain
         string - applicationKey
         string - originationType
+        CallHeader[] - callHeaders
+    }
+
+    [CallHeader]
+    {
+      string - key
+      string - value
     }
 
 **event** has the value “ice”
@@ -754,11 +767,11 @@ You can find more information on callback request signing [here](doc:using-rest#
 
 **version** shows the current API version
 
-**custom** is a string that can be used to pass custom information related to the call from Sinch SDK clients. See details [here](doc:voice-rest-api-callback-api#passing-custom-data-from-sinch-sdk-clients-in-callback-events).
+**custom** is a string that can be used to pass custom information related to the call.
 
 **user** shows the user Id that initiated the call
 
-**userRate** contains the rate that will be charged for the call established to the original destination. If the SVAML response specifies another destination, the same rate may not apply.
+**userRate** contains the rate that will be charged for the call established to the original destination. If the SVAML response specifies another destination, the same rate may not apply. Also see [Money](doc:using-rest#money-money) type.
 
 **cli** shows the number that will be displayed to the recipient of the call. By default it is set to “private”. If you want to be able to set your own CLI when making PSTN calls, please contact Sinch support.
 
@@ -777,7 +790,7 @@ You can find more information on callback request signing [here](doc:using-rest#
 > - “pstn”: If the incoming call comes from the PSTN network (a local phone number mapped to your application)
 > - “mxp”: If the incoming call comes from one of the Sinch SDKs (iOS, Android, Javascript) through data connection.
 
-**duration** shows the duration of the current call.
+**duration** is the duration of the current call (in seconds).
 
 > **Note**
 >
@@ -790,6 +803,8 @@ You can find more information on callback request signing [here](doc:using-rest#
 >         "type":"conference",
 >         "endpoint":"myCoolConference"
 >     }
+
+**callHeaders** If the call is initiated by a Sinch SDK Client, call headers will be the headers specified by the _caller_ client. See details [here](doc:voice-rest-api-callback-api#call-headers)
 
 ### Response
 
@@ -871,7 +886,7 @@ You can find more information on callback request signing [here](doc:using-rest#
 
 **version** shows the current API version
 
-**custom** is a string that can be used to pass custom information related to the call from Sinch SDK clients. See details [here](doc:voice-rest-api-callback-api#passing-custom-data-from-sinch-sdk-clients-in-callback-events).
+**custom** is a string that can be used to pass custom information related to the call.
 
 **user** shows the user Id that initiated the call
 
@@ -913,6 +928,13 @@ You can find more information on callback request signing [here](doc:using-rest#
         identity - to
         int - duration
         string - from
+        CallHeader[] - callHeaders
+    }
+
+    [CallHeader]
+    {
+      string - key
+      string - value
     }
 
 **event** has the value “dice”
@@ -942,19 +964,21 @@ You can find more information on callback request signing [here](doc:using-rest#
 
 **version** shows the current API version.
 
-**custom** is a string that can be used to pass custom information related to the call from Sinch SDK clients. See details [here](doc:voice-rest-api-callback-api#passing-custom-data-from-sinch-sdk-clients-in-callback-events).
+**custom** is a string that can be used to pass custom information related to the call.
 
 **user** shows the user Id that initiated the call.
 
-**debit** contains the amount that was charged for the call.
+**debit** contains the amount that was charged for the call. Also see [Money](doc:using-rest#money-money) type.
 
-**userRate** contains the rate per minute that applied for the call.
+**userRate** contains the rate per minute that applied for the call. Also see [Money](doc:using-rest#money-money) type.
 
 **to** is an object containing information on the recipient of the call.
 
-**duration** shows the duration of the call.
+**duration** shows the duration of the call. `duration` is an optional field, i.e. it may not be populated depending on whether it is applicable. E.g. if the call `result` is not `ANSWERED`, duration is not applicable and may not be present in the DICE.
 
 **from** shows information of the initiator of the call.
+
+**callHeaders** is the call headers specified by an initiating Sinch SDK Client, or headers specified in a `connectMXP` action in the ICE response.
 
 ### Response
 
@@ -1079,14 +1103,58 @@ You can find more information on callback request signing [here](doc:using-rest#
     40001 - Illegal SVAML
     50000 - Internal error
 
-## Passing Custom Data From Sinch SDK Clients in Callback Events
+## Call Headers
 
-The _ICE_ and _DICE_ events have a field named `custom` that can be used to pass custom information related to a call from the Sinch SDK clients and made accessible in the callback events. A call can on the client-side be initiated with _headers_ (__[1]__) and `custom` will be populated with the JSON encoding of those headers. E.g. if a call is initiated with headers `{"foo": "x"}` then the value of `custom` will be `"{\"foo\":\"x\"}"`.
+_Call Headers_ can be used to pass custom data from a Sinch SDK client to another, or specified in an _ICE_ response to be made available to the receiving client. Further, if _Call Headers_ is specified they will be available in _ICE_ and _DICE_ events.
+
+Example use cases:
+
+- Specify call headers at call initiation in end-user application (via Sinch SDK client) to make them available to _callee_ client.
+- Specify call headers in ICE response to make them available to _callee_ client.
+
+### Specifying Call Headers in Sinch SDK Clients (iOS & Android)
+
+If the custom data is available with the initiating client and you want to make it available to the receiving client and in ICE and DICE events, pass call headers when initiating the calls using the following Sinch SDK APIs:
+
+- Android: `CallClient.call(String userId, Map<String,String> headers)`
+- iOS: `-[SINCallClient callUserWithId:headers:]`
+
+This will make the call headers available in _ICE_ and _DICE_ events (as `callHeaders`), and on the call objects in the Sinch SDKs (`Call.headers` on Android, `-[SINCall headers]` on iOS).
+
+### Specifying Call Headers in ICE response
+
+You can provide call headers in the ICE response as part of an _action_, e.g. `connectMXP`. This will make the call headers available to the callee client and in the _DICE_ event.
+
+Example of ICE response:
+
+```
+{
+  "action": {
+    "name": "connectMXP",
+    "callHeaders": [
+      {"key": "foo", "value": "bar" },
+      {"key": "baz", "value": "qux" }
+    ]
+  }
+}
+```
+
+The maximum size for the value of call headers is 1024 bytes (counted as the UTF-8 encoded size of each header key/value pair).
+
+> **Important**
+>
+> When call headers are specified in ICE response, they will be made available to callee, but not to caller. I.e. if call headers was specified first by caller client, but then overriden via ICE response, the caller will not be updated of the changed call headers.
+
+### Call Headers and the `custom` Field
+
+**WARNING**: This is a deprecated feature.
+
+The _ICE_ and _DICE_ events have a field named `custom`. If call headers are specified at call initation on SDK client or via ICE response, the call headers will be available in `custom` in a JSON encoded format. E.g. if a call is initiated with headers `{"foo": "x"}` then the value of `custom` will be `"{\"foo\":\"x\"}"`.
+
+Note that call headers are only mapped to `custom` for Sinch SDK client calls and it is considered a legacy feature. It is _strongly recommended_ to use `callHeaders` as specify/override call headers in _ICE_ and _DICE_.
 
 > **Important**
 >
 > The value type of `custom` is always a _string_ and the JSON-encoded representation of _headers_ will be escaped when the string value is part of the larger ICE event structure. I.e. from the perspective of the structure of the ICE-event, the value of `custom` is just an opaque string.
 
 The maximum size for the value of `custom` is 1024 bytes.
-
-__[1]__: E.g. `CallClient.call(String userId, Map<String,String> headers)` in the Sinch Android APIs, and `-[SINCallClient callUserWithId:headers:]` in the Sinch iOS APIs.
