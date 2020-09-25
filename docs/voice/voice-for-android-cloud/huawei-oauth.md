@@ -2,12 +2,12 @@
 
 Sinch supports Huawei push messages via [Huawei Push Kit](https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides/service-introduction-0000001050040060). [Huawei Push Kit](https://developer.huawei.com/consumer/en/doc/development/HMSCore-Guides/service-introduction-0000001050040060) (_HPK_) is part of [Huawei Mobile Services](https://developer.huawei.com/consumer/en/hms) (_HMS_). The Sinch SDKs and platform can take care of sending push notification messages via _Huawei Push Kit_ on your behalf as part our _Sinch Managed Push Notifications_ functionality. To enable Huawei push messages for Android devices you will need to do two things:
 
-1. Make use of the _Huawei_ (_HMS_) APIs in the Sinch Android SDK, see details [here](TODO INSERT LINK).
+1. Make use of the _Huawei_ (_HMS_) APIs in the Sinch Android SDK, see details [here](doc:voice-android-cloud-push-notifications#section-Huawei-HMS-Notifications).
 2. Implement an _OAuth 2.0 Authorization Server_ endpoint that can provide Sinch with _OAuth 2.0_ _access_tokens_ required to send messages via _HPK_ on your behalf.
 
 ## Huawei OAuth Flow
 
-Sinch will send push notification messages via the [_HPK_ API](https://developer.huawei.com/consumer/en/doc/HMSCore-References-V5/https-send-api-0000001050986197-V5). Huawei Push Kit supports (and require) an _OAuth 2.0_ _Client Credentials_ flow to authenticate against the _Huawei Push Kit_ server endpoint(s). Your Huawei App in Huawei _AppGallery Connect_ will have an _App ID_ and an _App secret_. These are to be used as OAuth client credentials, i.e. `client_id` and `client_secret` respectively.
+Sinch will send push notification messages via the [_HPK_ API](https://developer.huawei.com/consumer/en/doc/HMSCore-References-V5/https-send-api-0000001050986197-V5). Huawei Push Kit supports (and requires) an _OAuth 2.0_ _Client Credentials_ flow to authenticate against the _Huawei Push Kit_ server endpoint(s). Your Huawei App in Huawei _AppGallery Connect_ will have an _App ID_ and an _App secret_. These are to be used as OAuth client credentials, i.e. `client_id` and `client_secret` respectively.
 
 Sinch supports Huawei OAuth flow by delegation. You will keep your `client_secret` on your backend, and Sinch will request an OAuth `access_token` via an _Authorization Server_ endpoint that you implement. The overall flow is depicted below:
 
