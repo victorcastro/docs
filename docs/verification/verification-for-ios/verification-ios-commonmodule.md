@@ -3,7 +3,7 @@ title: Using common verification configuration for multiple methods
 excerpt: Using same verification parameters (number, reference etc.) for different verification methods.
 next:
   pages:
-    - verification-ios-sms-verification
+    - verification-ios-miscellaneous
 ---
 
 If your application allows the user to authenticate via various verification methods it might be more readable and clear to initiate the verification using `VerificationInitData` and `CommonVerificationInitializationParameters`.
