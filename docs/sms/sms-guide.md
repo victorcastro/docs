@@ -123,13 +123,7 @@ The following error codes can be returned as values for the `code` field:
 | 403         | `unknown_group`                     | A referenced group ID is unknown. This could happen if the ID is invalid or if the group has been deleted.          |
 | 403         | `unknown_campaign`                  | The campaign ID does not match the specified originator.                                                            |
 | 403         | `missing_callback_url`              | Callback has been requested but no URL is provided.                                                                 |
-| 403         | `unknown_long_number`               | The given long number is unknown.                                                                                   |
-| 403         | `unknown_short_code`                | The given short code is unknown.                                                                                    |
-| 403         | `syntax_unknown_parameter`          | The given parameter is unknown.                                                                                     |
-| 403         | `unknown_url`                       | The given URL is unknown. This error can occur if URL is deleted.                                                   |
-| 403         | `binary_not_allowed_in_test`        | Binary messages cannot be sent in the test mode.                                                                    |
 | 403         | `llegal_number_type`                | Illegal phone number type of MSISDN for a chosen region was used.                                                   |
-| 403         | `\"%s\" contains malformed TAG '%s'`| The request body contains malformed TAG. For example missing opening or closing slash.                              | 
 
 ## Send SMS Messages
 
