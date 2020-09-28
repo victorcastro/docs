@@ -117,8 +117,7 @@ sinchClient.start();
 
 > 📘
 >
-> - Using the HMS Push platform requires that the _Huawei Mobile Services_ is installed on the device. The UI prompt to install the _HMS_ will appear automatically the very first time  a unique _HMS device token_ is being acquired. 
-> - If neither _Firebase Cloud Messaging_ nor _HMS Push_ is viable for the application, please consider deprecated [Active Connection](doc:voice-android-cloud-active-connection).
+> Using the HMS Push platform requires that the _Huawei Mobile Services_ is installed on the device. The UI prompt to install the _HMS_ will appear automatically the very first time  a unique _HMS device token_ is being acquired. 
 
 ### 2. Provision the Application with the Support Code
 
