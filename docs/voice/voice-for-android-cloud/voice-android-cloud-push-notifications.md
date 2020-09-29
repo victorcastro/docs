@@ -99,7 +99,7 @@ public void onMessageReceived(RemoteMessage remoteMessage){
 
 ### Prerequisites
 
-The following steps 1-5 will guide you through how to enable Huawei Push toghether with the Sinch SDK in your Android client-side application. To use Huawei Push notifications you must also implement the [Huawei OAuth 2.0 Flow](doc:voice-android-cloud-push-notifications#huawei-oauth-20-flow).
+The following steps 1-5 will guide you through how to enable Huawei Push together with the Sinch SDK in your Android client-side application. To use Huawei Push notifications you must also implement the [Huawei OAuth 2.0 Flow](doc:voice-android-cloud-push-notifications#huawei-oauth-20-flow).
 
 ### 1. Enable Support for Managed Push
 
