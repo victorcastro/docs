@@ -53,9 +53,12 @@ public UserController getUserController(String userId) {
 ```
 > 📘
 >
-> - Your application can be built to support both Push Notification platforms, but each _application instance_ should 
+> Your application can be built to support both Push Notification platforms, but each _application instance_ should 
 > register itself towards Sinch backend to receive Push Notification using either one way or another.
-> - Please observe the only difference between FCM and HMS Push registrations is the use of the [hms()](reference/com/sinch/android/rtc/HmsPushBuilder.html) sub-builder.
+
+> 📘
+>
+>Please observe that the only difference between FCM and HMS Push registrations is the use of the [hms()](reference/com/sinch/android/rtc/HmsPushBuilder.html) sub-builder.
 
 The former situation is showcased in _LoginActivity.java_ in _sinch-rtc-sample-push_ and _sinch-rtc-sample-video-push_ sample applications. The activity implements [UserRegistrationCallback](reference\com\sinch\android\rtc\UserRegistrationCallback.html) and [PushTokenRegistrationCallback](reference\com\sinch\android\rtc\PushTokenRegistrationCallback.html) interfaces:
 
