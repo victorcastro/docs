@@ -9,12 +9,7 @@ next:
 
 ## Receiving Incoming Calls via Push Notifications
 
-The application can receive incoming calls only when:
-
-- the application is in the foreground AND listening on an _Active Connection_ (_deprecated_)
-- the application is registered to receive incoming calls via Push Notifications the using [UserController.registerUser()](reference/com/sinch/android/rtc/UserController.html).
-
-The latter option is the only way the application can be notified of an incoming call if the phone is locked, or the application is in the background or closed.
+To receive incoming calls via Push Notifications the _application instance_ has to be registered on Sinch Backend using [UserController.registerUser()](reference/com/sinch/android/rtc/UserController.html). Push Notifications allow to receive an incoming call even if the phone is locked, or the application is in the background or closed.
 
 Sinch SDK supports both currently available major Push Notification platforms on Android - [Google's Firebase Cloud Messages](doc:voice-android-cloud-push-notifications#google-fcm-push-notifications) (later FCM) and [Huawei Mobile Services Push Notifications](doc:voice-android-cloud-push-notifications#huawei-hms-notifications)  (Huawei Push or HMS Push). 
 
@@ -71,13 +66,13 @@ This step is performed automatically when you call [UserController.registerUser(
 Create an instance of the _UserController_ using the [UserControllerBuilder](reference/com/sinch/android/rtc/UserControllerBuilder.html) and call [UserController.registerUser()](reference/com/sinch/android/rtc/UserController.html) to acquire and register FCM token on the Sinch Backend, and wait for the callbacks that reports whether registration succeeded. Please see dedicated `UserContoller` documentation [here](doc:voice-android-cloud-user-controller).
 
 ```java
-UserController uc = Sinch.getUserControllerBuilder()
+UserController userController = Sinch.getUserControllerBuilder()
                 .context(getApplicationContext())
                 .applicationKey("<application key>")
                 .userId("<user id>")
                 .environmentHost("ocra.api.sinch.com")
                 .build();
-uc.registerUser(this, this); // parameters are `UserRegistrationCallback` and `PushTokenRegistrationCallback`
+userController.registerUser(this, this); // parameters are `UserRegistrationCallback` and `PushTokenRegistrationCallback`
 ```
 
 ### 5. Implement _Listening Service_
@@ -104,7 +99,7 @@ public void onMessageReceived(RemoteMessage remoteMessage){
 
 ### Prerequisites
 
-The following steps 1-5 will guide you through how to enable Huawei Push toghether with the Sinch SDK in your Android client-side application. To use Huawei Push notifications you must also implement the [Huawei OAuth 2.0 Flow](doc:voice-android-cloud-push-notifications#huawei-oauth-20-flow).
+The following steps 1-5 will guide you through how to enable Huawei Push together with the Sinch SDK in your Android client-side application. To use Huawei Push notifications you must also implement the [Huawei OAuth 2.0 Flow](doc:voice-android-cloud-push-notifications#huawei-oauth-20-flow).
 
 ### 1. Enable Support for Managed Push
 
@@ -157,7 +152,7 @@ String hmsDeviceToken = HmsInstanceId.getInstance(context).getToken(appId, "HCM"
 Create an instance of the _UserController_ using the [UserControllerBuilder](reference/com/sinch/android/rtc/UserControllerBuilder.html) and sub-builder [HmsPushBuilder](reference/com/sinch/android/rtc/HmsPushBuilder.html), accessible via `UserControllerBuilder.hms()` method. Then call [UserController.registerUser()](reference/com/sinch/android/rtc/UserController.html) to acquire and register FCM token on the Sinch Backend, and wait for the callbacks that reports whether registration succeeded. Please see dedicated `UserContoller` documentation [here](doc:voice-android-cloud-user-controller).
 
 ```java
-UserController uc = Sinch.getUserControllerBuilder()
+UserController userController = Sinch.getUserControllerBuilder()
                     .context(getApplicationContext())
                     .applicationKey("<application key>")
                     .userId("<user id>")
@@ -168,7 +163,7 @@ UserController uc = Sinch.getUserControllerBuilder()
                         .done()
                     .build();
 
-uc.registerUser(this, this); // parameters are `UserRegistrationCallback` and `PushTokenRegistrationCallback`
+userController.registerUser(this, this); // parameters are `UserRegistrationCallback` and `PushTokenRegistrationCallback`
 ```        
 
 ### 5. Implement _Listening Service_
