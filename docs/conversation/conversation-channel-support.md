@@ -157,14 +157,14 @@ This section provides detailed information about which rich messages are
 natively supported by Facebook Messenger channel and what transcoding is applied in
 other cases.
 
-#### Sending Messages
+##### Sending Messages
 
 Here we give a mapping between Conversation API generic message format
 and the Messenger rendering on mobile devices.
 Please note that for the sake of brevity the JSON snippets do not include
 the **recipient** and **app_id** which are both required when sending a message.
 
-##### Text Messages
+###### Text Messages
 
 ---
 
@@ -184,7 +184,7 @@ The rendered message:
 
 ![Text Message](images/channel-support/messenger/messenger_text.jpg)
 
-##### Media Messages
+###### Media Messages
 
 ---
 
@@ -204,7 +204,7 @@ The rendered message:
 
 ![Media Message](images/channel-support/messenger/messenger_media.jpg)
 
-##### Choice Messages
+###### Choice Messages
 
 ---
 
@@ -255,7 +255,7 @@ The rendered message:
 
 ![Choice Message](images/channel-support/messenger/messenger_choice.jpg)
 
-##### Card Messages
+###### Card Messages
 
 ---
 
@@ -308,7 +308,7 @@ The rendered message:
 
 ![Card Message](images/channel-support/messenger/messenger_card.jpg)
 
-##### Carousel Messages
+###### Carousel Messages
 
 ---
 
@@ -402,7 +402,7 @@ The rendered message:
 
 ![Carousel Message](images/channel-support/messenger/messenger_carousel.jpg)
 
-##### Location Messages
+###### Location Messages
 
 ---
 
@@ -1732,7 +1732,8 @@ the account’s “edit info” [screen](https://partners.viber.com/).
 
 The easiest way to configure your Conversation API **app** with Viber support is to use
 [Sinch Portal](https://dashboard.sinch.com/convapi/overview). Just select your **app** and
-click on "SET UP CHANNEL" beside the Viber Bot channel.
+click on "SET UP CHANNEL" beside the Viber Bot channel. You will be asked to enter the
+the access token for your Viber bot.
 
 ##### Setup Viber Bot integration using the API
 
@@ -1778,8 +1779,13 @@ So to test your integration open the Viber app and search for the name of your V
 Then send a message to it. You should receive two callbacks on the registered Conversation API webhooks -  
 one is `conversation_start_notification` and the other is the actual message send from the handset.
 Both callbacks contain a field `contact_id` which is the identifier of the
-contact which was created for the Viber user. You can use this `contact_id`
-to reply to the Viber user.
+contact which was automatically created when processing the inbound Viber message.
+This contact contains the channel identity for the Viber user and you can use this `contact_id` to reply to the Viber user.
+The Viber Bot channel identities are opaque identifiers which are scoped to an app.
+This means that the same Viber user will have two different channel identities for
+two different Conversation API **apps**. Therefore a Conversation API contact can have multiple
+Viber Bot identities - the `/messages:send` endpoint automatically picks the correct
+identity which corresponds to the requesting app.
 
 #### Rich Message Support
 
@@ -1787,14 +1793,14 @@ This section provides detailed information about which rich messages are
 natively supported by Vier Bot channel and what transcoding is applied in
 other cases.
 
-#### Sending Messages
+##### Sending Messages
 
 Here we give a mapping between Conversation API generic message format
 and the Viber rendering on mobile devices.
 Please note that for the sake of brevity the JSON snippets do not include
 the **recipient** and **app_id** which are both required when sending a message.
 
-##### Text Messages
+###### Text Messages
 
 ---
 
@@ -1814,7 +1820,7 @@ The rendered message:
 
 ![Text Message](images/channel-support/viber/viber_text.jpg)
 
-##### Media Messages
+###### Media Messages
 
 ---
 
@@ -1834,7 +1840,7 @@ The rendered message:
 
 ![Media Message](images/channel-support/viber/viber_media.jpg)
 
-##### Choice Messages
+###### Choice Messages
 
 ---
 
@@ -1885,7 +1891,7 @@ The rendered message:
 
 ![Choice Message](images/channel-support/viber/viber_choice.jpg)
 
-##### Card Messages
+###### Card Messages
 
 ---
 
@@ -1932,7 +1938,7 @@ The rendered message:
 
 ![Card Message](images/channel-support/viber/viber_card.jpg)
 
-##### Carousel Messages
+###### Carousel Messages
 
 ---
 
@@ -2026,7 +2032,7 @@ The rendered message:
 
 ![Carousel Message](images/channel-support/viber/viber_carousel.jpg)
 
-##### Location Messages
+###### Location Messages
 
 ---
 
@@ -2050,3 +2056,136 @@ Conversation API POST `messages:send`
 The rendered message:
 
 ![Location Message](images/channel-support/viber/viber_location.jpg)
+
+
+##### Receiving Messages
+
+Viber channel supports various kinds of contact messages - text, media, location as well as quick replies.
+All of these are delivered by Conversation API with POST to `MESSAGE_INBOUND` webhook:
+
+---
+
+Example text reply:
+
+```json
+{
+  "app_id": "01EB37HMH1M6SV18ASNS3G135H",
+  "accepted_time": "2020-10-01T12:06:13.806686Z",
+  "event_time": "2020-10-01T12:06:13.254Z",
+  "project_id": "c36f3d3d-1513-4edd-ae42-11995557ff61",
+  "message": {
+    "id": "01EKJ0WGFM7TR314K4D9Y31J5S",
+    "direction": "TO_APP",
+    "contact_message": {
+      "text_message": {
+        "text": "This is text message from Viber user."
+      }
+    },
+    "channel_identity": {
+      "channel": "VIBER",
+      "identity": "9KC0p+pi4zPGDO99ACDxoQ==",
+      "app_id": "01EB37HMH1M6SV18ASNS3G135H"
+    },
+    "conversation_id": "01EKJ0KSWXMVDF05MG9TQ20S06",
+    "contact_id": "01EKA07N79THJ20WSN6AS30TMW",
+    "metadata": "",
+    "accept_time": "2020-10-01T12:06:13.794339Z"
+  }
+}
+```
+
+---
+
+Example location contact message:
+
+```json
+{
+  "app_id": "01EB37HMH1M6SV18ASNS3G135H",
+  "accepted_time": "2020-10-01T12:07:35.513615Z",
+  "event_time": "2020-10-01T12:07:34.935Z",
+  "project_id": "c36f3d3d-1513-4edd-ae42-11995557ff61",
+  "message": {
+    "id": "01EKJ0Z07XKM6H04VB5Q941QBP",
+    "direction": "TO_APP",
+    "contact_message": {
+      "location_message": {
+        "title": "",
+        "coordinates": {
+          "latitude": 55.73064,
+          "longitude": 13.160131
+        },
+        "label": ""
+      }
+    },
+    "channel_identity": {
+      "channel": "VIBER",
+      "identity": "9KC0p+pi4zPGDO99ACDxoQ==",
+      "app_id": "01EB37HMH1M6SV18ASNS3G135H"
+    },
+    "conversation_id": "01EKJ0KSWXMVDF05MG9TQ20S06",
+    "contact_id": "01EKA07N79THJ20WSN6AS30TMW",
+    "metadata": "",
+    "accept_time": "2020-10-01T12:07:35.496355Z"
+  }
+}
+```
+
+---
+
+Example media message:
+
+```json
+{
+  "app_id": "01EB37HMH1M6SV18ASNS3G135H",
+  "accepted_time": "2020-10-01T12:10:55.073703Z",
+  "event_time": "2020-10-01T12:10:53.991Z",
+  "project_id": "c36f3d3d-1513-4edd-ae42-11995557ff61",
+  "message": {
+    "id": "01EKJ1534NWK5R02TGWEJN13HA",
+    "direction": "TO_APP",
+    "contact_message": {
+      "media_message": {
+        "url": "https://dl-media.viber.com/5/media/2/short/any/sig/image/0x0/e9f1/61be89dcb2a9bc54bf5a998000e33b67e78557a1dc267e9ea4625d344e2ee9f1.jpg?Expires=1601557854&Signature=eCGFLNPPvyoltyO5kp-yZRgGuvdtFfOtehapbiTf9KkUAZ7268GT0YnZ8Mj750IgZhRS7Z~6g6cOZ2wbHcZgPjxfzNWS8F4A8ejWPb1v8crGA1hzaHGmuSWoIxlJguqGOjHvTfUxLOvInkqdCIQ4S8IMq-B65lOV~~iw7HScAXTjarSiua4pGOgdbPvSqULyec6omwJH7IE~4xg0TfuNJSAH4JTRwU4ByGPtkbsJ800VpdK1GA~kHV0vRKRSy2wXPcy6j-i17SX3Le06LYZd1aJNpAxGhgcMgRMsY34SS60~dDtwmnr2QNcktPg61cpK1UVhVwiZ09MfO9~6kmTIZQ__&Key-Pair-Id=APKAJ62UNSBCMEIPV4HA"
+      }
+    },
+    "channel_identity": {
+      "channel": "VIBER",
+      "identity": "9KC0p+pi4zPGDO99ACDxoQ==",
+      "app_id": "01EB37HMH1M6SV18ASNS3G135H"
+    },
+    "conversation_id": "01EKJ0KSWXMVDF05MG9TQ20S06",
+    "contact_id": "01EKA07N79THJ20WSN6AS30TMW",
+    "metadata": "",
+    "accept_time": "2020-10-01T12:10:55.060170Z"
+  }
+}
+```
+
+##### Receiving Delivery Receipts
+
+Messages sent on Viber channel can have three statuses: DELIVERED, READ and FAILED.
+If the status is FAILED the reason will include more information about the failure.
+Below is an example for DELIVERED receipt - READ and FAILED differ by the
+`status` and `reason` only.
+Conversation API POST to `MESSAGE_DELIVERY` webhook:
+
+```json
+{
+  "app_id": "01EB37HMH1M6SV18ASNS3G135H",
+  "accepted_time": "2020-10-01T12:10:00.530Z",
+  "event_time": "2020-10-01T12:10:03.624Z",
+  "project_id": "c36f3d3d-1513-4edd-ae42-11995557ff61",
+  "message_delivery_report": {
+    "message_id": "01EKJ13DYJX54C0N062N0Q1J9F",
+    "conversation_id": "01EKJ0KSWXMVDF05MG9TQ20S06",
+    "status": "READ",
+    "channel_identity": {
+      "channel": "VIBER",
+      "identity": "9KC0p+pi4zPGDO99ACDxoQ==",
+      "app_id": "01EB37HMH1M6SV18ASNS3G135H"
+    },
+    "contact_id": "01EKA07N79THJ20WSN6AS30TMW",
+    "metadata": ""
+  }
+}
+```
