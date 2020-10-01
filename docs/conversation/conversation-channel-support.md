@@ -2161,6 +2161,38 @@ Example media message:
 }
 ```
 
+---
+
+Example quick reply message:
+
+```json
+{
+  "app_id": "01EGQYR8N9S5VF096DQKYF08JD",
+  "accepted_time": "2020-10-01T12:39:48.469849Z",
+  "event_time": "2020-10-01T12:39:48.296Z",
+  "project_id": "ab5536b1-31b0-45e8-aec6-b35f13c41d0b",
+  "message": {
+    "id": "01EKJ2SZX9N6F11SJ11G511H6J",
+    "direction": "TO_APP",
+    "contact_message": {
+      "choice_response_message": {
+        "message_id": "01EKJ2SWHGDMYA0F0F1PQJ09WQ",
+        "postback_data": "suggested"
+      }
+    },
+    "channel_identity": {
+      "channel": "VIBER",
+      "identity": "+blNgtOp1StVmBEfR3xa5g==",
+      "app_id": "01EGQYR8N9S5VF096DQKYF08JD"
+    },
+    "conversation_id": "01EHY7KA6ZC03C1Q5QTRZ60GDA",
+    "contact_id": "01EHY7KA2BYT8A11E6Y2271NHA",
+    "metadata": "",
+    "accept_time": "2020-10-01T12:39:48.457764Z"
+  }
+}
+```
+
 ##### Receiving Delivery Receipts
 
 Messages sent on Viber channel can have three statuses: DELIVERED, READ and FAILED.
