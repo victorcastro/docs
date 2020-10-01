@@ -28,3 +28,5 @@ excerpt: >-
 [Sample Migration Letter Template](downloads\Migration Letter Template.pdf) - Use as a guide for creating a migration letter (only required for MIGRATING codes).
 
 [Sinch US Short Code Carrier Reach List](downloads\Sinch US Short Code Carrier Reach List 20200913.xlsx) - Sinch US Short Code Carrier Reach List.
+
+[Sinch Global Carrier Mapping Registry](downloads\Sinch_GCMR_20200927.xlsx) - Sinch GCMR for U.S. and Canada September 27, 2020.
