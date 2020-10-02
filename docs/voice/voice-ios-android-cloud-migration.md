@@ -10,8 +10,8 @@ hidden: true
 This guide serves the purpose of facilitating the ease of migration from the old, legacy Sinch Moble SDKs to the new cloud-based platform. We assume that you're familiar with key concepts, operations and glossary of the Sinch Voice and Video SDK. Here we provide a comprehensive list of the _changes_ required both in the application _and_ on your backend to get started with the new cloud-based Sinch mobile SDKs.
 
 Otherwise, if you had never used Sinch Voice and Video SDK before, please refer to the respective platform documentation:
-- [Sinch cloud-based Android SDK v.4](doc:voice-for-android-cloud.md)
-- [Sinch cloud-based iOS SDK v.5](doc:voice-ios-cloud.md)
+- [Sinch cloud-based Android SDK v.4](doc:voice-for-android-cloud)
+- [Sinch cloud-based iOS SDK v.5](doc:voice-ios-cloud)
 
 ## Contents
 
@@ -42,7 +42,7 @@ In the new SDK, registration is made both more secure and transparent:
 - _Application Secret_ must never be stored in the application, and there is no way to provide _Application Secret_ to the _SinchClient_ that could encourage that, instead:
 - Authorization is granted by providing industry-standard JWT registration token. 
 
-Both [iOS](doc:voice-ios-cloud-auth.md) and [Android](doc:voice-android-cloud-application-authentication) documents provide the same coverage on the formation of the JWT registration token, including links to the server-side sample code.
+Both [iOS](doc:voice-ios-cloud-auth) and [Android](doc:voice-android-cloud-application-authentication) documents provide the same coverage on the formation of the JWT registration token, including links to the server-side sample code.
 
 ## Backend User Authentication Server
 
