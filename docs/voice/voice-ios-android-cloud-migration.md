@@ -1,7 +1,7 @@
 ---
 title: Sinch Voice and Video SDK Migration Guide
 excerpt: >-
-  Follow this migration guide to start using modern cloud-based Sinch mobile Voice and Video SDK.
+  Follow this migration guide to start using the latest Sinch mobile Voice and Video SDKs.
 hidden: true
 ---
 
