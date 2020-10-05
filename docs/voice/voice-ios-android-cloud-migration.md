@@ -51,7 +51,7 @@ Both [iOS](doc:voice-ios-cloud-auth) and [Android](doc:voice-android-cloud-appli
 
 ## Android and UserController
 
-There is a new way to register _User_ on Android: _UserController API_. [UserController](voice-for-android-cloud/reference/com/sinch/android/rtc/UserController.html) provides a way independently from the `SinchClient` lifecycle, to register a _User_ for incoming calls via push notifications. You can also use it to un-register push token if receiving of incoming calls is no longer desirable (e.g. on logout, or changing users).
+There is a new way to register _User_ on Android: _UserController API_. [UserController](voice-for-android-cloud/reference/com/sinch/android/rtc/UserController.html) provides a way independently from the `SinchClient` lifecycle, to register a _User_ for incoming calls via push notifications. You can also use it to unregister push token if receiving of incoming calls is no longer desirable (e.g. on logout, or changing users).
 
 _UserController_ provides two types of callbacks:
 - related to the general _User_ registration on Sinch backend;
