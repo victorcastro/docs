@@ -7,40 +7,27 @@ hidden: true
 
 ## Intended Audience
 
-This guide serves the purpose of facilitating the ease of migration from the old, legacy Sinch Moble SDKs to the new cloud-based platform. We assume that you're familiar with key concepts, operations and glossary of the Sinch Voice and Video SDK. Here we provide a comprehensive list of the _changes_ required both in the application _and_ on your backend to get started with the new cloud-based Sinch mobile SDKs.
+This migration guide provides an overview of adaptions required to migrate from the Sinch legacy platform to the Sinch cloud-native platform. We assume that you're familiar with key concepts, operations, and glossary of the Sinch Voice and Video SDK. Here we provide a comprehensive list of the _changes_ required both in the application _and_ on your backend to get started with the new cloud-based Sinch mobile SDKs.
 
 Otherwise, if you had never used Sinch Voice and Video SDK before, please refer to the respective platform documentation:
-- [Sinch cloud-based Android SDK v.4](doc:voice-for-android-cloud)
-- [Sinch cloud-based iOS SDK v.5](doc:voice-ios-cloud)
+- [Sinch Android SDK 4.x](doc:voice-for-android-cloud)
+- [Sinch iOS SDK 5.x](doc:voice-ios-cloud)
 
 ## Contents
 
-- [General Changes](doc:voice-ios-android-cloud-migration#general-changes)
-- [Common Registration Changes](doc:voice-ios-android-cloud-migration#common-registration-changes)
-- [Backend User Authentication Server](doc:voice-ios-android-cloud-migration#backend-user-authentication-server)
+- [Client / User Registration Changes](doc:voice-ios-android-cloud-migration#common-registration-changes)
 - [Android and UserController](doc:voice-ios-android-cloud-migration#android-and-usercontroller)
-- [Backend OAuth Server for Huawei Push](doc:voice-ios-android-cloud-migration#backend-oauth-server-for-huawei-push)
-- [Build and Dependencies](doc:voice-ios-android-cloud-migration#build-and-dependencies)
+- [iOS APNs Signing Keys](doc:voice-ios-android-cloud-migration#ios-apns-signing-keys)
 
-## General Changes
+## Client / User Registration Changes
 
-The changes can be grouped by the platform (iOS/Android) or along the client/server boundaries. The table below provides a good eagle-eye overview of them:
+When you initiate `SinchClient` you have to provide _user identity_. In the legacy Sinch SDKs, user authentication and authorization were based on credentials provided in a way of an opaque token, based on the _SHA1_ digest of Sinch _Application Secret_. There was also a way to provide _Application Secret_ directly to the _SinchClient_.
 
-|                                                               | Client    | Backend   |  Android | iOS|
-| --------------------------------------------------------------|-----------|-----------|----------| ---|
-|User Registration Changes|v|v|v|v|
-|Backend User Authentication Server||v|v|v|
-|UserController API|v||v||
-|Huawei Push Notifications|v||v||
-|Backend OAuth Server for Huawei Push ||v|v||
+In the new SDK, to authorize the registration of a user, the application must provide a registration token to the SinchClient or UserController. This token should be in the form of a [JSON Web Token (JWT)](https://jwt.io/) signed with a signing key derived from the Application Secret. The recommended way to implement this authentication scheme is that the Application Secret should be kept securely on your server-side backend, and the signed token should be created and signed on your server, then passed via a secure channel to the application instance and Sinch client running on a device.
 
-## Common Registration Changes
-
-When you initiate `SinchClient` you have to provide _user identity_. In the legacy Sinch SDKs, user authentication and the authorization of the registration was based on credentials provided in a way of an opaque token, based on the _SHA1_ digest of Sinch _Application Secret_. There was also a way to provide _Application Secret_ directly to the _SinchClient_.
-
-In the new SDK, registration is made both more secure and transparent:
+Thus, registration is made both more simple and secure:
 - _Application Secret_ must never be stored in the application, and there is no way to provide _Application Secret_ to the _SinchClient_ that could encourage that, instead:
-- Authorization is granted by providing industry-standard JWT registration token. 
+- Authentication and Authorization is granted by JWT tokens. 
 
 Both [iOS](doc:voice-ios-cloud-auth) and [Android](doc:voice-android-cloud-application-authentication) documents provide the same coverage on the formation of the JWT registration token, including links to the server-side sample code.
 
@@ -68,12 +55,7 @@ The action flow diagram of the _User_ registration via _UserController_ is provi
 
 ![Registering User via UserController](voice-for-android-cloud\images\usercontroller-callbacks.pu.png)
 
-## Backend OAuth Server for Huawei Push
 
-> ❗️ 
-> MISSING SECTION (Christoffer)
+## iOS APNs Signing Keys
 
-## Build and Dependencies
-
-> ❗️ 
-> MISSING SECTION (Vicror, Christoffer)
+New Sinch iOS SDK only support APNs Token-based authentication, i.e. we no longer support APNs certificate-based functionality. Therefore, to enable Sinch to act as APNs Provider on your behalf, you must provide Sinch with an APNs Authentication Token Signing Key. You create this signing key in your Apple Developer Account and upload the key file to your Sinch Developer Account. Please find more details [here](doc:voice-ios-cloud-push-notifications-callkit#configuring-an-apns-authentication-signing-key).
