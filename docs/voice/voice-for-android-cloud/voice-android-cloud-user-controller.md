@@ -11,7 +11,7 @@ next:
 
 > 📘
 >
-> [UserController](reference/com/sinch/android/rtc/UserController.html) provides a way, independently from the `SinchClient` lifecycle, to register a user for incoming calls via push notifications. You can also use it to un-register push token if receiving of incoming calls is no longer desirable (e.g. on logout, or changing users).
+> [UserController](reference/com/sinch/android/rtc/UserController.html) provides a way, independently from the `SinchClient` lifecycle, to register a user for incoming calls via push notifications. You can also use it to unregister push token if receiving of incoming calls is no longer desirable (e.g. on logout, or changing users).
 
 Sinch SDK supports both currently available major Push Notification platforms on Android - [Google's Firebase Cloud Messages](doc:voice-android-cloud-push-notifications#google-fcm-push-notifications) (later `FCM Push`) and [Huawei Mobile Services Push Notifications](doc:voice-android-cloud-push-notifications#huawei-hms-notifications)  (later `Huawei Push` or `HMS Push`). 
 
@@ -111,7 +111,11 @@ public class LoginActivity extends BaseActivity implements SinchService.StartFai
 
 User registration is a two-step process, where the first the step is registering _user_ (after which you can make outgoing calls using the _SinchClient_), and the second is registering the push token for receiving incoming calls via FCM/HMS Push notifications. Each step has correspondent _success_ and _failure_ callbacks, where you are mostly interested in the _tokenRegistered_, After receiving it, you can terminate / close the application and be sure that incoming calls will be received.
 
-![Token-based User Registration](images\20200221-user_and_push_registration.png)
+![Token-based User Registration (FCM case)](images\20200221-user_and_push_registration.png)
+
+The action flow diagram of the _User_ registration via _UserController_ is provided below. _UserController_'s callbacks are highlighted in pale blue.
+
+![Registering User via UserController](images\usercontroller-callbacks.pu.png)
 
 > ❗️
 >
