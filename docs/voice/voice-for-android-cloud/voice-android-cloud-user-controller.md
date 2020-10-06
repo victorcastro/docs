@@ -115,7 +115,7 @@ User registration is a two-step process, where the first the step is registering
 
 The action flow diagram of the _User_ registration via _UserController_ is provided below. _UserController_'s callbacks are highlighted in pale blue.
 
-![Registering User via UserController](images\usercontroller-callbacks.pu.png)
+![Registering User via UserController](images\20201006-usercontroller-callbacks.pu.png)
 
 > ❗️
 >

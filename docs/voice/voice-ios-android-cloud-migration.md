@@ -43,17 +43,16 @@ _UserController_ provides two types of callbacks:
 - Callbacks for basic _User_ registration with the Sinch backend.
 - Callbacks for _push device token_ registration with the Sinch backend.
 
+The action flow diagram of the _User_ registration via _UserController_ is provided below. _UserController_'s callbacks are highlighted in pale blue.
+
+![Registering User via UserController](voice-for-android-cloud\images\20201006-usercontroller-callbacks.pu.png)
+
 > ❗️
 >
 > Though the use of _UserController_ is __optional__ for the FCM Push Notification case, since the _SinchClient_ can 
 > register itself to receive FCM Push, it is __mandatory__ for the Huawei Push Notifications, since the _push device
 > token_ have to be acquired by the _Application_ before constructing _UserController_.
 > Thus, it is __highly recommended__ to use _UserController_ in both cases.
-
-The action flow diagram of the _User_ registration via _UserController_ is provided below. _UserController_'s callbacks are highlighted in pale blue.
-
-![Registering User via UserController](voice-for-android-cloud\images\usercontroller-callbacks.pu.png)
-
 
 ## iOS APNs Signing Keys
 
