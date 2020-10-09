@@ -324,13 +324,14 @@ The `JWT` will be making use of the standard JWT header parameters `alg` and `ki
 // JWT Header (example)
 {
   "alg": "HS256",
-  "kid": "hkdfv1-20200901"
+  "kid": "hkdfv1-20200901",
+  "sinch:rtc:application_key": "a32e5a8d-f7d8-411c-9645-9038e8dd051d"
 }
 
 // JWT Payload (example)
 {
   "iss": "//rtc.sinch.com/applications/a32e5a8d-f7d8-411c-9645-9038e8dd051d",
-  "sub": "a32e5a8d-f7d8-411c-9645-9038e8dd051d",
+  "sub": "123456789",
   "aud": "https://as.your-domain.com/sinch/rtc/push/oauth2/v1/huawei-hms/token",
   "scope": "https://push-api.cloud.huawei.com",
   "iat": 1600780504,
@@ -340,7 +341,7 @@ The `JWT` will be making use of the standard JWT header parameters `alg` and `ki
 ```
 
 * Claim `iss` is on the form `//rtc.sinch.com/applications/<your Sinch Application Key>`
-* Claim `sub` is your _Sinch Application Key_.
+* Claim `sub` is your _HMS App ID_  (as specified via `HmsPushBuilder.applicationId(String)` on the Android client).
 * Claim `aud` will be set to the _Authorization Server_ token endpoint you have configured with Sinch. E.g. `https://as.your-domain.com/sinch/rtc/push/oauth2/v1/huawei-hms/token`
 * The JWT claim `scope` will be `https://push-api.cloud.huawei.com` (representing the Huawei _Push Kit_ server domain)
 * Claims `iat`, `exp`, `nonce` are standard JWT claims (see [JWT RFC 7519](https://tools.ietf.org/html/rfc7519))
@@ -369,7 +370,7 @@ signingKey = HMAC256(BASE64-DECODE(applicationSecret), UTF8-ENCODE(FormatDate(si
 
 Your _Authorization Server_ should validate the JWT in accordance with section [RFC 7523 - Section 3. JWT Format and Processing Requirements](https://tools.ietf.org/html/rfc7523#section-3). Here is a rough outline of the steps necessary:
 
-1. Use `sub` to lookup your corresponding _Application Key_ and _Application Secret_ (at this point the token is still unvalidated)
+1. Use JWT header parameter `sinch:rtc:application_key` to lookup your corresponding _Application Key_ and _Application Secret_ (at this point the token is still unvalidated)
 2. Derive the signing key (as detailed in the previous section)
 3. Validate that the JWT has a valid signature given the signing that you have derived.
 4. Validate the JWT payload in terms of `iat`, `exp`, `nonce` etc.
@@ -395,6 +396,8 @@ Content-Type: application/json;charset=utf-8
 ```
 
 Sinch will then be able to use this `access_token` to send push messages to your end-user devices until the token expires, upon which Sinch will issue a new token request to your _Authorization Server_.
+
+(__NOTE__: You will receive the your _HMS App ID_ in JWT claim `sub` and you can use that to for a given request map it to your corresponding _HMS App_)
 
 ### Rejecting the `access_token` grant request
 
