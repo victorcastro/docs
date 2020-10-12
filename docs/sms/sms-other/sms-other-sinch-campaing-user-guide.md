@@ -29,4 +29,4 @@ excerpt: >-
 
 [Sinch US Short Code Carrier Reach List](downloads\Sinch_US_Short_Code_Carrier_Reach_List.xlsx) - Sinch US Short Code Carrier Reach List.
 
-[Sinch Global Carrier Mapping Registry](downloads\Sinch_GCMR_20201004.xlsx) - Sinch GCMR for U.S. and Canada October 4, 2020.
+[Sinch Global Carrier Mapping Registry](downloads\Sinch_GCMR_20201011.xlsx) - Sinch GCMR for U.S. and Canada October 11, 2020.
