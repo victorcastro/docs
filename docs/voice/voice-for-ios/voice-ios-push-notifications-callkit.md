@@ -113,7 +113,7 @@ You want App-B to be able to call App-A. You need to generate *VoIP certificate*
 > ⚠ 
 > Note that both iOS apps should be signed using either *Apple Development Certificate* or *iOS Distribution Certificate*. Chosen certificate must match ANPS environment setting provided to Sinch SDK when `SINManagedPush` is created: if you sign using *Apple Development Certificate* please provide `SINAPSEnvironmentDevelopment`, if you sign using *iOS Distribution Certificate* please provide `SINAPSEnvironmentProduction`.
 
-Mismatch in APNS environment settings and signing identity in one or both iOS apps will result in inability to make a call from App-B to App-A.
+Mismatch in APNs environment settings and signing identity in one or both iOS apps will result in inability to make a call from App-B to App-A.
 
 #### Multiple Sinch Applications, one iOS app (one Bundle ID)
 
