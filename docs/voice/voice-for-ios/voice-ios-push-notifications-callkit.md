@@ -98,7 +98,7 @@ Your push notification certificates are now uploaded and ready for use.
 
 Certificates configured with Sinch can be replaced or renewed by uploading new ones. New certificates will automatically replace the previous ones for their respective type (_Development_, _Production_ and _VoIP Services_).
 
-### Possible scenarios of configuring your application
+### Possible Scenarios of Configuring Your Application
 
 Depending on your use case it is possible to configure calling functionality differently. Let's consider two possible scenarios:
 
