@@ -334,18 +334,23 @@ The `JWT` will be making use of the standard JWT header parameters `alg` and `ki
   "sub": "123456789",
   "aud": "https://as.your-domain.com/sinch/rtc/push/oauth2/v1/huawei-hms/token",
   "scope": "https://push-api.cloud.huawei.com",
+  "sinch:rtc:application_key": "a32e5a8d-f7d8-411c-9645-9038e8dd051d",
   "iat": 1600780504,
   "exp": 1600784104,
   "nonce": "6b438bda-2d5c-4e8c-92b0-39f20a94b34e"
 }
 ```
 
-* Claim `iss` is on the form `//rtc.sinch.com/applications/<your Sinch Application Key>`
+* Claim `iss` is on the form `//rtc.sinch.com/applications/<your Sinch Application Key>` (canonical form)
 * Claim `sub` is your _HMS App ID_  (as specified via `HmsPushBuilder.applicationId(String)` on the Android client).
 * Claim `aud` will be set to the _Authorization Server_ token endpoint you have configured with Sinch. E.g. `https://as.your-domain.com/sinch/rtc/push/oauth2/v1/huawei-hms/token`
-* The JWT claim `scope` will be `https://push-api.cloud.huawei.com` (representing the Huawei _Push Kit_ server domain)
+* Claim `scope` will be `https://push-api.cloud.huawei.com` (representing the Huawei _Push Kit_ server domain)
+* Claim `sinch:rtc:application_key` will contain your _Sinch Application Key_`.
 * Claims `iat`, `exp`, `nonce` are standard JWT claims (see [JWT RFC 7519](https://tools.ietf.org/html/rfc7519))
 
+
+> 📘
+> __Note__: Your _Sinch Application Key_ is present both in the JWT header and the JWT payload (as header parameter and claim `sinch:rtc:application_key`). The reason is it allows you to implement validating the JWT signature without accessing the payload, and once you have validated the JWT signature, you can strip away the header and all the data you need for further processing is self contained in the payload.
 
 #### `kid` and Deriving a Signing Key from Sinch Application Secret
 
@@ -397,7 +402,7 @@ Content-Type: application/json;charset=utf-8
 
 Sinch will then be able to use this `access_token` to send push messages to your end-user devices until the token expires, upon which Sinch will issue a new token request to your _Authorization Server_.
 
-(__NOTE__: You will receive the your _HMS App ID_ in JWT claim `sub` and you can use that to for a given request map it to your corresponding _HMS App_)
+__NOTE__: You will receive your _HMS App ID_ in JWT claim `sub` and you can use that to for a given request map it to your corresponding _HMS App_. You will also be able to access your _Sinch Application Key_ as the JWT claim `sinch:rtc:application_key` if you need that as input at this stage.
 
 ### Rejecting the `access_token` grant request
 
