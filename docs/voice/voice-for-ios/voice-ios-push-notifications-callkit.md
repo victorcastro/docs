@@ -110,7 +110,8 @@ Depending on your use case it is possible to configure calling functionality dif
 Suppose you have App-A and App-B with `A-BundleID` and `B-BundleID` iOS bundles respectively.
 You want App-B to be able to call App-A. You need to generate *VoIP certificate* for the app with `A-BundleID` and upload it to *Sinch Developer Portal* for the *Sinch Application* which application key you are going to use in both iOS apps.
 
-> ⚠️ Note that both iOS apps should be signed using either *Apple Development Certificate* or *iOS Distribution Certificate*. Chosen certificate must match ANPS environment setting provided to Sinch SDK when `SINManagedPush` is created: if you sign using *Apple Development Certificate* please provide `SINAPSEnvironmentDevelopment`, if you sign using *iOS Distribution Certificate* please provide `SINAPSEnvironmentProduction`.
+> ⚠ 
+> Note that both iOS apps should be signed using either *Apple Development Certificate* or *iOS Distribution Certificate*. Chosen certificate must match ANPS environment setting provided to Sinch SDK when `SINManagedPush` is created: if you sign using *Apple Development Certificate* please provide `SINAPSEnvironmentDevelopment`, if you sign using *iOS Distribution Certificate* please provide `SINAPSEnvironmentProduction`.
 
 Mismatch in APNS environment settings and signing identity in one or both iOS apps will result in inability to make a call from App-B to App-A.
 
@@ -120,7 +121,8 @@ Suppose that we have two Sinch Apps (in Sinch Portal), App-A and App-B and only 
 iOS app could be build with App-A application key or App-B application key.
 If you want to make a call from iOS app with App-A application key to iOS app with App-B application key you need to generate VoIP certificate for iOS app bundle ID and upload it to the caller app in *Sinch Developer Portal*. In our example you will upload VoIP certificate to App-A in the portal.
 
-> ⚠️ Note that both iOS apps should be signed using either *Apple Development Certificate* or *iOS Distribution Certificate*. Chosen certificate must match ANPS environment setting provided to Sinch SDK when `SINManagedPush` is created: if you sign using *Apple Development Certificate* please provide `SINAPSEnvironmentDevelopment`, if you sign using *iOS Distribution Certificate* please provide `SINAPSEnvironmentProduction`.
+> ⚠
+> Note that both iOS apps should be signed using either *Apple Development Certificate* or *iOS Distribution Certificate*. Chosen certificate must match ANPS environment setting provided to Sinch SDK when `SINManagedPush` is created: if you sign using *Apple Development Certificate* please provide `SINAPSEnvironmentDevelopment`, if you sign using *iOS Distribution Certificate* please provide `SINAPSEnvironmentProduction`.
 
 ## CallKit
 
