@@ -10,7 +10,7 @@ next:
 ---
 Verification of a phone number is performed in two steps, a verification SMS is requested and a verification code for that particular verification session is sent to the recipient. It's the responsibility of the developer to ask the end-user to provide the verification code from the SMS.
 
-## Request an SMS verification
+## Request an SMS verification [Objective-C]
 
 To initiate a SMS verification, start by creating a `SINVerification`, then request an SMS by invoking `-[SINVerification initiateWithCompletionHandler:]`.
 ```objectivec
@@ -39,6 +39,16 @@ self.verification = verification; // retain the verification instance
     // Show UI for entering the code which will be received via SMS
   }
 }];
+```
+
+## Request an SMS verification [Swift]
+To initiate a SMS verification, start by creating a `SINVerification`, then request an SMS by invoking `-[SINVerification initiateWithCompletionHandler:]`.
+```swift
+// Get user's current region by carrier info
+let defaultRegion: String = SINDeviceRegion.currentCountryCode()
+let parseError: NSError! = nil
+
+...continue please!
 ```
 
 
